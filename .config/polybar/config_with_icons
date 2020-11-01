@@ -1,0 +1,261 @@
+[bar/eDP1]
+background = ${colors.background}
+foreground = ${colors.foreground}
+width = 100%
+height = 3%
+monitor=HDMI-1
+radius = 0.0
+fixed-center = false 
+;separator = "  "
+dpi= 92
+;space at end of bar
+padding-left = 0
+padding-right = 1
+
+wm-name = bspwm
+wm-restack = bspwm
+
+; space between modules
+module-margin = 1
+
+;font-0 = Iosevka:size=10;4
+font-0 = Roboto Mono:size=10;4
+font-1 = Material Icons:size=10;4
+
+modules-left = bspwm
+modules-right = synology-cloud  vpn-nordvpn-status wlan backlight alsa battery date 
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+enable-ipc = true
+
+[bar/DP2]
+background = ${colors.background}
+foreground = ${colors.foreground}
+width = 100%
+height = 3%
+monitor=DP2
+radius = 0.0
+fixed-center = false 
+;separator = "  "
+dpi= 144 
+;space at end of bar
+padding-left = 0
+padding-right = 1
+
+wm-name = bspwm
+wm-restack = bspwm
+
+; space between modules
+module-margin = 1
+
+;font-0 = Iosevka:size=10;4
+font-0 = Roboto Mono:size=10;4
+font-1 = Material Icons:size=10;4
+
+modules-left = bspwm
+modules-right = synology-cloud  vpn-nordvpn-status wlan backlight alsa battery date 
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+enable-ipc = true
+
+[module/bspwm]
+type = internal/bspwm
+
+
+label-focused = %name%
+label-focused-background = ${colors.red}
+label-focused-foreground = ${colors.foreground}
+label-focused-underline = #ef8cb969
+label-focused-padding = 1
+
+label-occupied = %name%
+label-occupied-padding = 1
+label-occupied-background = ${colors.gray}
+label-occupied-foreground = ${colors.foreground}
+
+label-urgent = %name%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+
+label-empty = %name%
+label-empty-foreground = ${colors.foreground}
+label-empty-background = ${colors.background}
+label-empty-padding = 1
+
+
+[module/vpn-nordvpn-status]
+type = custom/script
+exec = ~/.config/polybar/vpn-nordvpn-status.sh
+interval = 5
+
+[module/dropbox-isrunning]
+
+type = custom/script
+exec = ~/.config/polybar/isrunning-dropbox.sh
+interval = 5
+click-left = ~/polybar-scripts/dropbox-isrunning.sh --toggle
+
+
+[module/synology-cloud]
+
+type = custom/script
+exec = ~/.config/polybar/synology-cloud.sh
+interval = 5
+
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+
+format = <ramp> <label>
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-5 = 
+ramp-6 = 
+
+label = %percentage%%
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+label-focused-foreground = ${colors.foreground}
+label-focused-background = ${colors.primary}
+label-mode = %mode%
+label-mode-padding = 1
+label-focused = %index%
+label-focused-padding = 1
+label-unfocused = %index%
+label-unfocused-padding = 1
+label-visible = %index%
+label-visible-padding = 1
+label-urgent = %index%
+label-urgent-padding = 1
+
+
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+interval = 3.0
+format-connected-prefix = " "
+format-connected = <label-connected>
+label-connected = up
+format-disconnected-prefix = " "
+format-disconnected = <label-disconnected>
+label-disconnected = down 
+
+[module/eth]
+type = internal/network
+interface = enp0s25
+interval = 3.0
+format-connected-underline = #55aa55
+format-connected-prefix = "ETH: "
+label-connected = %local_ip%
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%d.%m.%y"
+date-alt = "%a, %d. %b. %Y"
+
+time = %H:%M
+time-alt = %H:%M
+
+format-prefix = " "
+
+label = "%date%   %time%"
+
+
+[module/alsa]
+type = internal/alsa
+
+format-volume = <ramp-volume> <label-volume>
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+label-volume = %percentage%%
+label-muted =  
+
+[module/battery]
+type = internal/battery
+battery = BAT1
+
+adapter = AC
+full-at = 97
+
+format-charging = <label-charging>
+format-discharging = <label-discharging> 
+format-full = <label-full> 
+
+label-charging =  %percentage%%
+label-discharging =   %percentage%%
+label-full =   %percentage%%
+
+[module/bg]
+
+type = custom/text
+content = " "
+content-background = ${colors.background}
+content-foreground = ${colors.foreground}
+
+[module/green]
+
+type = custom/text
+content = " "
+content-background = ${colors.green}
+content-foreground = ${colors.foreground}
+
+[module/cyan]
+
+type = custom/text
+content = " "
+content-background = ${colors.cyan}
+content-foreground = ${colors.foreground}
+
+[module/blue]
+
+type = custom/text
+content = " "
+content-background = ${colors.blue}
+content-foreground = ${colors.foreground}
+
+[module/yellow]
+
+type = custom/text
+content = " "
+content-background = ${colors.yellow}
+content-foreground = ${colors.foreground}
+
+[module/red]
+
+type = custom/text
+content = " "
+content-background = ${colors.red}
+content-foreground = ${colors.foreground}
+
+[settings]
+screenchange-reload = true
+
+[colors]
+background = ${xrdb:background:#222}
+foreground = ${xrdb:foreground:#222}
+foreground-alt = ${xrdb:color7:#222}
+primary = ${xrdb:color8:#222}
+secondary = ${xrdb:color2:#222}
+alert = ${xrdb:color3:#222}
+red = ${xrdb:color1:#222}
+darkred = ${xrdb:color1:#222}
+green = ${xrdb:color2:#222}
+yellow = ${xrdb:color3:#222}
+blue = ${xrdb:color4:#222}
+magenta = ${xrdb:color5:#222}
+cyan = ${xrdb:color4:#222}
+gray = ${xrdb:color8:#222}

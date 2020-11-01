@@ -1,0 +1,202 @@
+
+# Font configuration (changes require restart)
+font:
+  # The normal (roman) font face to use.
+  normal:
+    family: Roboto Mono
+    # family: Inconsolata
+    # family: Fira Code
+    #family: Dina
+    # family: DejaVu Sans Mono
+    #family: Spleen
+    # family: Terminus
+    # family: Source Code Pro
+    # family: Anonymous Pro
+    # Style can be specified to pick a specific face.
+    # style: Bold
+    style: Regular
+
+  # The bold font face
+  #bold:
+  #family: Misc Tamsyn
+    # Style can be specified to pick a specific face.
+    # style: Bold
+
+  # The italic font face
+  #italic:
+      #family: Misc Tamsyn
+    # Style can be specified to pick a specific face.
+    # style: Italic
+
+  # font size
+  size: 10
+
+
+
+
+window:
+  # Window dimensions (changes require restart)
+  #
+  # Specified in number of columns/lines, not pixels.
+  # If both are `0`, this setting is ignored.
+  dimensions:
+    columns: 0
+    lines: 0
+
+  # Window position (changes require restart)
+  #
+  # Specified in number of pixels.
+  # If the position is not set, the window manager will handle the placement.
+  #position:
+  #  x: 0
+  #  y: 0
+
+  # Window padding (changes require restart)
+  #
+  # Blank space added around the window in pixels. This padding is scaled
+  # by DPI and the specified value is always added at both opposing sides.
+  padding:
+    x: 4
+    y: 4
+
+  # Spread additional padding evenly around the terminal content.
+  dynamic_padding: false
+
+
+
+
+# # Base16 Tomorrow Night - alacritty color config
+# # Chris Kempson (http://chriskempson.com)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0x1d1f21'
+#     foreground: '0xc5c8c6'
+
+#   # Colors the cursor will use if `custom_cursor_colors` is true
+#   cursor:
+#     text: '0x1d1f21'
+#     cursor: '0xc5c8c6'
+
+#   # Normal colors
+#   normal:
+#     black:   '0x1d1f21'
+#     red:     '0xcc6666'
+#     green:   '0xb5bd68'
+#     yellow:  '0xf0c674'
+#     blue:    '0x81a2be'
+#     magenta: '0xb294bb'
+#     cyan:    '0x8abeb7'
+#     white:   '0xc5c8c6'
+
+#   # Bright colors
+#   bright:
+#     black:   '0x969896'
+#     red:     '0xde935f'
+#     green:   '0x282a2e'
+#     yellow:  '0x373b41'
+#     blue:    '0xb4b7b4'
+#     magenta: '0xe0e0e0'
+#     cyan:    '0xa3685a'
+#     white:   '0xffffff'
+
+# draw_bold_text_with_bright_colors: false
+
+
+#colors:
+#  # Default colors
+#  primary:
+#    background: '0x262626'
+#    foreground: '0xbcbcbc'
+#
+#  # Normal colors
+#  normal:
+#    black:   '0x1c1c1c'
+#    red:     '0xaf5f5f'
+#    green:   '0x5f875f'
+#    yellow:  '0x87875f'
+#    blue:    '0x5f87af'
+#    magenta: '0x5f5f87'
+#    cyan:    '0x5f8787'
+#    white:   '0x6c6c6c'
+#
+#  # Bright colors
+#  bright:
+#    black:   '0x444444'
+#    red:     '0xff8700'
+#    green:   '0x87af87'
+#    yellow:  '0xffffaf'
+#    blue:    '0x8fafd7'
+#    magenta: '0x8787af'
+#    cyan:    '0x5fafaf'
+#    white:   '0xffffff'
+
+
+# Base16 Default Dark - alacritty color config
+# Chris Kempson (http://chriskempson.com)
+colors:
+  # Default colors
+  primary:
+    background: '0x181818'
+    foreground: '0xd8d8d8'
+
+  # Colors the cursor will use if `custom_cursor_colors` is true
+  cursor:
+    text: '0x181818'
+    cursor: '0xd8d8d8'
+
+  # Normal colors
+  normal:
+    black:   '0x181818'
+    red:     '0xab4642'
+    green:   '0xa1b56c'
+    yellow:  '0xf7ca88'
+    blue:    '0x7cafc2'
+    magenta: '0xba8baf'
+    cyan:    '0x86c1b9'
+    white:   '0xd8d8d8'
+
+  # Bright colors
+  bright:
+    black:   '0x585858'
+    red:     '0xdc9656'
+    green:   '0x282828'
+    yellow:  '0x383838'
+    blue:    '0xb8b8b8'
+    magenta: '0xe8e8e8'
+    cyan:    '0xa16946'
+    white:   '0xf8f8f8'
+
+draw_bold_text_with_bright_colors: false
+
+key_bindings:
+  # (Windows, Linux, and BSD only)
+  - { key: P,        mods: Control|Shift, action: Paste            }
+  - { key: V,        mods: Control|Shift, action: Paste            }
+  - { key: C,        mods: Control|Shift, action: Copy             }
+  - { key: I,        mods: Control|Shift, action: PasteSelection   }
+  - { key: Key0,     mods: Control,       action: ResetFontSize    }
+  - { key: Equals,   mods: Control,       action: IncreaseFontSize }
+  - { key: Add,      mods: Control,       action: IncreaseFontSize }
+  - { key: Subtract, mods: Control,       action: DecreaseFontSize }
+  - { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  - { key: N,        mods: Control|Shift, action: ScrollLineDown   }
+  - { key: R,        mods: Control|Shift, action: ScrollLineUp     }
+  - { key: D,        mods: Control|Shift, action: ScrollPageDown   }
+  - { key: U,        mods: Control|Shift, action: ScrollPageUp     }
+
+
+
+  - { key: P,        mods: Alt|Shift, action: Paste            }
+  - { key: V,        mods: Alt|Shift, action: Paste            }
+  - { key: C,        mods: Alt|Shift, action: Copy             }
+  - { key: I,        mods: Alt|Shift, action: PasteSelection   }
+  - { key: Key0,     mods: Alt,       action: ResetFontSize    }
+  - { key: Equals,   mods: Alt,       action: IncreaseFontSize }
+  - { key: Add,      mods: Alt,       action: IncreaseFontSize }
+  - { key: Subtract, mods: Alt,       action: DecreaseFontSize }
+  - { key: Minus,    mods: Alt,       action: DecreaseFontSize }
+  - { key: N,        mods: Alt|Shift, action: ScrollLineDown   }
+  - { key: R,        mods: Alt|Shift, action: ScrollLineUp     }
+  - { key: D,        mods: Alt|Shift, action: ScrollPageDown   }
+  - { key: U,        mods: Alt|Shift, action: ScrollPageUp     }

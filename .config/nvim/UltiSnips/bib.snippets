@@ -1,0 +1,64 @@
+
+snippet inbook "In Book reference" b
+@inbook{${1:name},
+	author={${2:author}},
+	title={${3:title}},
+	subtitle={${4:subtitle}},
+	booktitle={${5:book}},
+	editor={${6:editor}},
+	year={${7:YYYY}},
+	location={${8:somewhere}},
+	publisher={${9:publisher}},
+	pages={${10:NN}--${11:NN}}
+}
+$0
+endsnippet
+
+snippet incollection "In collection reference" b
+@incollection{${1:name},
+	author={${2:author}},
+	title={${3:title}},
+	booktitle={${5:book}},
+	editor={${6:editor}},
+	year={${7:YYYY}},
+	location={${8:somewhere}},
+	publisher={${9:publisher}},
+	pages={${10:NN}--${11:NN}}
+}
+$0
+endsnippet
+
+snippet conference "conference paper" b
+@conference{${1:name},
+	author={${2:author}},
+	title={${3:title}},
+	booktitle={${5:book}},
+	year={${7:YYYY}},
+	location={${8:somewhere}},
+	address={${9:address}}
+}
+$0
+endsnippet
+
+
+snippet thesis "thesis paper" b
+@phdthesis{${1:name},
+	author={${2:author}},
+	title={${3:title}},
+	school={${5:school}},
+	year={${7:YYYY}},
+	location={${9:location}}
+}
+$0
+endsnippet
+
+snippet online "website" b
+@online{${1:name},
+	author={${2:author}},
+	title={${3:title}},
+	url={${5:url}},
+	year={${7:YYYY}},
+	urldate={${9:urldate}}
+}
+$0
+endsnippet

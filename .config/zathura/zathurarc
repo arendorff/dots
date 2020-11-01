@@ -1,0 +1,41 @@
+set selection-clipboard clipboard
+
+map n scroll down
+map r scroll up
+#map s scroll left
+#map t scroll right
+map T rotate
+map S rotate
+map N zoom in
+map R zoom out
+# map N scroll full-down
+# map R scroll full-up
+map j search forward
+map J search backward
+map 1 adjust_window best-fit
+map 2 adjust_window width
+map 3 toggle_page_mode
+map = adjust_window width
+#map l follow
+#map L display_link
+#map f toggle_fullscreen
+# map N navigate next
+# map R navigate previous
+map t navigate next
+map s navigate previous
+
+set default-fg "#dadada"
+set statusbar-fg "#dadada"
+set recolor-darkcolor "#000000"
+set recolor-lightcolor "#fdf6e3"
+
+#set smooth-scroll true
+set statusbar-home-tilde true
+set font "Terminus 10"
+
+set default-fg "#dadada"
+set default-bg "#252525"
+set statusbar-fg "#dadada"
+set statusbar-bg "#252525"
+# set recolor-darkcolor "#dadada"
+# set recolor-lightcolor "#252525"

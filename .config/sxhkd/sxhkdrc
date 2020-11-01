@@ -1,0 +1,351 @@
+#!/usr/bin/env bash
+
+# hide window
+#super + h
+  #bspc node -g hidden
+
+# unhide window
+#super + shift + h
+  #bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
+
+# terminal emulator
+super + shift + Return
+        termite
+
+super + Return
+        alacritty
+
+        # alacritty --config-file "$HOME/.config/alacritty/alacritty.x250.yml"
+
+
+	# dunst information
+super + g
+        timebattery.fish
+
+        # notify-send "$(date +"%a %H:%M %d.%m.%Y") $(acpi -b)"
+
+       # dunstify "$(date) $(acpi -b)"
+
+        # toggle between tiling  and floating
+super + a
+      bspc node -t {floating,tiled}
+
+# program launcher
+super + space
+        dmenu_run -i -l 25 -fn "Roboto Mono-11" -nf "#c5c8c6" -nb "#1d1f21" -sb "#81a2be" -sf "#1d1f21"
+
+super + shift + space
+        dmenuscript.fish
+
+# take a screenshot
+super + p
+        scrot; sleep 1; notify-send "Screenshot taken!"
+
+        # dmenu_run -fn "Roboto Mono-11"
+
+        #dmenu_run -fn "Roboto Mono-12" -i -p "run:"
+#dmenu_run -nf "#$FOREGROUND" -nb "#$BACKGROUND" -sb "#$DEFAULTRED" -sf "#$BACKGROUND" -fn "$DEFAULTFONT-16" -i -p "run:"
+
+# make sxhkd reload its configuration files:
+super + z
+	pkill -USR1 -x sxhkd
+
+super + q
+	pkill -USR1 -x sxhkd
+
+# quit/restart bspwm
+super + shift + z
+     bspc wm -r
+
+super + shift + q
+     bspc wm -r
+
+# set the window state
+#super + {_,shift +}space
+#super + alt {_,shift +}space
+#		 bspc node -t {tiled,floating}
+
+# GAPS
+super + {_,shift +}b
+       bspc config window_gap {0,15}
+
+
+# kill window
+super + x
+      bspc node -c
+
+# alternate between the tiled and monocle layout
+#super + e
+super + e
+       bspc node -t ~fullscreen
+
+super + shift + e
+       bspc desktop -l next
+
+#super + {_,shift + }o
+#        bspc node -t {fullscreen, tiled}
+
+# swap the current node and the biggest node
+# super + g
+	# bspc node -s biggest
+
+super + {_,shift +}odiaeresis
+    {betterlockscreen -l, systemctl poweroff}
+
+super + shift + BackSpace
+          systemctl reboot
+
+
+#
+# focus/swap
+#
+
+# focus/move the node in the given direction
+# super + {_,ctrl + }{s,n,r,t}
+	# bspc node -{f,s} {west,south,north,east}
+
+super + {_,ctrl + }{n,r}
+	bspc node -{f,s} {next.local,prev.local}
+
+#super + {_,shift + }{s,n,r,t}
+#	bspc node -{f,s} {west,south,north,east}
+
+# focus the next/previous desktop in the current monitor
+super + {_,shift +}u
+	bspc desktop -f {next,prev}.local.occupied
+
+super + {s,t}
+	bspc desktop -f {next,prev}.local.occupied
+
+# focus the next/previous desktop in the current monitor
+#super + alt + n
+#	bspc desktop -f next.local.occupied
+#
+#super + alt + r
+#	bspc desktop -f prev.local.occupied
+#
+#super + ctrl + n
+#	bspc desktop -f next.local.occupied
+#
+#super + ctrl + r
+#	bspc desktop -f prev.local.occupied
+
+
+# super + shift + s
+# 	bspc desktop -f prev.local
+
+# super + shift + t
+# 	bspc desktop -f next.local
+
+# super + shift + r
+# 	bspc desktop -f prev.local.occupied
+
+# super + shift + n
+# 	bspc desktop -f next.local.occupied
+#
+#super + alt + t
+#	bspc desktop -f next.local
+#
+#super + alt + s
+#	bspc desktop -f prev.local
+#
+#super + ctrl + t
+#	bspc desktop -f next.local
+#
+#super + ctrl + s
+#	bspc desktop -f prev.local
+
+
+# focus the last node/desktop
+#super + {_,shift + }Tab
+	#bspc {desktop,node } -f last.local
+
+# focus the last desktop
+super + Tab
+	bspc desktop -f last.local
+
+    # focus the next node on the desktop
+super + shift + Tab
+	bspc node -f next.local
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+
+# PROGRAM HOTKEYS
+
+super + v
+        TZ=UTC firefox
+
+#pgrep -x firefox && FOCUS FIREFOX NODE || firefox
+super + Shift + v
+          qutebrowser
+
+
+#super + c
+    #termite -e ranger
+
+super + c
+         alacritty -e lf
+
+super + shift + c
+        pcmanfm-qt
+
+super + w
+    telegram-desktop
+
+
+super + m
+    thunderbird
+
+
+# EXTRA KEYS
+
+XF86AudioMute
+       pactl set-sink-mute 0 toggle
+        #amixer sset Master toggle
+
+XF86AudioLowerVolume
+        sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%"
+		#amixer set Master 5%-
+
+XF86AudioRaiseVolume
+        sh -c "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%"
+		#amixer set Master 5%+
+
+XF86WLAN
+        wifitoggle.fish
+
+XF86MonBrightnessDown
+	      brightnessctl set 5%-
+
+XF86MonBrightnessUp
+	      brightnessctl set +5%
+
+XF86Display
+             brightnessctl set 1%
+#XF86MonBrightnessDown
+#		xbacklight -dec 5
+#XF86MonBrightnessUp
+#		xbacklight -inc 5
+
+
+		      # player control spotify music
+XF86Tools
+        playerctl play-pause
+
+XF86Search
+        playerctl stop
+
+XF86LaunchA
+        playerctl next
+
+XF86Explorer
+        playerctl previous
+
+
+        #
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+# super + alt + {s,n,r,t}
+# 	bspc node -z {left -10 0,bottom 0 10,top 0 -10,right 10 0}
+
+# super + alt + {Left,Down,Up,Right}
+# 	bspc node -z {left -10 0,bottom 0 10,top 0 -10,right 10 0}
+
+# # contract a window by moving one of its side inward
+# super + alt + shift + {s,n,r,t}
+# 	bspc node -z {right -10 0,top 0 10,bottom 0 -10,left 10 0}
+
+# super + alt + shift + {Left,Down,Up,Right}
+# 	bspc node -z {right -10 0,top 0 10,bottom 0 -10,left 10 0}
+
+
+# hide
+super + h
+        xdo hide
+# unhide
+super + shift + h
+        xdo show -dr
+## hide window
+#super + h
+#  bspc node -g hidden
+#
+## unhide window
+#super + shift + h
+#  bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
+
+
+# move a floating window
+#super + {Left,Down,Up,Right}
+# bspc node -v {-10 0,0 10,0 -10,10 0}
+
+
+#
+# preselect
+#
+
+# preselect the direction
+#super + alt + {s,n,r,t}
+	#bspc node -p {west,south,north,east}
+
+# preselect the ratio
+#alt + super + {1-9}
+	#bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+#super + ctrl + space
+	#bspc node -p cancel
+
+
+# cancel the preselection for the focused desktop
+#super + ctrl + shift + space
+	#bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+#alt + super + {s,n,r,t}
+	#bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+#alt + super + shift + {s,n,r,t}
+	#bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+#super + {Left,Down,Up,Right}
+	#bspc node -v {-20 0,0 20,0 -20,20 0}
+
+
+# spotify
+    # Play/Pause
+XF86AudioPlay
+        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+
+# Next
+XF86AudioNext
+        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+
+# Previous
+XF86AudioPrev
+        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+
+# Stop
+XF86AudioStop
+        dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop
+
+
+
+# youtube mpv stuff
+super + udiaeresis
+           /home/mo/Scripts/youtube.sh
+
+super + shift + udiaeresis
+           /home/mo/Scripts/youtubehd.sh
+
+           #   mpv --fs --ytdl-format=22 "$(xclip -o -sel clip)" || mpv --fs "$(xclip -o -sel clip)" || dunstify "error with script"

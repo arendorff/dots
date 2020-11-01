@@ -1,0 +1,360 @@
+# interpreter for shell commands (needs to be POSIX compatible)
+set shell sh
+
+# set '-eu' options for shell commands
+# These options are used to have safer shell commands. Option '-e' is used to
+# exit on error and option '-u' is used to give error for unset variables.
+# Option '-f' disables pathname expansion which can be useful when $f, $fs, and
+# $fx variables contain names with '*' or '?' characters. However, this option
+# is used selectively within individual commands as it can be limiting at
+# times.
+set shellopts '-eu'
+
+# set internal field separator (IFS) to "\n" for shell commands
+# This is useful to automatically split file names in $fs and $fx properly
+# since default file separator used in these variables (i.e. 'filesep' option)
+# is newline. You need to consider the values of these options and create your
+# commands accordingly.
+set ifs "\n"
+
+# leave some space at the top and the bottom of the screen
+set scrolloff 10
+
+# quit
+map q quit
+
+# press to jump to next match in find mode
+map ; find-next
+map , find-prev
+
+# movement
+map n down
+map r up
+map s updir
+map t open
+map <enter> open
+
+map gg top
+map G bottom
+
+# copy & paste
+map y copy
+
+# reload directory
+map l reload
+
+# delete cut duplicate
+map d
+map dd cut
+map dD duplicate
+map p paste-backup
+map P paste-async
+map u clear
+cmd trash %trash-put $fx
+map DD trash
+map Dd delete $fx
+# map P :Link # symlinks and hard links
+map P :symlink # symlinks and hard links
+
+# search
+map / search
+map ? search-back
+map j search-next
+map J search-prev
+map f find
+map F find-back
+map ; find-next
+map , find-prev
+
+# fzf search and jump
+map <c-f> :fzf_jump
+
+# interacting with  files and directories
+# map R rename
+map e $$EDITOR $f # open in EDITOR
+map i $$PAGER $f # page with PAGER
+map S $$SHELL # open SHELL in this directory
+map R rename
+map <c-r> :bulk-rename
+
+# jumping
+map gh cd ~/
+map gc cd ~/.config/
+map g. cd ~/SynologyDrive/dots
+map gb cd ~/Dropbox/
+map gd cd ~/Downloads
+map gD cd ~/Documents
+map gN cd ~/NAS
+map gn cd ~/Dropbox/notes
+map gC cd ~/Cloud
+map gu cd ~/SynologyDrive/Documents/master
+map gM cd /run/media
+map gm cd ~/SynologyDrive/Documents/master
+map gT cd ~/.local/share/Trash/files
+map gv cd ~/Video
+map gS cd ~/Scripts
+map gs cd ~/SynologyDrive
+map gt cd ~/todo
+
+map .b cd ~/.config/bspwm
+map .e cd ~/.emacs.d/
+map .t cd ~/.config/termite
+map .r cd ~/.config/termite
+map .z cd ~/.config/zathura
+map .d cd ~/.config/dunst
+map .l cd ~/.config/lf
+map .s cd ~/.config/sxhkd
+map .f cd ~/.config/fish
+
+
+# file info and show hidden
+map zh set hidden!
+map h set hidden!
+map zr set reverse!
+map zn set info
+map zs set info size
+map x extract
+map Xz zip
+map Xt tar
+
+# sortby/order
+map on :set sortby natural; set info
+map os :set sortby size; set info size
+map ot :set sortby time; set info time
+map oN :set sortby name
+
+# extracting & compressing (see scripts at the beginning)
+map x extract
+map Xz zip
+map Xt tar
+# marking
+map m mark-save
+map M mark-load
+# removing marks...
+map b mark-remove
+
+# incremental searching with /
+set incsearch true
+
+# match pattern everywhere in the word and not just beginning when finding
+set anchorfind true
+
+# reads input when finding until there's only one match (not just the first match)
+set findlen 0
+
+# add directory or file
+map ad push %mkdir<space>
+map af push %touch<space>
+
+# paste with rsync for progress
+cmd paste-progress &{{
+    load=$(lf -remote 'load')
+    mode=$(echo "$load" | sed -n '1p')
+    list=$(echo "$load" | sed '1d')
+    if [ $mode = 'copy' ]; then
+        rsync -av --ignore-existing --progress $list . \
+        | stdbuf -i0 -o0 -e0 tr '\r' '\n' \
+        | while read line; do
+            lf -remote "send $id echo $line"
+        done
+    elif [ $mode = 'move' ]; then
+        mv -n $list .
+    fi
+    lf -remote 'send load'
+    lf -remote 'send clear'
+}}
+
+# paste with backup of existing files
+cmd paste-backup %{{
+    load=$(lf -remote 'load')
+    mode=$(echo "$load" | sed -n '1p')
+    list=$(echo "$load" | sed '1d')
+    if [ $mode = 'copy' ]; then
+        cp -r --backup=numbered $list .
+    elif [ $mode = 'move' ]; then
+        mv --backup=numbered $list .
+    fi
+    lf -remote 'send load'
+    lf -remote 'send clear'
+}}
+
+# duplicate a single file
+cmd duplicate $cp $f $f.bak
+# cmd dup %{{
+# list=$(echo "$load" | sed '1d')
+# cp $list ./dup-`basename -s $list`
+# }}
+
+# create symlinks and hard links
+cmd symlink %{{
+load=$(lf -remote 'load')
+mode=$(echo "$load" | sed -n '1p')
+list=$(echo "$load" | sed '1d')
+if [ $mode = 'copy' ]; then
+    # do something with $list
+		ln -sr $list -t .
+elif [ $mode = 'move' ]; then
+    # do something else with $list
+		ln $list -t .
+fi
+}}
+
+# create symlinks and hard links THIS IS BROKEN, USE THE ONE ABOVE
+cmd Link %{{
+	lf -remote 'load' | while read file; do
+		if [ ! -n "${mode+1}" ]; then
+			mode="$file"
+			continue
+		fi
+		files=("$file")
+	done
+	if [ "${#files[@]}" -le 1 ]; then
+		lf -remote "send $id echo no files to link"
+		exit 0
+	fi
+	# symbolicly copy mode is indicating a soft link
+	if [[ "$mode" == copy ]]; then
+		ln -sr $files -t .
+	# while a move mode is indicating a hard link
+	elif [[ "$mode" == move ]]; then
+		ln $files -t .
+	fi
+}}
+# P is used for both soft and hard linking. The "cut" mode of files donates a hard link is requested, while a "copy" mode donates a soft link is requested.
+
+# asynchronous copy and paste
+cmd paste-async &{{
+    load=$(lf -remote 'load')
+    mode=$(echo "$load" | sed -n '1p')
+    list=$(echo "$load" | sed '1d')
+    if [ $mode = 'copy' ]; then
+        cp -rn $list .
+    elif [ $mode = 'move' ]; then
+        mv -n $list .
+    fi
+    lf -remote 'send load'
+    lf -remote 'send clear'
+}}
+
+
+# renaming like in ranger
+# Unmap the default binding
+map c
+# Rename the file with a completely different name
+map cc push :rename<space>
+# Edit the current filename
+map cw ${{
+	# get 'basename' of the selection
+	filename="${f##*/}"
+	# quote it so we won't deal with quotes in the lf -remote command
+	filename="$(printf '%q' "$filename")"
+	filename="${filename// /<space>}"
+	lf -remote "send $id push :rename<space>$filename"
+}}
+# Edit filename before the extension
+map cW ${{
+	# get 'basename' of the selection
+	filename="${f##*/}"
+	# quote it so we won't deal with quotes in the lf -remote command
+	filename="$(printf '%q' "$filename")"
+	filename="${filename// /<space>}"
+	lf -remote "send $id push :rename<space>$filename<a-b><c-b>"
+}}
+
+# extract the current file with the right command
+# (xkcd link: https://xkcd.com/1168/)
+cmd extract ${{
+    set -f
+    case $f in
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f;;
+        *.tar.gz|*.tgz) tar xzvf $f;;
+        *.tar.xz|*.txz) tar xJvf $f;;
+        *.zip) unzip $f;;
+        *.rar) unrar x $f;;
+        *.7z) 7z x $f;;
+    esac
+}}
+
+# compress current file or selected files with tar and gunzip
+cmd tar ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    tar czf $1.tar.gz $1
+    rm -rf $1
+}}
+
+# compress current file or selected files with zip
+cmd zip ${{
+    set -f
+    mkdir $1
+    cp -r $fx $1
+    zip -r $1.zip $1
+    rm -rf $1
+}}
+
+# This command is called when current file is not a directory. You may want to
+# use either file extensions and/or mime types here. Below uses an editor for
+# text files and a file opener for the rest.
+#cmd open ${{
+#    case $(file --mime-type $f -b) in
+#        text/*) $EDITOR $fx;;
+#        */pdf) $PDFVIEWER $fx;;
+#        image/*) $IMGVIEWER $fx;;
+#        *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
+#    esac
+#}}
+
+cmd open ${{
+    set -f
+    case $f in
+        *.pdf|*.mobi|*.epub) setsid -f $PDFVIEWER > /dev/null 2>&1 $f;;
+        *.md|*.org|*.txt|*.conf|*.yaml|*.toml|*.json|*.hex|*.c|*.R|*.r|*.rmd|*.html|*.bib) nvim $f;;
+        # the dot opens the whole directory not just one image
+        *.jpeg|*.png|*.jpg|*.JPG|*.JPEG) setsid -f sxiv > /dev/null 2>&1  .;;
+        # *.jpeg|*.png|*.jpg|*.JPG|*.JPEG) setsid -f $IMGVIEWER > /dev/null 2>&1  .;;
+        #*.jpeg|*.png|*.jpg) $IMGVIEWER $f;;
+        # *.MP4|*.mkv|*.webm|*.mp4|*.avi|*.mp3|*.flac|*.ogg|*.aac) setsid -f xdg-open > /dev/null 2>&1 $f &;;
+        # *.mkv|*.webm|*.mp4|*.avi|*.mp3|*.flac|*.ogg|*.aac) setsid -f mpv --sub-auto=fuzzy $f &;;
+        *.mkv|*.webm|*.mp4|*.avi|*.mp3|*.flac|*.ogg|*.aac) mpv --sub-auto=fuzzy $f;;
+#*) /home/mo/Scripts/emacsclientwrapper.sh $f # open in EDITOR
+        *) nvim $f ;; # open in EDITOR
+        #*) $EDITOR $f;;
+esac
+}}
+
+
+# define a custom 'rename' command without prompt for overwrite
+# cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+# map r push :rename<space>
+
+# bulk rename
+cmd bulk-rename ${{
+    old=$(mktemp)
+    new=$(mktemp)
+    [ -n $fs ] && fs=$(ls)
+    printf "$fs\n" > $old
+    printf "$fs\n" > $new
+    $EDITOR $new
+    [ $(cat $new | wc -l) -ne $(cat $old | wc -l) ] && exit
+    paste $old $new | while read names; do
+        src=$(printf $names | cut -f1)
+        dst=$(printf $names | cut -f2)
+        [ $src = $dst ] && continue
+        [ -e $dst ] && continue
+        mv $src $dst
+    done
+    rm $old $new
+    lf -remote "send $id unselect"
+}}
+
+# fzf jump
+cmd fzf_jump ${{
+   res="$(fd --hidden --type f --ignore-file ~/.config/fd/fdignore-test -a . . | fzf --reverse --header='Jump to location')"
+   if [ -f "$res" ]; then
+     cmd="select"
+   elif [ -d "$res" ]; then
+     cmd="cd"
+   fi
+lf -remote "send $id $cmd \"$res\""
+}}

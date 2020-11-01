@@ -1,0 +1,413 @@
+
+
+# basic setup 
+#for_window [class="^.*"] border pixel 0
+default_border pixel 2
+default_floating_border pixel 4
+# mouse cursors does not determine which window is active. 
+focus_follows_mouse no
+
+# 
+
+#gaps 
+#Needed for i3gaps
+gaps inner 0
+#disable and enable gaps off and on
+bindsym $mod+z		gaps inner current set 0; gaps outer current set 0
+bindsym $mod+Shift+z				gaps inner current set 15
+#gaps outer current set 5
+#resize gaps
+bindsym $mod+b			gaps outer current plus 5; gaps inner current plus 5
+bindsym $mod+Shift+b 	 	gaps inner current minus 5; gaps outer current minus 5
+#  smart_gaps on
+#smart_borders on
+#hide_edge_borders smart_no_gaps # hides borders when no gaps and one window (i3-gaps)  # smart: hides border when one window is visible
+# workspace $ws1 gaps inner 0
+
+
+#basic definitions 
+#set $term --no-startup-id urxvt
+set $term --no-startup-id termite
+set $mod Mod4
+set $browser1 --no-startup-id firefox
+set $browser2 --no-startup-id qutebrowser
+set $font Misc Tamsyn 
+#set $font xos4 Terminus
+#set $font Roboto Mono
+set $fontsize 13
+#font pango: Roboto Mono 11
+#workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# alternating layouts
+#default_orientation vertical #start in opposite orientation from your monitor
+#or_window [class=".*"] split toggle #toggles split at each new window
+#bindsym $mod+shift+q split toggle kill #kill command resets the split
+#bindsym $mod+e layout toggle split # should already exist but use if split orientation messes up
+# this kind of breaks tabbed layouts...at least without the last keybind....
+
+#classes
+#for_window [class="qutebrowser"] border pixel 0
+#for_window [class="qutebrowser"] gaps inner 0
+#for_window [class="rxvt-unicode"] gaps inner 15
+#for_window [class="Firefox"] border pixel 0; layout tabbed
+for_window [class="Firefox"] border pixel 0; gaps inner 0
+for_window [class="firefox"] border pixel 0; gaps inner 0
+#for_window [class="urxvt"] gaps inner 20
+#for_window [class="termite"] gaps inner 20
+# for_window [class="urxvt"] border pixel 1
+#for_window [class="Urxvt"] gaps inner 15
+# for_window [class="URxvt"] focus child, layout split, focus
+#for_window [class="Firefox"] gaps outer 0, focus, border pixel none
+# assigns firefox to first workspace
+assign [class="Firefox"] $ws1 
+assign [class="Emacs"] $ws2 
+# for_window [class="Firefox"] 
+# for_window [class="Firefox"] focus child, layout tabbed, focus
+
+
+#SYSTEMD
+ set $shutdown shutdown -h now
+ set $reboot reboot
+ set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
+ set $hibernate sudo systemctl suspend
+
+
+
+
+# run on startup 
+# exec --no-startup-id xautolock -time 15 -locker "i3lock"
+#exec_always --no-startup-id flashfocus
+exec --no-startup-id betterlockscreen --update /home/mo/Dropbox/wallpaper/edgywall.png
+#exec_always --no-startup-id $term -e "/home/mo/.config/i3/i3-alternating-layout/alternating_layouts.py"
+# exec_always --no-startup-id /home/mo/.config/i3/i3-alternating-layout/alternating_layouts.py
+# exec_always --no-startup-id ~/alternating_layouts.py
+#exec --no-startup-id xinput --set-prop 10 303 -0.3
+# exec --no-startup-id xinput --set-prop 10 303 1; xinput --set-prop 10 306 0, 1
+exec --no-startup-id udiskie
+exec --no-startup-id xinput set-prop 13 320 0, 1
+exec --no-startup-id xinput set-prop 13 311 0.5
+exec --no-startup-id xmodmap ~/.Xmodmap
+#exec --no-startup-id emacsclient -a "" -c
+exec --no-startup-id dropbox
+exec --no-startup-id dunst 
+exec --no-startup-id xfce4-power-manager
+# exec --no-startup-id exec $term -e dropbox
+#exec --no-startup-id $term -e xrdb ~/.Xresources
+# exec --no-startup-id nm-applet
+exec --no-startup-id compton --config /home/mo/.config/compton.conf
+#  exec --no-startup-id $term -e redshift -l 50.1:8.6
+exec --no-startup-id redshift-gtk
+#Increase key rate repeat
+exec_always --no-startup-id xset r rate 200 50
+# first number delay, second key repeat
+#exec --no-startup-id $term -e xset r rate 300 50
+#Unclutter makes the mouse invisible after a brief period
+exec --no-startup-id unclutter
+#exec --no-startup-id 
+#setup trackpoint
+ # exec --no-startup-id  $term -e echo 180 | sudo tee /sys/devices/platform/i8042/serio1/sensitivity ; echo 200 | sudo tee /sys/devices/platform/i8042/serio1/speed
+# 
+
+
+# keybinds 
+#
+# mouse+mod to drag floating windows
+floating_modifier $mod
+
+#workspace back and forth and previous
+bindsym $mod+Shift+Tab		workspace next
+bindsym $mod+Ctrl+Tab		workspace prev
+bindsym $mod+Tab		workspace back_and_forth
+bindsym $mod+u		workspace next
+# press the number of current workspace to go to where you where before that.
+# workspace_auto_back_and_forth yes
+
+# toggle layout
+bindsym $mod+w layout toggle tabbed splith
+
+
+# start terminal
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+Ctrl+Return exec termite
+
+# start new browser window
+#bindsym $mod+Shift+Return exec firefox --browser
+
+# kill 
+bindsym $mod+x split toggle kill
+
+# move and change focus 
+# change focus 
+bindsym $mod+s focus left
+bindsym $mod+n focus down
+bindsym $mod+r focus up
+bindsym $mod+t focus right
+
+
+#change focus arrow keys
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+s move left
+bindsym $mod+Shift+n move down
+bindsym $mod+Shift+r move up
+bindsym $mod+Shift+t move right
+
+# move focused window arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+# 
+
+# split in horizontal orientation
+bindsym $mod+adiaeresis	 split v
+
+# split in vertical orientation
+bindsym $mod+p split h
+
+# enter fullscreen mode for the focused container
+bindsym $mod+e fullscreen toggle
+
+# toggle tiling / floating
+bindsym $mod+shift+space floating toggle
+
+# change focus between tiling / floating windows
+ bindsym $mod+space focus mode_toggle
+
+#workspaces 
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+# 
+
+# reload the configuration file
+bindsym $mod+m reload
+
+# restart i3 inplace
+bindsym $mod+Shift+m restart
+
+# resize window
+bindsym $mod+f resize shrink width 10 px or 10 ppt
+        bindsym $mod+h resize grow height 10 px or 10 ppt
+        bindsym $mod+g resize shrink height 10 px or 10 ppt
+        bindsym $mod+k resize grow width 10 px or 10 ppt
+
+# i3lock
+bindsym $mod+odiaeresis exec --no-startup-id betterlockscreen -l dim
+
+# shutdown
+#bindsym $mod+Shift+odiaeresis 	$term -e $shutdown
+bindsym $mod+Shift+odiaeresis 	exec $shutdown
+
+# leave i3
+bindsym $mod+Shift+Escape 	exec i3-msg exit
+
+# reboot
+bindsym $mod+Shift+BackSpace 	exec $reboot
+
+# focus the parent container
+bindsym $mod+q	focus parent
+
+# Focus firefox!!!!
+bindsym $mod+F1 [class="Firefox"] focus
+
+# move the currently focused window to the scratchpad
+bindsym Mod1+Shift+j move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym Mod1+j scratchpad show
+
+
+#app keybinds 
+
+# start rofi
+#bindsym $mod+a exec "rofi -show run -width 70 -matching normal"
+# bindsym $mod+space exec "locate mo | xdg-open $(rofi -dmenu -i -p 'locate:' -width 70 -matching normal)"
+#bindsym $mod+a exec dmenu_run -i -fn "xos4 Terminus-11" -nb "#002b36"
+# bindsym $mod+a exec "dmenu_run -nf '#93A1A1' -nb '#002B36' -sb '#657B83' -sf '#002B36' -fn 'xos4 Terminus-10' -i -p 'run:'"
+bindsym $mod+a exec "dmenu_run -nf '$foreground' -nb '$background' -sb '$highlight' -sf '$background' -fn '$font-$fontsize' -i -p 'run:'"
+
+#browser
+bindsym $mod+v		exec $browser1 --new-window
+bindsym $mod+Shift+v exec $term -e killall firefox
+#ranger
+bindsym $mod+c 			exec $term -e ranger
+bindsym $mod+l 			exec --no-startup-id emacsclient -a "" -c
+# bindsym $mod+Shift+l 			exec $term -e killall emacs
+bindsym $mod+Shift+l 			exec --no-startup-id emacs 
+
+#bindsym $mod+l 			exec $term -e emacsclient -nc
+bindsym $mod+Shift+c		exec $term -e sudo ~/.scripts/rangerstart
+ 
+
+
+# wallpapers & themes: 
+# exec_always --no-startup-id wal -i ~/.config/wall.png -a 95
+# exec $term -e hsetroot -solid "#002b36"
+#exec $term -e hsetroot -solid "$background"
+#"#1E2127"
+#exec --no-startup-id feh --bg-fill ~/.config/wall.png 
+# exec --no-startup-id hsetroot -solid "#282828"
+exec --no-startup-id hsetroot -solid "#181818"
+#exec --no-startup-id hsetroot -solid "#2b2b2b"
+ 
+
+set_from_resource $inactive i3wm.color0 #FF0000
+set_from_resource $active i3wm.color1  #FF0000
+set_from_resource $highlight i3wm.color8  #FF0000
+set_from_resource $foreground i3wm.foreground  #FF0000
+set_from_resource $background i3wm.background  #FF0000
+set $red #FF0000
+# border is the border around the name of the window when shown
+# background is background of name tag
+# text ist text
+# indicator shows where the next window will be
+# child_border is the border around the whole window
+
+
+# class                 border 		 backgr. 	text 	indicator	child_border
+client.focused          $foreground $highlight $foreground $active $foreground  
+client.focused_inactive $background $background $foreground $foreground $highlight  
+client.unfocused        $background $background $foreground $foreground $highlight  
+client.urgent           $background $background $foreground $foreground $highlight 
+client.placeholder      $background $background $foreground $foreground $highlight
+
+client.background       $active
+
+#bar 
+# exec_always --no-startup-id /home/mo/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+# First I have a tmux window used for background scripts.
+# I'll later bind this to mod+u.
+for_window [instance="dropdown"] floating enable
+for_window [instance="dropdown"] resize set 625 400
+for_window [instance="dropdown"] move scratchpad
+for_window [instance="dropdown"] border pixel 5
+# Runs the tmuxinit script, which searches for an earlier tmux instance,
+# otherwise starts a new one (to prevent multiple dropdown sessions).
+#exec --no-startup-id $term -title dropdown -name dropdown
+
+#bindsym $mod+Shift+Return			[instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
+
+# #---Extra XF86 Keys---# #
+# These are the extra media keys that some keyboards have.
+#bindsym XF86AudioMute		exec --no-startup-id amixer set Master toggle
+#bindsym XF86AudioLowerVolume	exec --no-startup-id amixer set Master 5%-
+#bindsym XF86AudioRaiseVolume	exec --no-startup-id  amixer set Master 5%+
+bindsym XF86AudioMute	exec --no-startup-id "pactl set-sink-mute 0 toggle"
+bindsym XF86AudioRaiseVolume	exec --no-startup-id "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%"
+bindsym XF86AudioLowerVolume	exec --no-startup-id "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%"
+
+bindsym XF86PowerOff		exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
+##bindsym XF86Copy		exec
+##bindsym XF86Open		exec
+##bindsym XF86Paste		exec
+##bindsym XF86Cut		exec
+##bindsym XF86MenuKB		exec
+bindsym XF86Calculator		exec $term -e R -q
+##bindsym XF86Sleep		This binding is typically mapped by systemd automatically.
+##bindsym XF86WakeUp		exec
+bindsym XF86Explorer		exec $term -e ranger
+##bindsym XF86Send		exec
+##bindsym XF86Xfer		exec
+bindsym XF86WWW			exec --no-startup-id $BROWSER
+##bindsym XF86DOS		exec
+bindsym XF86ScreenSaver		exec exec --no-startup-id lockscreen
+##bindsym XF86RotateWindows	exec
+##bindsym XF86TaskPane		exec
+##bindsym XF86Favorites		exec
+bindsym XF86MyComputer		exec $term -e ranger
+##bindsym XF86Back		exec
+##bindsym XF86Forward		exec
+bindsym XF86Eject		exec --no-startup-id dmenuumount
+bindsym XF86AudioNext		exec --no-startup-id lmc next
+bindsym XF86AudioPlay		exec --no-startup-id lmc toggle
+bindsym XF86AudioPrev		exec --no-startup-id lmc prev
+bindsym XF86AudioStop		exec --no-startup-id lmc toggle
+##bindsym XF86AudioRecord
+bindsym XF86AudioRewind		exec --no-startup-id lmc back 10
+bindsym XF86AudioForward	exec --no-startup-id lmc forward 10
+##bindsym XF86Phone		exec
+##bindsym XF86Tools		exec
+bindsym XF86HomePage		exec $BROWSER https://lukesmith.xyz
+bindsym XF86Reload		restart
+##bindsym XF86ScrollUp		exec
+##bindsym XF86ScrollDown		exec
+##bindsym XF86New		exec
+##bindsym XF86LaunchA		exec
+##bindsym XF86LaunchB		exec
+##bindsym XF86Launch2		exec
+##bindsym XF86Launch3		exec
+##bindsym XF86Launch4		exec
+##bindsym XF86Launch5		exec
+##bindsym XF86Launch6		exec
+##bindsym XF86Launch7		exec
+##bindsym XF86Launch8		exec
+##bindsym XF86Launch9		exec
+#bindsym XF86AudioMicMute	exec $micmute
+bindsym XF86TouchpadToggle	exec --no-startup-id toggletouchpad
+bindsym XF86TouchpadOn		exec --no-startup-id synclient TouchpadOff=0
+bindsym XF86TouchpadOff		exec --no-startup-id synclient TouchpadOff=1
+bindsym XF86Suspend		exec --no-startup-id lockscreen
+bindsym XF86Close		kill
+bindsym XF86WebCam		exec --no-startup-id camtoggle
+bindsym XF86Mail		exec $term -e neomutt
+bindsym XF86Messenger		exec $term -e weechat
+bindsym XF86Search		exec $BROWSER https://duckduckgo.com
+##bindsym XF86Go			exec
+##bindsym XF86Finance		exec
+##bindsym XF86Game		exec
+bindsym XF86Shop		exec $BROWSER https://ebay.com
+#bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 5; exec --no-startup-id dunstify "screen brightness: $(xbacklight -get)/100%"
+bindsym XF86MonBrightnessDown	exec --no-startup-id xbacklight -dec 5
+bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 5
+#bindsym XF86MonBrightnessUp	exec --no-startup-id xbacklight -inc 5; exec --no-startup-id dunstify "screen brightness: $(xbacklight -get)/100%"
+
+bindsym XF86AudioMedia		exec --no-startup-id st -e ncmpcpp
+bindsym XF86Display		exec --no-startup-id arandr
+#bindsym XF86KbdLightOnOff	exec
+bindsym XF86KbdBrightnessDown	exec --no-startup-id python3.6 ~/.scripts/kb-lights.py -
+bindsym XF86KbdBrightnessUp	exec --no-startup-id python3.6 ~/.scripts/kb-lights.py +
+##bindsym XF86Reply		exec
+##bindsym XF86MailForward	exec
+##bindsym XF86Save		exec
+bindsym XF86Documents		exec $term -e ranger ~/Documents
+##bindsym XF86Battery		exec
+##bindsym XF86Bluetooth		exec
+bindsym XF86WLAN		exec $netrefresh

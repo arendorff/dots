@@ -1,0 +1,31 @@
+
+clear mod1
+clear mod2
+clear mod3
+clear mod4
+clear mod5
+clear shift
+clear lock
+clear control
+
+keycode 37 = Control_L Control_R
+keycode 50 = Shift_L Shift_R
+! neo layout key to the right of Lshift
+keycode 94 = ISO_Level5_Shift
+! neo layout capslock key modifier
+keycode 66 = ISO_Level3_Shift
+! rl super key to alt
+keycode 133 = Alt_L Meta_L Alt_L Alt_L Alt_L 
+! rl alt key to super
+keycode 64 = Super_L Super_R Super_L Super_L Super_L
+
+
+! because of my weird keymap layout, xmodmap can't handle it and complains about Shift being bound to both lock and shift (modifier). Not binding lock fixes the issue.
+add shift = Shift_L Shift_R
+!add lock = Shift_L
+add control = Control_L Control_R
+add mod1 = Alt_L Meta_L
+add mod3 = ISO_Level5_Shift
+add mod4 = Super_L Super_R Super_L
+add mod5 = ISO_Level3_Shift
+
