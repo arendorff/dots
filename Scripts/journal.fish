@@ -1,6 +1,6 @@
 #!/bin/fish
 
-set file ~/todo/journal.md
+set file ~/sync/docs/todo/journal.md
 
 test -f $file; or notify-send "Journal not found"; or exit
 

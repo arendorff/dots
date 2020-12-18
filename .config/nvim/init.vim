@@ -221,7 +221,7 @@ noremap <C-t> <C-w>l
 nnoremap ä za
 nnoremap Ä zA
 
-"" NEO2 REMAPPINGS
+" NEO2 REMAPPINGS
 noremap s h
 noremap n gj
 noremap r gk
@@ -447,8 +447,9 @@ set statusline+=%L   " Total lines
 " colorscheme {{{
 
 " important for true colors in neovim
-set termguicolors
-" colorscheme codedark
+" set termguicolors
+
+ " colorscheme codedark
 colorscheme base16-default-dark
 " colorscheme base16-tomorrow-night
 " colorscheme wal

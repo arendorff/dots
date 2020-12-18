@@ -1,94 +1,90 @@
+
+!Xft.dpi: 192
+!Xcursor.size: 32
+
+
+!#define DPI 92
+!#define DPI 144
+#define DPI 135
+!#define DPI 115
+!#define DPI 120
 !
-!!Xft.dpi: 192
-!!Xcursor.size: 32
-!
-!
-!!#define DPI 92
-#define DPI 144
-!#define DPI 135
-!!#define DPI 115
-!!#define DPI 120
-!
-!Xft.autohint:               0
-!Xft.antialias:              1
-!Xft.hinting:                true
-!Xft.hintstyle:              hintslight
-!Xft.rgba:                   rgb
-!Xft.lcdfilter:              lcddefault
+Xft.autohint:               0
+Xft.antialias:              1
+Xft.hinting:                true
+Xft.hintstyle:              hintslight
+Xft.rgba:                   rgb
+Xft.lcdfilter:              lcddefault
 Xft.dpi: DPI
-!
-!XTerm.vt100.translations: #override \n\
-!    Ctrl <Key>n: larger-vt-font() \n\
-!    Ctrl <Key>r: smaller-vt-font()
-!
-!
-!XTerm.vt100.faceName: Roboto Mono:size=10:antialias=true
-!xterm*faceName: Inconsolata
-!xterm*faceName: Roboto Mono
-!xterm*faceSize: 12
-!xterm*renderFont: true
-!
-!XTerm.faceName: Roboto Mono:size=10:antialias=true
-!XTerm.vt100.font: Terminus:size=20
-!xterm*faceName: Terminus
-!xterm*faceName: Terminus
-!xterm*faceSize: 11
-!
-!!#include "/home/mo/.xfiles/xresources/base16-xresources/eighties-256.Xresources"
-!!#include "/home/mo/.xfiles/xresources/base16-xresources/default-dark-256.Xresources"
-!!#include "/home/mo/.xfiles/xresources/base16-xresources/default-dark.Xresources"
-!!#include "/home/mo/.xfiles/themes/base16-xresources/xresources/base16-zenburn-256.Xresources"
-!!#include "/home/mo/.xfiles/themes/base16-xresources/xresources/base16-default-dark.Xresources"
-!
-!
-!
-!!TomorrowNight
-!#define t_background        #323232
-!#define t_current_line      #282a2e
-!#define t_selection      	#373b41
-!#define t_foreground      	#cdcdcd
-!#define t_comment	     	#969896
-!#define t_red		     	#cc6666
-!#define t_orange	     	#de935f
-!#define t_yellow        	#f0c674
-!#define t_green	        	#b5bd68
-!#define t_aqua	        	#8abeb7
-!#define t_blue	        	#81a2be
-!#define t_purple        	#b294bb
-!
-!
-!*.foreground:   t_foreground
-!*.background:   t_background
-!*.cursorColor:  #aeafad
-!
-!! Black / Grey
-!*.color0:       #000000
-!*.color8:       #666666
-!
-!! Red / Bright Red
-!*.color1:       t_red
-!*.color9:       #FF3334
-!
-!! Green + Bright Green
-!*.color2:       t_green
-!*.color10:      #9ec400
-!
-!! Yellow (Orange) + Bright Yellow (Yellow)
-!*.color3:       t_orange
-!*.color11:      t_yellow
-!
-!! Blue + Bright Blue
-!*.color4:       t_blue
-!*.color12:      t_blue
-!
-!! Magenta (Purple) + Bright Magenta
-!*.color5:       t_purple
-!*.color13:      #b777e0
-!
-!! Cyan (Aqua) + Bright Cyan
-!*.color6:       t_aqua
-!*.color14:      #54ced6
-!
-!! Light Grey (Selection) + White (Current Line)
-!*.color7:       t_selection
-!*.color15:      t_current_line
+
+XTerm.vt100.translations: #override \n\
+    Ctrl <Key>n: larger-vt-font() \n\
+    Ctrl <Key>r: smaller-vt-font()
+
+
+XTerm.vt100.faceName: Roboto Mono:size=10:antialias=true
+xterm*faceName: Inconsolata
+xterm*faceName: Roboto Mono
+xterm*faceSize: 12
+xterm*renderFont: true
+
+XTerm.faceName: Roboto Mono:size=10:antialias=true
+XTerm.vt100.font: Terminus:size=20
+xterm*faceName: Terminus
+xterm*faceName: Terminus
+xterm*faceSize: 11
+
+!Base16 Default Dark
+!Scheme: Chris Kempson (http://chriskempson.com)
+
+#define base00 #181818
+#define base01 #282828
+#define base02 #383838
+#define base03 #585858
+#define base04 #b8b8b8
+#define base05 #d8d8d8
+#define base06 #e8e8e8
+#define base07 #f8f8f8
+#define base08 #ab4642
+#define base09 #dc9656
+#define base0A #f7ca88
+#define base0B #a1b56c
+#define base0C #86c1b9
+#define base0D #7cafc2
+#define base0E #ba8baf
+#define base0F #a16946
+
+*foreground:   base05
+!#ifdef background_opacity
+!*background:   [background_opacity]base00
+!#else
+*background:   base00
+!#endif
+*cursorColor:  base05
+
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
+
+*color8:       base03
+*color9:       base08
+*color10:      base0B
+*color11:      base0A
+*color12:      base0D
+*color13:      base0E
+*color14:      base0C
+*color15:      base07
+
+! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+! use 'shell' template to set these if necessary
+*color16:      base09
+*color17:      base0F
+*color18:      base01
+*color19:      base02
+*color20:      base04
+*color21:      base06

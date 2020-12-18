@@ -82,18 +82,18 @@ map gh cd ~/
 map gc cd ~/.config/
 map g. cd ~/SynologyDrive/dots
 map gb cd ~/Dropbox/
-map gd cd ~/Downloads
-map gD cd ~/Documents
-map gN cd ~/NAS
+map gd cd ~/downloads
+map gD cd ~/documents
+map gN cd /mnt/moritz
+map gu cd /mnt/moritz
+map gs cd /mnt/moritz
 map gn cd ~/Dropbox/notes
 map gC cd ~/Cloud
-map gu cd ~/SynologyDrive/Documents/master
 map gM cd /run/media
 map gm cd ~/SynologyDrive/Documents/master
 map gT cd ~/.local/share/Trash/files
-map gv cd ~/Video
-map gS cd ~/Scripts
-map gs cd ~/SynologyDrive
+map gv cd ~/video
+map gS cd ~/scripts
 map gt cd ~/todo
 
 map .b cd ~/.config/bspwm
@@ -316,7 +316,7 @@ cmd open ${{
         #*.jpeg|*.png|*.jpg) $IMGVIEWER $f;;
         # *.MP4|*.mkv|*.webm|*.mp4|*.avi|*.mp3|*.flac|*.ogg|*.aac) setsid -f xdg-open > /dev/null 2>&1 $f &;;
         # *.mkv|*.webm|*.mp4|*.avi|*.mp3|*.flac|*.ogg|*.aac) setsid -f mpv --sub-auto=fuzzy $f &;;
-        *.mkv|*.webm|*.mp4|*.avi|*.mp3|*.flac|*.ogg|*.aac) mpv --sub-auto=fuzzy $f;;
+        *.mkv|*.webm|*.MP4|*.mp4|*.avi|*.mp3|*.flac|*.ogg|*.aac) mpv --sub-auto=fuzzy $f;;
 #*) /home/mo/Scripts/emacsclientwrapper.sh $f # open in EDITOR
         *) nvim $f ;; # open in EDITOR
         #*) $EDITOR $f;;

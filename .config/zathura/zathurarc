@@ -12,9 +12,9 @@ map R zoom out
 # map R scroll full-up
 map j search forward
 map J search backward
-map 1 adjust_window best-fit
-map 2 adjust_window width
-map 3 toggle_page_mode
+map x adjust_window best-fit
+map v adjust_window width
+map l toggle_page_mode
 map = adjust_window width
 #map l follow
 #map L display_link

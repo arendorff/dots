@@ -21,11 +21,11 @@ pgrep -x mpd || mpd &
 #pgrep -x polybar || $HOME/.config/polybar/launch.sh
 #pgrep -x polybar || polybar polybar &
 pgrep -x redshift || redshift &
-pgrep -x nextcloud || nextcloud &
+# pgrep -x nextcloud || nextcloud &
 # pgrep -x cloud-drive-ui || synology-drive &
 pgrep -x unclutter || unclutter --timeout 2 &
 pgrep -x xfce4-power-manager || xfce4-power-manager &
-pgrep cloud-drive || synology-cloud-station-drive &
+# pgrep cloud-drive || synology-cloud-station-drive &
 # hsetroot -solid "#4c6054"
 # hsetroot -solid "#353535"
 hsetroot -solid "#000000"
@@ -36,13 +36,13 @@ hsetroot -solid "#000000"
 xsetroot -cursor_name left_ptr &
 # setxbkmap -layout de -variant neo
 xset r rate 200 50
-xmodmap ~/.xmodmap-modified
+# xmodmap ~/.xmodmap-modified
 
 
 
 # thinkpad specific configuration
-if [ $(hostname) = x250 ]
-then
+# if [ $(hostname) = thinkpad ]
+# then
 # trackpoint acceleration speed
 xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 0.3
 
@@ -59,4 +59,4 @@ xinput set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
 xinput set-prop "Synaptics TM3075-002" "libinput Tapping Drag Lock Enabled" 1
 xinput set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
 
-fi
+# fi

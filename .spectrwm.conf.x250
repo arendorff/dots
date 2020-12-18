@@ -104,7 +104,8 @@ autorun = ws[1]:/home/mo/.config/spectrwm/autostart.sh
 # name			= ws[10]:Music
 
 # Mod key, (Windows key is Mod4) (Apple key on OSX is Mod2)
-modkey = Mod4
+modkey = Mod1
+# modkey = Mod4
 
 # This allows you to include pre-defined key bindings for your keyboard layout.
 # keyboard_mapping = ~/.spectrwm_us.conf
@@ -460,7 +461,7 @@ bind[ws_prev_move]	= MOD+Shift+Down
 bind[ws_prior]		= MOD+Tab
 
 
-program[timebattery] = timebattery.fish
+program[timebattery] = /home/mo/scripts/timebattery.fish
 bind[timebattery] = MOD + g
 
 # program[mpc
@@ -485,3 +486,6 @@ program[music] = alacritty -e ncmpcpp
 bind[music] = MOD + i
 # fix window spawning in the wrong workspace or something.
 # quirk[.*] = IGNORESPAWNS + IGNOREPID
+
+program[systemmenu] = /home/mo/scripts/systemmenu.fish
+bind[systemmenu] = MOD+Shift+odiaeresis

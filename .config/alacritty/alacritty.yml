@@ -177,8 +177,8 @@ key_bindings:
   - { key: I,        mods: Control|Shift, action: PasteSelection   }
   - { key: Key0,     mods: Control,       action: ResetFontSize    }
   - { key: Equals,   mods: Control,       action: IncreaseFontSize }
-  - { key: Add,      mods: Control,       action: IncreaseFontSize }
-  - { key: Subtract, mods: Control,       action: DecreaseFontSize }
+  # - { key: Add,      mods: Control,       action: IncreaseFontSize }
+  # - { key: Subtract, mods: Control,       action: DecreaseFontSize }
   - { key: Minus,    mods: Control,       action: DecreaseFontSize }
   - { key: N,        mods: Control|Shift, action: ScrollLineDown   }
   - { key: R,        mods: Control|Shift, action: ScrollLineUp     }
@@ -193,8 +193,8 @@ key_bindings:
   - { key: I,        mods: Alt|Shift, action: PasteSelection   }
   - { key: Key0,     mods: Alt,       action: ResetFontSize    }
   - { key: Equals,   mods: Alt,       action: IncreaseFontSize }
-  - { key: Add,      mods: Alt,       action: IncreaseFontSize }
-  - { key: Subtract, mods: Alt,       action: DecreaseFontSize }
+  # - { key: Add,      mods: Alt,       action: IncreaseFontSize }
+  # - { key: Subtract, mods: Alt,       action: DecreaseFontSize }
   - { key: Minus,    mods: Alt,       action: DecreaseFontSize }
   - { key: N,        mods: Alt|Shift, action: ScrollLineDown   }
   - { key: R,        mods: Alt|Shift, action: ScrollLineUp     }

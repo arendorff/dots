@@ -1,4 +1,12 @@
 .dropbox*
+.CloudStation
+.factorio
+games
+.gem
+.npm
+R
+BraveSoftware
+vivaldi
 .cache*
 .rstudio-desktop
 .radian*
@@ -12,6 +20,7 @@
 .bash_history
 .bash_logout
 .themes
+.wine
 .nv
 shares
 qmk_firmware

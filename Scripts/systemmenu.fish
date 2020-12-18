@@ -16,7 +16,7 @@ switch $var
     case suspend
         sudo systemctl suspend
     case exit
-        killall spectrwm; or killall bspwm
+        killall spectrwm; or killall bspwm; or killall openbox
     case escape
         notify-send "Exiting script..."
     case '*'

@@ -57,12 +57,10 @@ function mbamount
 end
 
 function nasmount
-sudo mount -t nfs NAS:/volume1/stuff ~/NAS/stuff
-sudo mount -t nfs NAS:/volume1/video ~/NAS/video
-sudo mount -t nfs NAS:/volume1/cloud ~/NAS/cloud
+sudo mount -t cifs //ubuntu/moritz /mnt/moritz -o credentials=/etc/samba/credentials/moritz,workgroup=workgroup,uid=mo,gid=mo,iocharset=utf8
 end
 function nasumount
-umount /home/mo/NAS/video /home/mo/NAS/stuff /home/mo/NAS/cloud
+sudo umount /mnt/moritz
 end
 
 # activate vim keybindings
@@ -132,7 +130,7 @@ abbr vpnc 'nordvpn connect'
 abbr vpnd 'nordvpn disconnect'
 abbr ytdl 'youtube-dl'
 abbr r ranger
-abbr l lfcd
+abbr l lf
 abbr sc 'systemctl'
 abbr scs 'systemctl status'
 abbr sce 'systemctl enable'
@@ -140,7 +138,7 @@ abbr scd 'systemctl disable'
 abbr mv 'mv -iv'
 abbr cp 'cp -riv'
 abbr mkdir 'mkdir -vp'
-abbr rm 'rm -rv'
+abbr rm 'rm -riv'
 
 abbr ytdlv 'youtube-dl --no-playlist --no-overwrites --ignore-errors --skip-unavailable-fragments --fragment-retries 0 -o "~/Video/%(uploader)s - %(title)s.%(ext)s" -f "bestvideo[height<=720]+bestaudio/best[height<=720]" "'
 abbr ytdlp 'youtube-dl --yes-playlist --no-overwrites --ignore-errors --skip-unavailable-fragments --fragment-retries 0 -o "~/Video/%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s" -f "bestvideo[height<=720]+bestaudio/best[height<=720]" "'
@@ -156,7 +154,7 @@ abbr jm 'cd ~/SynologyDrive/Documents/master; ls -GFHh'
 abbr jc 'cd ~/.config; ls -GFHh'
 abbr jC 'cd ~/Cloud; ls -GFHh'
 abbr j. 'cd ~/dotfiles; ls -GFHh'
-abbr jn 'cd ~/SynologyDrive/Documents/master/notes; ls -GFHh'
+abbr jn 'cd /mnt/moritz'
 abbr jv 'cd ~/Video; ls -GFHh'
 abbr js 'cd ~/Scripts; tree'
 
@@ -165,6 +163,9 @@ cd $argv
 ls -GFHh
 end
 
+
+# my public ip
+abbr myip 'curl ipinfo.io/ip'
 # config files
 abbr vrc 'nvim ~/.config/nvim/init.vim'
 abbr bashrc 'nvim ~/.bashrc'
@@ -192,18 +193,18 @@ abbr drc 'nvim ~/.config/dunst/dunstrc'
 abbr drc 'nvim ~/.config/dunst/dunstrc'
 
 # todo files
-abbr tp 'nvim ~/todo/personal.md'
-abbr tr 'nvim ~/todo/ricing.md'
-abbr tm 'nvim ~/todo/master.md'
-abbr th 'nvim ~/todo/health.md'
-abbr thl 'glow ~/todo/health.md'
-abbr tpl 'glow ~/todo/personal.md'
-abbr trl 'glow ~/todo/ricing.md'
-abbr tml 'glow ~/todo/master.md'
+abbr tp 'nvim ~/sync/docs/todo/personal.md'
+abbr tr 'nvim ~/sync/docs/todo/ricing.md'
+abbr tm 'nvim ~/sync/docs/todo/master.md'
+abbr th 'nvim ~/sync/docs/todo/health.md'
+abbr thl 'glow ~/sync/docs/todo/health.md'
+abbr tpl 'glow ~/sync/docs/todo/personal.md'
+abbr trl 'glow ~/sync/docs/todo/ricing.md'
+abbr tml 'glow ~/sync/docs/todo/master.md'
 
 # journal
 abbr jj journal.fish
-abbr jo 'nvim +normal\ G ~/todo/journal.md'
+abbr jo 'nvim +normal\ G ~/sync/docs/todo/journal.md'
 
 # todo ls
 function tls
@@ -214,9 +215,10 @@ end
 #stty -ixon
 
 # some more ls abbreviations
-abbr ls 'ls -GFHh'
+abbr ls 'ls -GFHh -1'
 abbr ll 'ls -lh'
 abbr la 'ls -Alh'
+abbr lm 'ls -t -1'
 abbr v 'nvim'
 abbr vim 'nvim'
 abbr vi 'nvim'
@@ -293,6 +295,10 @@ end
 
 function ffj
 cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore-test -a . ~ | fzf --header='Jump to location'); pwd; tree -L 1
+end
+
+function ffja
+cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore-test -a . / | fzf --header='Jump to location'); pwd; tree -L 1
 end
 
 function cc

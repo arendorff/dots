@@ -8,7 +8,7 @@ workspace_limit	= 5
 # focus_close		= previous
 # focus_close_wrap	= 1
 # focus_default		= last
-# spawn_position		= next
+# spawn_position	= next
 # workspace_clamp	= 1
 # warp_focus		= 1
 # warp_pointer		= 1
@@ -20,8 +20,8 @@ color_focus_maximized   = rgb:1d/1f/21
 color_unfocus           = rgb:35/35/35
 # color_unfocus           = rgb:1d/1f/21
 color_unfocus_maximized = rgb:88/88/00
-region_padding          = 20
-tile_gap                = 20
+region_padding          = 0
+tile_gap                = 0
 
 # Region containment
 # Distance window must be dragged/resized beyond the region edge before it is
@@ -41,10 +41,9 @@ bar_enabled		= 0
 # bar_font_color[1]	= rgb:a0/a0/a0
 # bar_font_color_selected	= black
 bar_font		= Terminus:size=10
-bar_action		= /home/mo/scripts/baraction.sh
+# bar_action		= baraction.sh
 # bar_justify		= left
 # bar_format		= +N:+I +S <+D>+4<%a %b %d %R %Z %Y+8<+A+4<+V
-bar_format		= +A+<+C+<+D+<+I
 # workspace_indicator	= listcurrent,listactive,markcurrent,printnames
 # bar_at_bottom		= 1
 # stack_enabled		= 1
@@ -67,9 +66,30 @@ bar_format		= +A+<+C+<+D+<+I
 # region		= screen[1]:1280x1024+1280+0
 
 # Launch applications in a workspace of choice
-autorun		= ws[1]:/home/mo/.config/spectrwm/autostart.sh
-# autorun		= ws[2]:xombrero http://www.openbsd.org
+# autorun		= ws[1]:xterm
+# autorun	= ws[1]:mpd
+# autorun = ws[1]:xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 0.3
+# autorun = ws[1]:xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Profile Enabled" 0, 1
+# autorun = ws[1]:xinput set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
+# autorun = ws[1]:xinput set-prop "Synaptics TM3075-002" "libinput Tapping Drag Lock Enabled" 1
+# autorun = ws[1]:xinput set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
+# autorun = ws[1]:pgrep -x sxhkd || sxhkd -m -1 &
+# autorun = ws[1]:pgrep -x mpd || mpd &
+# autorun = ws[1]:pgrep -x udiskie || udiskie &
+# autorun = ws[1]:pgrep -x dunst || dunst &
+# autorun = ws[1]:pgrep -x redshift || redshift &
+# autorun = ws[1]:pgrep -x unclutter || unclutter --timeout 2 &
+# autorun = ws[1]:pgrep -x xfce4-power-manager || xfce4-power-manager &
+# autorun = ws[1]:pgrep cloud-drive || synology-cloud-station-drive &
+# autorun = ws[1]:setxkbmap -layout de -variant neo
+# autorun = ws[1]:xmodmap ~/.xmodmap-modified
+# autorun = ws[1]:xset r rate 200 50
+# autorun = ws[1]:hsetroot -solid "#000000"
+# autorun = ws[1]:xsetroot -cursor_name left_ptr &
+autorun = ws[1]:/home/mo/.config/spectrwm/autostart.sh
 
+
+# get rid of annoying x cursor
 # Customize workspace layout at start
 # layout		= ws[1]:4:0:0:0:vertical
 # layout		= ws[2]:0:0:0:0:horizontal
@@ -84,7 +104,8 @@ autorun		= ws[1]:/home/mo/.config/spectrwm/autostart.sh
 # name			= ws[10]:Music
 
 # Mod key, (Windows key is Mod4) (Apple key on OSX is Mod2)
-modkey = Mod4
+modkey = Mod1
+# modkey = Mod4
 
 # This allows you to include pre-defined key bindings for your keyboard layout.
 # keyboard_mapping = ~/.spectrwm_us.conf
@@ -92,108 +113,100 @@ keyboard_mapping = /dev/null
 
 # PROGRAMS
 
-program[browser1]               = firefox
-bind[browser1]                  = MOD+v
+# Validated default programs:
+# program[lock]		= xlock
+program[term]		= alacritty
+program[term2]		=  xterm
+program[menu]       = dmenu_run -i -l 25 -fn "Roboto Mono-10"
+# program[menu]		= dmenu_run $dmenu_bottom -fn $bar_font -nb $bar_color -nf $bar_font_color -sb $bar_color_selected -sf $bar_font_color_selected
+# program[search]	= dmenu $dmenu_bottom -i -fn $bar_font -nb $bar_color -nf $bar_font_color -sb $bar_color_selected -sf $bar_font_color_selected
+# program[name_workspace]	= dmenu $dmenu_bottom -p Workspace -fn $bar_font -nb $bar_color -nf $bar_font_color -sb $bar_color_selected -sf $bar_font_color_selected
 
-program[browser2]               = brave
-bind[browser2]                  = MOD+Shift+v
+# To disable validation of the above, free the respective binding(s):
+# bind[]		= MOD+Shift+Delete	# disable lock
+# bind[]		= MOD+Shift+Return	# disable term
+# bind[]		= MOD+p			# disable menu
 
-program[nautilus]                = nautilus
-bind[nautilus]                   = MOD+Shift+c
-bind[nautilus]                   = MOD+c
+# Optional default programs that will only be validated if you override:
+# program[screenshot_all]	= screenshot.sh full	# optional
+# program[screenshot_wind]	= screenshot.sh window	# optional
+# program[initscr]	= initscreen.sh			# optional
 
-program[telegram]              = telegram-desktop
-bind[telegram]                 = MOD+w
+# program bindings
 
-program[term]                  = alacritty
-# program[term2]                 = kitty --single-instance
-program[term2]                 = xterm
 
-program[menu]                  = dmenu_run -fn "Terminus-12"
-bind[menu]                     = MOD+a
+program[browser1] = firefox
+program[browser2] = brave
+program[mail]      = thunderbird
+program[telegram] = telegram-desktop
+program[pcmanfm] = pcmanfm
+program[thunar] = thunar
+program[dmenuscript] = /home/mo/scripts/dmenuscript.fish
+program[timebattery] = /home/mo/scripts/timebattery.fish
+program[music] = alacritty -e ncmpcpp
 
-program[dmenuscript]           = /home/mo/scripts/dmenuscript.fish
-bind[dmenuscript]              = MOD+Shift+space
-
-# system control
-
-program[shutdown]              = /home/mo/scripts/systemmenu.fish
-bind[shutdown]                 = MOD+Shift+odiaeresis
-
+bind[browser1]    = MOD+w
+bind[browser2]    = MOD+Shift+w
+bind[pcmanfm]    = MOD+Shift+r
+bind[pcmanfm]    = MOD+r
+bind[telegram]    = MOD+t
+bind[dmenuscript] = MOD+Shift+space
+bind[mail]         = MOD+e
+bind[timebattery] = MOD+i
+bind[music] = MOD + s
 # volume control
 
-program[sound_increase]        = pactl set-sink-volume @DEFAULT_SINK@ +5%
-bind[sound_increase]           = XF86AudioRaiseVolume
+program[sound_increase] = amixer set Master 5%+
+bind[sound_increase] = XF86AudioRaiseVolume
 
-program[sound_decrease]        = pactl set-sink-volume @DEFAULT_SINK@ -5%
-bind[sound_decrease]           = XF86AudioLowerVolume
+program[sound_decrease] = amixer set Master 5%-
+bind[sound_decrease] = XF86AudioLowerVolume
 
-program[sound_mute]            = pactl set-sink-mute @DEFAULT_SINK@ toggle
-bind[sound_mute]               = XF86AudioMute
+program[sound_mute] = pactl set-sink-mute @DEFAULT_SINK@ toggle
+bind[sound_mute] = XF86AudioMute
 
 # brightness
 
-# program[brightness_increase] = brightnessctl set +5%
-# bind[brightness_increase]    = XF86MonBrightnessUp
+program[brightness_increase] = brightnessctl set +5%
+bind[brightness_increase] = XF86MonBrightnessUp
 
-# program[brightness_decrease] = brightnessctl set 5%-
-# bind[brightness_decrease]    = XF86MonBrightnessDown
+program[brightness_decrease] = brightnessctl set 5%-
+bind[brightness_decrease] = XF86MonBrightnessDown
 
-# program[brightness_min]      = brightnessctl set 1%
-# bind[brightness_min]         = XF86Display
+program[brightness_min] = brightnessctl set 1%
+bind[brightness_min] = XF86Display
 
 # player control spotify music
 
-program[mpc_pause]             = mpc toggle
-bind[mpc_pause]                = XF86AudioPlay
+program[mpc_pause] = mpc toggle
+bind[mpc_pause] = XF86AudioPlay
 
-# program[mpc_stop]            = mpc stop
-# bind[mpc_stop]               = XF86AudioPlay
+# program[mpc_stop] = mpc stop
+# bind[mpc_stop] = XF86AudioPlay
 
-program[mpc_next]              = mpc next
-bind[mpc_next]                 = XF86AudioNext
+program[mpc_next] = mpc next
+bind[mpc_next] = XF86AudioNext
 
-program[mpc_previous]          = mpc prev
-bind[mpc_previous]             = XF86AudioPrev
+program[mpc_previous] = mpc prev
+bind[mpc_previous] = XF86AudioPrev
 
 
 # QUIRKS
 # Default quirks, remove with: quirk[class:name] = NONE
-quirk[MPlayer:xv]			= FLOAT + FULLSCREEN + FOCUSPREV
-quirk[OpenOffice.org 2.4:VCLSalFrame]	= FLOAT
-quirk[OpenOffice.org 3.0:VCLSalFrame]	= FLOAT
-quirk[OpenOffice.org 3.1:VCLSalFrame]	= FLOAT
-quirk[Firefox-bin:firefox-bin]		= TRANSSZ
-quirk[Firefox:Dialog]			= FLOAT
-quirk[Gimp:gimp]			= FLOAT + ANYWHERE
-quirk[XTerm:xterm]			= XTERM_FONTADJ
-quirk[xine:Xine Window]			= FLOAT + ANYWHERE
-quirk[Xitk:Xitk Combo]			= FLOAT + ANYWHERE
-quirk[xine:xine Panel]			= FLOAT + ANYWHERE
-quirk[Xitk:Xine Window]			= FLOAT + ANYWHERE
-quirk[xine:xine Video Fullscreen Window] = FULLSCREEN + FLOAT
-quirk[pcb:pcb]				= FLOAT
-
-quirk[Steam]				= WS[2] + FLOAT
-
-# fix R plot windows spawning wrong
-quirk[r_x11]    = IGNORESPAWNWS
-quirk[R_x11]    = IGNORESPAWNWS
-
-quirk[.*]    = IGNORESPAWNWS
-# quirk[R Graphics\: Device 2 (ACTIVE)]    = FLOAT
-# quirk[::R Graphics: Device 2 (ACTIVE)]    = IGNORESPAWNWS + IGNOREPID
-
-# WM_CLASS(STRING) = "r_x11", "R_x11"
-# WM_NAME(STRING) = "R Graphics: Device 2 (ACTIVE)"
-# WM_NORMAL_HINTS(WM_SIZE_HINTS):
-# 		program specified location: 0, 0
-# 		program specified size: 644 by 637
-# _SWM_PID(STRING) = "1060"
-
-
-# quirk[,*] = IGNORESPAWNWS + IGNOREPID
-
+# quirk[MPlayer:xv]			= FLOAT + FULLSCREEN + FOCUSPREV
+# quirk[OpenOffice.org 2.4:VCLSalFrame]	= FLOAT
+# quirk[OpenOffice.org 3.0:VCLSalFrame]	= FLOAT
+# quirk[OpenOffice.org 3.1:VCLSalFrame]	= FLOAT
+# quirk[Firefox-bin:firefox-bin]		= TRANSSZ
+# quirk[Firefox:Dialog]			= FLOAT
+# quirk[Gimp:gimp]			= FLOAT + ANYWHERE
+# quirk[XTerm:xterm]			= XTERM_FONTADJ
+# quirk[xine:Xine Window]			= FLOAT + ANYWHERE
+# quirk[Xitk:Xitk Combo]			= FLOAT + ANYWHERE
+# quirk[xine:xine Panel]			= FLOAT + ANYWHERE
+# quirk[Xitk:Xine Window]			= FLOAT + ANYWHERE
+# quirk[xine:xine Video Fullscreen Window] = FULLSCREEN + FLOAT
+# quirk[pcb:pcb]				= FLOAT
 
 
 ## Key bindings for United States (us) keyboards
@@ -257,9 +270,9 @@ bind[master_del]	= MOD+period
 #bind[mvws_21]		= MOD+Shift+F11
 #bind[mvws_22]		= MOD+Shift+F12
 #bind[name_workspace]	= MOD+Shift+slash
-bind[quit]		= MOD+Shift+q
+bind[quit]		= MOD+Shift+p
 #bind[raise_toggle]	= MOD+Shift+r
-bind[restart]		= MOD+q
+bind[restart]		= MOD+p
 #bind[rg_1]		= MOD+KP_End
 #bind[rg_2]		= MOD+KP_Down
 #bind[rg_3]		= MOD+KP_Next
@@ -325,15 +338,13 @@ bind[restart]		= MOD+q
 bind[bar_toggle]	= MOD+b
 #bind[bar_toggle_ws]	= MOD+Shift+b
 #bind[button2]		= MOD+v
-# bind[cycle_layout]	= MOD+Shift+Return
+bind[cycle_layout]	= MOD+Shift+Return
 #bind[flip_layout]	= MOD+Shift+backslash
-bind[float_toggle]	= MOD+Shift+a
+bind[float_toggle]	= MOD+Shift+d
 bind[focus_main]	= MOD+m
-program[mail]       = thunderbird
-bind[mail]	= MOD+l
-bind[focus_next]	= MOD+n
+bind[focus_next]	= MOD+j
 #bind[focus_next]	= MOD+Tab
-bind[focus_prev]	= MOD+r
+bind[focus_prev]	= MOD+k
 #bind[focus_prev]	= MOD+Shift+Tab
 #bind[focus_urgent]	= MOD+u
 #bind[height_grow]	= MOD+Shift+equal
@@ -345,10 +356,8 @@ bind[focus_prev]	= MOD+r
 #bind[master_del]	= MOD+period
 # bind[master_grow]	= MOD+Shift+T
 # bind[master_shrink]	= MOD+Shift+S
-bind[maximize_toggle]	= MOD+e
-bind[menu]		= MOD+a
-program[dmenuscript] = /home/mo/scripts/dmenuscript.fish
-bind[dmenuscript] = MOD+Shift+space
+bind[maximize_toggle]	= MOD+f
+bind[menu]		= MOD+d
 #bind[move_down]		= MOD+Shift+bracketright
 #bind[move_left]		= MOD+bracketleft
 #bind[move_right]	= MOD+bracketright
@@ -407,16 +416,16 @@ bind[mvws_22]		= MOD+Shift+F12
 #bind[stack_inc]		= MOD+Shift+comma
 #bind[stack_reset]	= MOD+Shift+space
 bind[swap_main]		= MOD+space
-bind[swap_next]		= MOD+Shift+n
-bind[swap_prev]		= MOD+Shift+r
+bind[swap_next]		= MOD+Shift+j
+bind[swap_prev]		= MOD+Shift+k
 bind[term]		= MOD+Return
 bind[term2]		= MOD+Shift+Return
 #bind[uniconify]		= MOD+Shift+w
 #bind[version]		= MOD+Shift+v
 #bind[width_grow]	= MOD+equal
 #bind[width_shrink]	= MOD+minus
-bind[wind_del]		= MOD+x
-bind[wind_kill]		= MOD+Shift+x
+bind[wind_del]		= MOD+q
+bind[wind_kill]		= MOD+Shift+q
 bind[ws_1]		= MOD+1
 bind[ws_2]		= MOD+2
 bind[ws_3]		= MOD+3
@@ -440,27 +449,38 @@ bind[ws_20]		= MOD+F10
 bind[ws_21]		= MOD+F11
 bind[ws_22]		= MOD+F12
 bind[ws_next]		= MOD+Right
-bind[ws_next]		= MOD+t
-bind[ws_next]		= MOD+u
+bind[ws_next]		= MOD+l
+bind[ws_next]		= MOD+a
 bind[ws_next_all]	= MOD+Up
-bind[ws_next_move]	= Mod4+Mod1+t
-bind[ws_prev_move]	= Mod4+Mod1+s
-bind[ws_next_all]	= MOD+Shift+t
-bind[ws_prev_all]	= MOD+Shift+s
+bind[ws_next_all]	= MOD+Shift+l
 bind[ws_next_move]	= MOD+Shift+Up
 # bind[ws_next_move]	= MOD+Shift+n
 bind[ws_prev]		= MOD+Left
-bind[ws_prev]		= MOD+s
+bind[ws_prev]		= MOD+h
 bind[ws_prev_all]	= MOD+Down
+bind[ws_prev_all]	= MOD+Shift+h
 bind[ws_prev_move]	= MOD+Shift+Down
 # bind[ws_prev_move]	= MOD+Shift+r
 bind[ws_prior]		= MOD+Tab
 
 
-bind[raise] = MOD+Button2
+# program[mpc
+# XF86Tools
+# XF86Search
+# XF86LaunchA
+# XF86Explorer
 
-program[music] = alacritty -e ncmpcpp
-bind[music] = MOD + i
+program[mpc_pause] = mpc toggle
+bind[mpc_pause] = XF86Search
 
-program[timebattery] = /home/mo/scripts/timenotify.fish
-bind[timebattery] = MOD + g
+# program[mpc_stop] = mpc stop
+# bind[mpc_stop] = XF86AudioPlay
+
+program[mpc_next] = mpc next
+bind[mpc_next] = XF86LaunchA
+
+program[mpc_previous] = mpc prev
+bind[mpc_previous] = XF86Tools
+
+# fix window spawning in the wrong workspace or something.
+# quirk[.*] = IGNORESPAWNS + IGNOREPID
