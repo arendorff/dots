@@ -136,7 +136,7 @@ program[menu]       = dmenu_run -i -l 25 -fn "Roboto Mono-10"
 
 program[browser1] = firefox
 bind[browser1]    = MOD+v
-program[browser2] = brave
+program[browser2] = chromium
 bind[browser2]    = MOD+Shift+v
 
 program[pcmanfm] = pcmanfm

@@ -7,7 +7,9 @@ xinput set-prop "Cooler Master Technology Inc. MM710 Gaming Mouse" "libinput Acc
 xset r rate 200 50
 
 #hsetroot -solid "#323232"
-hsetroot -solid "#4c6054"
+#hsetroot -solid "#4c6054"
+
+feh --bg-fill ~/images/walls/wallhaven-137ozw.png
 
 DESKTOP_ENV="OPENBOX"
 
@@ -21,7 +23,7 @@ redshift &
 
 emacs --daemon &
 
-xfce4-power-manager & 
+xfce4-power-manager &
 
 # Waits one second then starts the NetworkManager applet.
 #sleep 1 && nm-applet --sm-disable &

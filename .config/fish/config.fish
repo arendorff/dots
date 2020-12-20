@@ -241,8 +241,9 @@ abbr psi "pacman -Si" # info on package in repos.
 abbr pqi "pacman -Qi" # info on local package
 abbr listorphans "pacman -Qdt"
 abbr pqs "pacman -Qs" # local search
-abbr locallist "pacman -Qet"  #list all explicitly installed packages
 abbr deleteorphans "sudo pacman -Rns (pacman -Qtdq)" # delete orphaned packages
+abbr create-package-list "pacman -Qqen > pkglist.txt"
+abbr create-aur-package-list "pacman -Qqem > aurpkglist.txt"
 
 # AUR
 abbr ys "yay -S"
@@ -274,7 +275,7 @@ setxkbmap -layout de -variant neo
 end
 
 # define default fzf command for vim
-set -Ux FZF_DEFAULT_COMMAND 'fd --hidden --type f --ignore-file ~/.config/fd/fdignore-test -a . .'
+set -Ux FZF_DEFAULT_COMMAND 'fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . .'
 
 # fancy fzf for pacman
 function ffs
@@ -290,24 +291,24 @@ pacman -Qq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -Rns
 end
 
 function ffo
-xdg-open (fd --hidden --type f --ignore-file ~/.config/fd/fdignore-test -a . ~ | fzf --header='Open file') &; disown; exit
+xdg-open (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Open file') &; disown; exit
 end
 
 function ffj
-cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore-test -a . ~ | fzf --header='Jump to location'); pwd; tree -L 1
+cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Jump to location'); pwd; tree -L 1
 end
 
 function ffja
-cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore-test -a . / | fzf --header='Jump to location'); pwd; tree -L 1
+cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore -a . / | fzf --header='Jump to location'); pwd; tree -L 1
 end
 
 function cc
-cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore-test -a . ~ | fzf --header='Jump to location'); pwd; tree -L 1
+cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Jump to location'); pwd; tree -L 1
 end
 
 function ffv
-# nvim (fd --hidden --type f --ignore-file ~/.config/fd/fdignore-test -a . ~ | fzf --header='Open in Neovim')
-fd --hidden --type f --ignore-file ~/.config/fd/fdignore-test -a . ~ | fzf --header='Open in Neovim' | xargs -ro nvim
+# nvim (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Open in Neovim')
+fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Open in Neovim' | xargs -ro nvim
 end
 
 function ffc
@@ -315,7 +316,7 @@ fd --hidden --type f -L -a . ~/.config | fzf --header='Open config files' | xarg
 end
 
 function ffS
-nvim (fd --hidden --type f --ignore-file ~/.config/fd/fdignore-test -a . ~/scripts | fzf --header='Open scripts')
+nvim (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~/scripts | fzf --header='Open scripts')
 end
 
 function ff
