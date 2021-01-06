@@ -22,7 +22,7 @@ pgrep -x mpd || mpd &
 #pgrep -x polybar || $HOME/.config/polybar/launch.sh
 #pgrep -x polybar || polybar polybar &
 pgrep -x redshift || redshift &
-pgrep -x nitrogen || nitrogen --restore &
+# pgrep -x nitrogen || nitrogen --restore &
 # pgrep -x nextcloud || nextcloud &
 # pgrep -x cloud-drive-ui || synology-drive &
 pgrep -x unclutter || unclutter --timeout 2 &
@@ -31,6 +31,7 @@ pgrep -x xfce4-power-manager || xfce4-power-manager &
 # hsetroot -solid "#4c6054"
 # hsetroot -solid "#353535"
 #hsetroot -solid "#000000"
+hsetroot -solid "#181818"
 #autorandr -c
 
 # feh --bg-fill ~/images/walls/wallhaven-137ozw.png

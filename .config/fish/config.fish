@@ -118,7 +118,6 @@ abbr gs 'git status'
 abbr gpp 'git pull'
 abbr ga 'git add'
 abbr gc 'git commit -m "'
-abbr cat 'bat'
 abbr R 'R --quiet'
 abbr df 'df -h'
 abbr vpn 'nordvpn'
@@ -184,7 +183,7 @@ abbr bspwmrc "nvim ~/.config/bspwm/bspwmrc"
 abbr brc "nvim ~/.config/bspwm/bspwmrc"
 abbr swayrc "nvim ~/.config/sway/config"
 abbr sxhkdrc "nvim ~/.config/sxhkd/sxhkdrc"
-abbr src "nvim ~/.config/sxhkd/sxhkdrc"
+abbr src "nvim ~/.spectrwm.conf"
 abbr arc "nvim ~/.config/alacritty/alacritty.yml"
 abbr manrc "nvim ~/.config/vimpager/init.vim"
 abbr pagerrc "nvim ~/.config/vimpager/init.vim"
@@ -193,10 +192,10 @@ abbr drc 'nvim ~/.config/dunst/dunstrc'
 abbr drc 'nvim ~/.config/dunst/dunstrc'
 
 # todo files
-abbr tp 'nvim ~/sync/docs/todo/personal.md'
-abbr tr 'nvim ~/sync/docs/todo/ricing.md'
-abbr tm 'nvim ~/sync/docs/todo/master.md'
-abbr th 'nvim ~/sync/docs/todo/health.md'
+abbr tep 'nvim ~/sync/docs/todo/personal.md'
+abbr ter 'nvim ~/sync/docs/todo/ricing.md'
+abbr tem 'nvim ~/sync/docs/todo/master.md'
+abbr teh 'nvim ~/sync/docs/todo/health.md'
 abbr thl 'glow ~/sync/docs/todo/health.md'
 abbr tpl 'glow ~/sync/docs/todo/personal.md'
 abbr trl 'glow ~/sync/docs/todo/ricing.md'
@@ -239,11 +238,13 @@ abbr spsyu "sudo pacman -Syu" # update repository database und packages
 abbr psyu "sudo pacman -Syu" # update repository database und packages
 abbr psi "pacman -Si" # info on package in repos.
 abbr pqi "pacman -Qi" # info on local package
-abbr listorphans "pacman -Qdt"
+abbr list-orphans "pacman -Qdt"
+abbr list-installed-native-packages "pacman -Qent"
+abbr list-installed-foreign-packages "pacman -Qemt"
 abbr pqs "pacman -Qs" # local search
-abbr deleteorphans "sudo pacman -Rns (pacman -Qtdq)" # delete orphaned packages
-abbr create-package-list "pacman -Qqen > pkglist.txt"
-abbr create-aur-package-list "pacman -Qqem > aurpkglist.txt"
+abbr delete-orphans "sudo pacman -Rns (pacman -Qtdq)" # delete orphaned packages
+abbr create-package-list "pacman -Qqen > ~/sync/dots/x250/pkglist.txt"
+abbr create-aur-package-list "pacman -Qqem > ~/sync/dots/x250/aurpkglist.txt"
 
 # AUR
 abbr ys "yay -S"
@@ -260,7 +261,8 @@ set -x VISUAL /usr/bin/nvim
 #set -Ux VISUAL '/usr/bin/emacs -nw'
 set -x PAGER /usr/bin/less
 set -x IMGVIEWER /usr/bin/sxiv
-set -x PDFVIEWER /usr/bin/zathura
+set -x PDFVIEWER /usr/bin/evince
+# set -x PDFVIEWER /usr/bin/zathura
 # set -x TERM /usr/bin/alacritty
 set -x BROWSER /usr/bin/firefox
 # set -x WM /usr/bin/bspwm

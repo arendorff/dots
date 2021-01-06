@@ -43,6 +43,12 @@ map y copy
 # reload directory
 map l reload
 
+# open with
+map Oz &zathura $f
+map Os &sxiv $f
+map Oe &evince $f
+
+
 # delete cut duplicate
 map d
 map dd cut
@@ -80,21 +86,17 @@ map <c-r> :bulk-rename
 # jumping
 map gh cd ~/
 map gc cd ~/.config/
-map g. cd ~/SynologyDrive/dots
-map gb cd ~/Dropbox/
+map g. cd ~/sync/dots
 map gd cd ~/downloads
 map gD cd ~/documents
 map gN cd /mnt/moritz
-map gu cd /mnt/moritz
-map gs cd /mnt/moritz
-map gn cd ~/Dropbox/notes
-map gC cd ~/Cloud
-map gM cd /run/media
-map gm cd ~/SynologyDrive/Documents/master
+map gs cd /home/mo/sync
+map gM cd /mnt/
+map gm cd ~/sync/docs/master/
 map gT cd ~/.local/share/Trash/files
 map gv cd ~/video
 map gS cd ~/scripts
-map gt cd ~/todo
+map gt cd ~/sync/docs/todo
 
 map .b cd ~/.config/bspwm
 map .e cd ~/.emacs.d/
