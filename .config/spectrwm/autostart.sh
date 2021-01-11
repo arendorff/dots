@@ -12,7 +12,7 @@
 
 # pgrep -x sxhkd || sxhkd -m -1 -c $HOME/.config/sxhkd/sxhkdrc.corsair &
 #pgrep -x dropbox || dropbox &
-pgrep -x udiskie || udiskie &
+# pgrep -x udiskie || udiskie &
 pgrep -x lxsession || lxsession &
 #pgrep -x emacs || emacs --daemon &
 #pgrep -x picom || picom &
@@ -65,3 +65,7 @@ xinput set-prop "Synaptics TM3075-002" "libinput Tapping Drag Lock Enabled" 1
 xinput set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
 
 # fi
+
+# disable wifi
+
+sudo ip link set wlp36s0 down

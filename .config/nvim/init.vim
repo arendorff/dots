@@ -628,3 +628,4 @@ abbreviate Aians Authoritarians
 abbreviate Aian Authoritarian
 abbreviate aiy authority
 abbreviate aiies authorities
+abbreviate crv child-rearing values

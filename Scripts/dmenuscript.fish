@@ -22,7 +22,7 @@
 # end
 
 
-set string (fd --hidden --type f --ignore-file ~/.config/fd/fdignore-test -a . ~ | dmenu -fn "Terminus-12" -nf "#c5c8c6" -nb "#1d1f21" -sb "#81a2be" -sf "#1d1f21" -i -l 25)
+set string (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | dmenu -fn "Terminus-12" -nf "#c5c8c6" -nb "#1d1f21" -sb "#81a2be" -sf "#1d1f21" -i -l 25)
 
         # dmenu_run -i -fn "Terminus-12" -nf "#c5c8c6" -nb "#1d1f21" -sb "#81a2be" -sf "#1d1f21"
 
@@ -32,7 +32,8 @@ if test -f $string
     # nvim "$string"
     switch $string
         case '*.pdf'
-            evince $string &
+            zathura $string &
+            # evince $string &
         case '*.md' '*.org' '*.txt' '*.conf' '*.yaml' '*.yml' '*.toml' '*.json' '*.hex' '*.c' '*.R' '*.r' '*.rmd' '*.html' '*.bib' '*.fish' '*.sh'
             alacritty -e $EDITOR $string
             # alacritty -e $EDITOR $string

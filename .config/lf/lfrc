@@ -91,7 +91,7 @@ map gd cd ~/downloads
 map gD cd ~/documents
 map gN cd /mnt/moritz
 map gs cd /home/mo/sync
-map gM cd /mnt/
+map gM cd /media/mo/
 map gm cd ~/sync/docs/master/
 map gT cd ~/.local/share/Trash/files
 map gv cd ~/video
@@ -310,7 +310,8 @@ cmd zip ${{
 cmd open ${{
     set -f
     case $f in
-        *.pdf|*.mobi|*.epub) setsid -f $PDFVIEWER > /dev/null 2>&1 $f;;
+        *.pdf) setsid -f $PDFVIEWER > /dev/null 2>&1 $f;;
+        *.mobi|*.epub) setsid -f foliate > /dev/null 2>&1 $f;;
         *.md|*.org|*.txt|*.conf|*.yaml|*.toml|*.json|*.hex|*.c|*.R|*.r|*.rmd|*.html|*.bib) nvim $f;;
         # the dot opens the whole directory not just one image
         *.jpeg|*.png|*.jpg|*.JPG|*.JPEG) setsid -f sxiv > /dev/null 2>&1  .;;

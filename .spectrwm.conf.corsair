@@ -462,5 +462,5 @@ bind[raise] = MOD+Button2
 program[music] = alacritty -e ncmpcpp
 bind[music] = MOD + i
 
-program[timebattery] = /home/mo/scripts/timenotify.fish
-bind[timebattery] = MOD + g
+program[timebattery] = /home/mo/scripts/systeminfo_corsair.fish
+bind[timebattery] = MOD+g

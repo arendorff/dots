@@ -342,6 +342,8 @@ abbr ytv ytv.fish
 
 # date
 abbr now 'date "+%H:%M %d.%m.%Y"'
+abbr wifi 'nmcli device'
+abbr wifiscan 'nmcli dev wifi'
 
 # systemctl
 abbr ssc 'sudo systemctl'
