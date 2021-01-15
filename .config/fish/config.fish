@@ -3,6 +3,7 @@ xinput set-prop "Cooler Master Technology Inc. MM710 Gaming Mouse" "libinput Acc
 end
 
 # PATH
+set PATH /var/lib/flatpak/exports/bin $PATH
 set PATH /home/mo/scripts $PATH
 set PATH /home/mo/SynologyDrive/dots/x250/Scripts $PATH
 set PATH /home/mo/.gem/ruby/2.7.0/bin $PATH
@@ -134,10 +135,10 @@ abbr sc 'systemctl'
 abbr scs 'systemctl status'
 abbr sce 'systemctl enable'
 abbr scd 'systemctl disable'
-abbr mv 'mv -iv'
-abbr cp 'cp -riv'
+abbr mv 'mv -v'
+abbr cp 'cp -rv'
 abbr mkdir 'mkdir -vp'
-abbr rm 'rm -riv'
+abbr rm 'rm -rv'
 
 abbr ytdlv 'youtube-dl --no-playlist --no-overwrites --ignore-errors --skip-unavailable-fragments --fragment-retries 0 -o "~/Video/%(uploader)s - %(title)s.%(ext)s" -f "bestvideo[height<=720]+bestaudio/best[height<=720]" "'
 abbr ytdlp 'youtube-dl --yes-playlist --no-overwrites --ignore-errors --skip-unavailable-fragments --fragment-retries 0 -o "~/Video/%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s" -f "bestvideo[height<=720]+bestaudio/best[height<=720]" "'
@@ -162,6 +163,11 @@ cd $argv
 ls -GFHh
 end
 
+# flatpak
+abbr fv 'io.neovim.nvim'
+abbr fnvim 'io.neovim.nvim'
+abbr fvim 'io.neovim.nvim'
+abbr fvrc 'io.neovim.nvim ~/.var/app/io.neovim.nvim/config/nvim/init.vim'
 
 # my public ip
 abbr myip 'curl ipinfo.io/ip'
@@ -185,6 +191,7 @@ abbr swayrc "nvim ~/.config/sway/config"
 abbr sxhkdrc "nvim ~/.config/sxhkd/sxhkdrc"
 abbr src "nvim ~/.spectrwm.conf"
 abbr arc "nvim ~/.config/alacritty/alacritty.yml"
+abbr krc "nvim ~/.config/kitty/kitty.conf"
 abbr manrc "nvim ~/.config/vimpager/init.vim"
 abbr pagerrc "nvim ~/.config/vimpager/init.vim"
 abbr zshrc "nvim ~/.zshrc"
@@ -252,6 +259,24 @@ abbr yss "yay -Ss"
 abbr yrs "yay -Rs"
 abbr ysyu "yay -Syu"
 abbr ysyyu "yay -Syyu"
+
+# apt debian
+
+abbr sai 'sudo aptitude install'
+abbr sar 'sudo aptitude remove'
+abbr saa 'sudo aptitude autoremove'
+abbr sau 'sudo aptitude update && sudo aptitude upgrade'
+abbr safu 'sudo aptitude update && sudo aptitude full-upgrade'
+
+# fzf apt
+function fai
+    sudo apt install (fzf -m < ~/docs/pkglist-debian.txt)
+    # sudo apt install -y (apt list 2>/dev/null | cut -d'/' -f1 | fzf -m)
+end
+
+function far
+    sudo apt remove (apt list --installed 2>/dev/null | cut -d'/' -f1 | fzf -m)
+end
 
 # define environment variables
 set -x EDITOR /usr/bin/nvim
@@ -342,8 +367,6 @@ abbr ytv ytv.fish
 
 # date
 abbr now 'date "+%H:%M %d.%m.%Y"'
-abbr wifi 'nmcli device'
-abbr wifiscan 'nmcli dev wifi'
 
 # systemctl
 abbr ssc 'sudo systemctl'
@@ -384,3 +407,6 @@ end
 
 # To add support for TTYs this line can be optionally added.
 # source ~/.cache/wal/colors-tty.sh
+
+abbr bdown brightnessctl set 5%-
+abbr bup  brightnessctl set +5%
