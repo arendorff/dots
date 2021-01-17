@@ -1,6 +1,7 @@
 
 " Plug {{{
 
+
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -14,6 +15,7 @@ Plug 'tpope/vim-repeat'
 Plug 'prettier/vim-prettier'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'tpope/vim-commentary'
 Plug 'dylanaraps/wal'
@@ -21,9 +23,9 @@ Plug 'tpope/vim-surround'
 " Plug 'freitass/todo.txt-vim'
 Plug 'liuchengxu/vim-which-key'
 " Plug 'sunaku/vim-shortcut'
-Plug 'norcalli/nvim-colorizer.lua'
+" Plug 'norcalli/nvim-colorizer.lua'
 Plug 'lifepillar/vim-mucomplete'
-Plug 'lervag/vimtex'
+" Plug 'lervag/vimtex'
 Plug 'chriskempson/base16-vim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'jalvesaq/nvim-r'
@@ -147,9 +149,10 @@ set complete=.,w,b,u,U,i,d,t
 " colorizer {{{
 
 
+
 "enable hex colors colorizer
 set termguicolors "required
-lua require'colorizer'.setup()
+" lua require'colorizer'.setup()
 
 " }}}
 
@@ -476,16 +479,17 @@ au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm al
 "let R_term_cmd = 'alacritty --config-file /home/mo/.config/alacritty/alacritty.x250.yml'
 " let R_external_term = 1
 " let R_external_term = 'xterm'
-let R_objbr_place = 'console,above'
-let R_objbr_w  = 60
-let R_rconsole_width = 60
-let R_assign = 0
-" let R_show_args = 0
-let R_app = "radian"
-let R_cmd = "R"
-let R_hl_term = 0
-let R_args = []  " if you had set any
-let R_bracketed_paste = 1
+
+" let R_objbr_place = 'console,above'
+" let R_objbr_w  = 60
+" let R_rconsole_width = 60
+" let R_assign = 0
+" " let R_show_args = 0
+" let R_app = "radian"
+" let R_cmd = "R"
+" let R_hl_term = 0
+" let R_args = []  " if you had set any
+" let R_bracketed_paste = 1
 
 " }}}
 

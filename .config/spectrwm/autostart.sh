@@ -25,7 +25,7 @@ pgrep -x redshift || redshift &
 # pgrep -x nitrogen || nitrogen --restore &
 # pgrep -x nextcloud || nextcloud &
 # pgrep -x cloud-drive-ui || synology-drive &
-pgrep -x unclutter || unclutter --timeout 2 &
+pgrep -x unclutter || unclutter -idle 2 &
 pgrep -x xfce4-power-manager || xfce4-power-manager &
 # pgrep cloud-drive || synology-cloud-station-drive &
 # hsetroot -solid "#4c6054"

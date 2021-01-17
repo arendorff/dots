@@ -53,12 +53,9 @@ end
 #sudo mount -t cifs //NAS/stuff /home/mo/NAS/stuff -o credentials=/etc/samba/credentials/NAS,workgroup=NAS,iocharset=utf8,uid=mo,gid=mo
 #end
 
-function mbamount
-    sudo mount -t cifs //MBA/MBA /home/mo/shares/mba -o username=mo,password=lazarus,workgroup=WORKGROUP,iocharset=utf8,uid=mo,gid=mo
-end
 
 function nasmount
-sudo mount -t cifs //ubuntu/moritz /mnt/moritz -o credentials=/etc/samba/credentials/moritz,workgroup=workgroup,uid=mo,gid=mo,iocharset=utf8
+sudo mount -t cifs //ubuntu/moritz /mnt/moritz -o credentials=/etc/samba/credentials,workgroup=workgroup,uid=mo,gid=mo,iocharset=utf8
 end
 function nasumount
 sudo umount /mnt/moritz
@@ -132,9 +129,9 @@ abbr ytdl 'youtube-dl'
 abbr r ranger
 abbr l lf
 abbr sc 'systemctl'
-abbr scs 'systemctl status'
-abbr sce 'systemctl enable'
-abbr scd 'systemctl disable'
+abbr scs 'sudo systemctl status'
+abbr sce 'sudo systemctl enable'
+abbr scd 'sudo systemctl disable'
 abbr mv 'mv -v'
 abbr cp 'cp -rv'
 abbr mkdir 'mkdir -vp'
@@ -264,13 +261,14 @@ abbr ysyyu "yay -Syyu"
 
 abbr sai 'sudo aptitude install'
 abbr sar 'sudo aptitude remove'
-abbr saa 'sudo aptitude autoremove'
+abbr saa 'sudo apt autoremove'
 abbr sau 'sudo aptitude update && sudo aptitude upgrade'
 abbr safu 'sudo aptitude update && sudo aptitude full-upgrade'
 
 # fzf apt
 function fai
-    sudo apt install (fzf -m < ~/docs/pkglist-debian.txt)
+    sudo apt install (fzf --header='Install package:' -m --preview 'apt-cache show {1}' < ~/docs/pkglist-debian.txt)
+# pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
     # sudo apt install -y (apt list 2>/dev/null | cut -d'/' -f1 | fzf -m)
 end
 
@@ -410,3 +408,22 @@ end
 
 abbr bdown brightnessctl set 5%-
 abbr bup  brightnessctl set +5%
+abbr wifi nmcli device
+
+
+function trackpoint
+xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 0.3
+
+# trackpoint accel profile
+xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Profile Enabled" 0, 1
+
+# tapping enabled
+#xinput set-prop 12 286 1
+xinput set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
+
+
+
+# touchpad drag lock to drage files you can quickly let go and still be in dragging mode.
+xinput set-prop "Synaptics TM3075-002" "libinput Tapping Drag Lock Enabled" 1
+xinput set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
+end
