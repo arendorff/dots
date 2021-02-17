@@ -88,7 +88,7 @@ map gh cd ~/
 map gc cd ~/.config/
 map g. cd ~/sync/dots
 map gd cd ~/downloads
-map gD cd ~/documents
+map gD cd ~/docs
 map gN cd /mnt/moritz
 map gs cd /home/mo/sync
 map gM cd /media/mo/

@@ -23,7 +23,7 @@ Plug 'tpope/vim-surround'
 " Plug 'freitass/todo.txt-vim'
 Plug 'liuchengxu/vim-which-key'
 " Plug 'sunaku/vim-shortcut'
-" Plug 'norcalli/nvim-colorizer.lua'
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'lifepillar/vim-mucomplete'
 " Plug 'lervag/vimtex'
 Plug 'chriskempson/base16-vim'
@@ -495,12 +495,24 @@ au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm al
 
 " pandoc/markdown {{{
 
-autocmd BufRead,BufNewFile *.md,*.markdown set filetype=pandoc
+
+autocmd BufRead,BufNewFile *.pmd set filetype=pandoc
+" autocmd BufRead,BufNewFile *.md,*.markdown set filetype=markdown
 " autocmd BufRead,BufNewFile *.md,*.rmd,*.rmarkdown,*.markdown set filetype=pandoc
+
 autocmd BufRead,BufNewFile *.rmd set conceallevel=0
 autocmd BufRead,BufNewFile *.md set conceallevel=0
-autocmd BufRead,BufNewFile *.md set foldlevel=2
+autocmd BufRead,BufNewFile *.pmd set conceallevel=0
+autocmd BufRead,BufNewFile *.md set foldlevel=5
+autocmd BufRead,BufNewFile *.pmd set foldlevel=5
 autocmd BufRead,BufNewFile *.R set conceallevel=0
+
+" don't allow vim-pandoc to handle markdown filetype.
+" let g:pandoc#filetypes#pandoc_markdown = 0
+
+" define the handled filetypes for plugin.
+"      let g:pandoc#filetypes#handled = ["pandoc"]
+"      let g:pandoc#filetypes#pandoc_markdown = 0
 
 " }}}
 

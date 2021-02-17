@@ -13,7 +13,8 @@
 # pgrep -x sxhkd || sxhkd -m -1 -c $HOME/.config/sxhkd/sxhkdrc.corsair &
 #pgrep -x dropbox || dropbox &
 # pgrep -x udiskie || udiskie &
-pgrep -x lxsession || lxsession &
+# pgrep -x lxsession || lxsession &
+pgrep -x lxqt-policykit-agent || lxqt-policykit-agent &
 #pgrep -x emacs || emacs --daemon &
 #pgrep -x picom || picom &
 pgrep -x dunst || dunst &
@@ -31,7 +32,8 @@ pgrep -x xfce4-power-manager || xfce4-power-manager &
 # hsetroot -solid "#4c6054"
 # hsetroot -solid "#353535"
 #hsetroot -solid "#000000"
-hsetroot -solid "#181818"
+xsetroot -solid "#181818"
+# hsetroot -solid "#181818"
 #autorandr -c
 
 # feh --bg-fill ~/images/walls/wallhaven-137ozw.png

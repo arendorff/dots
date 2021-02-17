@@ -23,6 +23,8 @@ map = adjust_window width
 # map R navigate previous
 map t navigate next
 map s navigate previous
+map Right navigate next
+map Left navigate previous
 
 set default-fg "#dadada"
 set statusbar-fg "#dadada"

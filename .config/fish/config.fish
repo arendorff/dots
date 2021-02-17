@@ -3,7 +3,12 @@ xinput set-prop "Cooler Master Technology Inc. MM710 Gaming Mouse" "libinput Acc
 end
 
 # PATH
+set PATH /snap/bin/ $PATH
+set PATH /usr/local/sbin $PATH
+set PATH /sbin $PATH
 set PATH /var/lib/flatpak/exports/bin $PATH
+set PATH /home/mo/bin/* $PATH
+set PATH /home/mo/bin/neovim/bin $PATH
 set PATH /home/mo/scripts $PATH
 set PATH /home/mo/SynologyDrive/dots/x250/Scripts $PATH
 set PATH /home/mo/.gem/ruby/2.7.0/bin $PATH
@@ -127,7 +132,7 @@ abbr vpnc 'nordvpn connect'
 abbr vpnd 'nordvpn disconnect'
 abbr ytdl 'youtube-dl'
 abbr r ranger
-abbr l lf
+abbr l lfcd
 abbr sc 'systemctl'
 abbr scs 'sudo systemctl status'
 abbr sce 'sudo systemctl enable'
@@ -284,8 +289,8 @@ set -x VISUAL /usr/bin/nvim
 #set -Ux VISUAL '/usr/bin/emacs -nw'
 set -x PAGER /usr/bin/less
 set -x IMGVIEWER /usr/bin/sxiv
-set -x PDFVIEWER /usr/bin/evince
-# set -x PDFVIEWER /usr/bin/zathura
+# set -x PDFVIEWER /usr/bin/evince
+set -x PDFVIEWER /usr/bin/zathura
 # set -x TERM /usr/bin/alacritty
 set -x BROWSER /usr/bin/firefox
 # set -x WM /usr/bin/bspwm
@@ -327,8 +332,13 @@ function ffja
 cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore -a . / | fzf --header='Jump to location'); pwd; tree -L 1
 end
 
+# function cc
+# cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Jump to location'); pwd; tree -L 1
+# end
+
 function cc
-cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Jump to location'); pwd; tree -L 1
+    cd $argv
+    tree -L 1 -C
 end
 
 function ffv
