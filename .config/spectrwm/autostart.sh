@@ -38,10 +38,10 @@ xsetroot -solid "#181818"
 
 # feh --bg-fill ~/images/walls/wallhaven-137ozw.png
 
+setxbkmap -layout de -variant neo
 # exec spectrwm
 
 xsetroot -cursor_name left_ptr &
-# setxbkmap -layout de -variant neo
 xset r rate 200 50
 # xmodmap ~/.xmodmap-modified
 
@@ -70,4 +70,4 @@ xinput set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
 
 # disable wifi
 
-sudo ip link set wlp36s0 down
+# sudo ip link set wlp36s0 down

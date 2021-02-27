@@ -1,14 +1,4 @@
-bitwarden-bin
-brave-bin
-brother-hll2300d
-dict-freedict-deu-eng
-dict-freedict-eng-deu
-doi2bib
-easystroke-git
-glow
-gotop-bin
 lf-bin
-mangohud
 nordvpn-bin
-oomox
-pfetch-git
+pandoc-bin
+paru
