@@ -3,11 +3,11 @@
 font:
   # The normal (roman) font face to use.
   normal:
-    # family: Roboto Mono
+    family: Roboto Mono
     # family: Inconsolata
     # family: Fira Code
     #family: Dina
-    family: DejaVu Sans Mono
+    # family: DejaVu Sans Mono
     # family: Hack
     # family: Fira Code
     #family: Spleen

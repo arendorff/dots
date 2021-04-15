@@ -115,9 +115,9 @@ keyboard_mapping = /dev/null
 
 # Validated default programs:
 # program[lock]		= xlock
-program[term]		= kitty
+program[term]		= kitty --single-instance
 # program[term]		= alacritty
-program[term2]		=  xterm
+program[term2]		=  alacritty
 program[menu]       = dmenu_run -i -l 25 -fn "Roboto Mono-10"
 # program[menu]		= dmenu_run $dmenu_bottom -fn $bar_font -nb $bar_color -nf $bar_font_color -sb $bar_color_selected -sf $bar_font_color_selected
 # program[search]	= dmenu $dmenu_bottom -i -fn $bar_font -nb $bar_color -nf $bar_font_color -sb $bar_color_selected -sf $bar_font_color_selected
@@ -137,17 +137,24 @@ program[menu]       = dmenu_run -i -l 25 -fn "Roboto Mono-10"
 
 program[browser1]         = firefox
 bind[browser1]            = MOD+v
+
 program[browser2]         = chromium
 bind[browser2]            = MOD+Shift+v
 
 program[pcmanfm]          = pcmanfm
 program[thunar]           = thunar
+
 bind[pcmanfm]             = MOD+Shift+c
 bind[pcmanfm]             = MOD+c
+
+program[signal]         = signal-desktop
+bind[signal]            = MOD+Shift+w
+
 program[telegram]         = telegram-desktop
 bind[telegram]            = MOD+w
+
 program[dmenuscript]      = /home/mo/scripts/dmenuscript.fish
-bind[dmenuscript]         = MOD+Shift+space
+bind[dmenuscript]         = MOD+m
 # program[wifinotification] = /home/mo/scripts/wifi-notification.fish
 # bind[wifinotification]    = MOD+Shift+g
 
@@ -195,7 +202,12 @@ program[wifitoggle] = nmcli device disconnect wlp3s0 || nmcli device connect wlp
 bind[wifitoggle] = MOD+Shift+h
 # bind[wifitoggle] = XF86WLAN
 
+
 # QUIRKS
+
+# fix window spawning in the wrong workspace or something.
+quirk[.*] = IGNORESPAWNWS + IGNOREPID
+
 # Default quirks, remove with: quirk[class:name] = NONE
 # quirk[MPlayer:xv]			= FLOAT + FULLSCREEN + FOCUSPREV
 # quirk[OpenOffice.org 2.4:VCLSalFrame]	= FLOAT
@@ -345,7 +357,7 @@ bind[bar_toggle]	= MOD+b
 bind[cycle_layout]	= MOD+Shift+Return
 #bind[flip_layout]	= MOD+Shift+backslash
 bind[float_toggle]	= MOD+Shift+a
-bind[focus_main]	= MOD+m
+bind[focus_main]	= MOD+space
 bind[focus_next]	= MOD+n
 #bind[focus_next]	= MOD+Tab
 bind[focus_prev]	= MOD+r
@@ -419,7 +431,7 @@ bind[mvws_22]		= MOD+Shift+F12
 #bind[stack_dec]		= MOD+Shift+period
 #bind[stack_inc]		= MOD+Shift+comma
 #bind[stack_reset]	= MOD+Shift+space
-bind[swap_main]		= MOD+space
+bind[swap_main]		= MOD+Shift+space
 bind[swap_next]		= MOD+Shift+n
 bind[swap_prev]		= MOD+Shift+r
 bind[term]		= MOD+Return
@@ -471,6 +483,8 @@ bind[ws_prior]		= MOD+Tab
 program[timebattery] = /home/mo/scripts/timebattery.fish
 bind[timebattery] = MOD+g
 
+program[timebattery2] = /home/mo/scripts/timebattery.fish
+bind[timebattery2] = MOD+odiaeresis
 # program[mpc
 # XF86Tools
 # XF86Search
@@ -491,8 +505,7 @@ bind[mpc_previous] = XF86Tools
 
 program[music] = alacritty -e ncmpcpp
 bind[music] = MOD + i
-# fix window spawning in the wrong workspace or something.
-# quirk[.*] = IGNORESPAWNS + IGNOREPID
+
 
 program[systemmenu] = /home/mo/scripts/systemmenu.fish
 bind[systemmenu] = MOD+Shift+odiaeresis

@@ -2,7 +2,12 @@ function cooler
 xinput set-prop "Cooler Master Technology Inc. MM710 Gaming Mouse" "libinput Accel Profile Enabled" 0, 1
 end
 
+# set -x MANPAGER "nvim -c 'set ft=man' -"
+# set -x MANPAGER 'nvim +Man!'
+# set -x MANPAGER '/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
+
 # PATH
+set PATH /home/mo/.local/bin $PATH
 set PATH /snap/bin/ $PATH
 set PATH /usr/local/sbin $PATH
 set PATH /sbin $PATH
@@ -165,11 +170,6 @@ cd $argv
 ls -GFHh
 end
 
-# flatpak
-abbr fv 'io.neovim.nvim'
-abbr fnvim 'io.neovim.nvim'
-abbr fvim 'io.neovim.nvim'
-abbr fvrc 'io.neovim.nvim ~/.var/app/io.neovim.nvim/config/nvim/init.vim'
 
 # my public ip
 abbr myip 'curl ipinfo.io/ip'
@@ -180,6 +180,7 @@ abbr trc 'nvim ~/.config/termite/config; cd ~/.config/termite/'
 abbr rrc 'nvim ~/.config/ranger/rc.conf'
 abbr zrc 'nvim ~/.config/zathura/zathurarc.conf'
 abbr lrc 'nvim ~/.config/lf/lfrc'
+abbr awrc 'nvim ~/.config/awesome/rc.lua'
 abbr frc "nvim ~/.config/fish/config.fish"
 abbr orc "nvim ~/.config/openbox/rc.xml"
 abbr crc "nvim ~/.config/compton.conf"
@@ -204,7 +205,7 @@ abbr drc 'nvim ~/.config/dunst/dunstrc'
 abbr tep 'nvim ~/sync/docs/todo/personal.md'
 abbr ter 'nvim ~/sync/docs/todo/ricing.md'
 abbr tem 'nvim ~/sync/docs/todo/master.md'
-abbr teh 'nvim ~/sync/docs/todo/health.md'
+abbr teh 'nvim +normal\ G ~/sync/docs/todo/health.md'
 abbr thl 'glow ~/sync/docs/todo/health.md'
 abbr tpl 'glow ~/sync/docs/todo/personal.md'
 abbr trl 'glow ~/sync/docs/todo/ricing.md'
@@ -228,8 +229,8 @@ abbr ll 'ls -lh'
 abbr la 'ls -Alh'
 abbr lm 'ls -t -1'
 abbr v 'nvim'
-abbr vim 'nvim'
-abbr vi 'nvim'
+# abbr vim 'nvim'
+# abbr vi 'nvim'
 abbr pseg 'ps -e | grep -i '
 
 # udiskie
@@ -256,11 +257,12 @@ abbr create-package-list "pacman -Qqen > ~/sync/dots/x250/pkglist.txt"
 abbr create-aur-package-list "pacman -Qqem > ~/sync/dots/x250/aurpkglist.txt"
 
 # AUR
-abbr ys "yay -S"
-abbr yss "yay -Ss"
-abbr yrs "yay -Rs"
-abbr ysyu "yay -Syu"
-abbr ysyyu "yay -Syyu"
+abbr ys "paru -S"
+abbr yss "paru -Ss"
+abbr yrs "paru -Rs"
+abbr ysyu "paru -Syu"
+# abbr ysyu "paru -Syu"
+abbr ysyyu "paru -Syyu"
 
 # apt debian
 
@@ -270,16 +272,16 @@ abbr saa 'sudo apt autoremove'
 abbr sau 'sudo aptitude update && sudo aptitude upgrade'
 abbr safu 'sudo aptitude update && sudo aptitude full-upgrade'
 
-# fzf apt
-function fai
-    sudo apt install (fzf --header='Install package:' -m --preview 'apt-cache show {1}' < ~/docs/pkglist-debian.txt)
-# pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
-    # sudo apt install -y (apt list 2>/dev/null | cut -d'/' -f1 | fzf -m)
-end
+# # fzf apt
+# function fai
+#     sudo apt install (fzf --header='Install package:' -m --preview 'apt-cache show {1}' < ~/docs/pkglist-debian.txt)
+# # pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
+#     # sudo apt install -y (apt list 2>/dev/null | cut -d'/' -f1 | fzf -m)
+# end
 
-function far
-    sudo apt remove (apt list --installed 2>/dev/null | cut -d'/' -f1 | fzf -m)
-end
+# function far
+#     sudo apt remove (apt list --installed 2>/dev/null | cut -d'/' -f1 | fzf -m)
+# end
 
 # define environment variables
 set -x EDITOR /usr/bin/nvim
@@ -308,27 +310,37 @@ end
 set -Ux FZF_DEFAULT_COMMAND 'fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . .'
 
 # fancy fzf for pacman
-function ffs
+function fs
+pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
+end
+# fancy fzf for pacman
+function fai
 pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
 end
 
 function ffy
 yay -Slq | fzf -m --preview 'yay -Si {1}' | xargs -ro sudo pacman -S
 end
+
 # fzf pacman remove
-function ffr
+function fr
 pacman -Qq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -Rns
 end
 
-function ffo
+# fzf pacman remove
+function far
+pacman -Qq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -Rns
+end
+
+function fo
 xdg-open (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Open file') &; disown; exit
 end
 
-function ffj
+function fj
 cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Jump to location'); pwd; tree -L 1
 end
 
-function ffja
+function fja
 cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore -a . / | fzf --header='Jump to location'); pwd; tree -L 1
 end
 
@@ -336,21 +348,21 @@ end
 # cd (fd --hidden --type d --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Jump to location'); pwd; tree -L 1
 # end
 
-function cc
-    cd $argv
-    tree -L 1 -C
-end
+# function cc
+#     cd $argv
+#     tree -L 1 -C
+# end
 
-function ffv
+function fv
 # nvim (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Open in Neovim')
 fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Open in Neovim' | xargs -ro nvim
 end
 
-function ffc
+function fc
 fd --hidden --type f -L -a . ~/.config | fzf --header='Open config files' | xargs -ro nvim
 end
 
-function ffS
+function fS
 nvim (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~/scripts | fzf --header='Open scripts')
 end
 
@@ -436,4 +448,81 @@ xinput set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
 # touchpad drag lock to drage files you can quickly let go and still be in dragging mode.
 xinput set-prop "Synaptics TM3075-002" "libinput Tapping Drag Lock Enabled" 1
 xinput set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
+end
+
+
+# # colored man pages in fish
+# function man --wraps man --description 'Format and display manual pages'
+#     set -q man_blink; and set -l blink (set_color $man_blink); or set -l blink (set_color -o red)
+#     set -q man_bold; and set -l bold (set_color $man_bold); or set -l bold (set_color -o 5fafd7)
+#     set -q man_standout; and set -l standout (set_color $man_standout); or set -l standout (set_color 949494)
+#     set -q man_underline; and set -l underline (set_color $man_underline); or set -l underline (set_color -u afafd7)
+
+#     set -l end (printf "\e[0m")
+
+#     set -lx LESS_TERMCAP_mb $blink
+#     set -lx LESS_TERMCAP_md $bold
+#     set -lx LESS_TERMCAP_me $end
+#     set -lx LESS_TERMCAP_so $standout
+#     set -lx LESS_TERMCAP_se $end
+#     set -lx LESS_TERMCAP_us $underline
+#     set -lx LESS_TERMCAP_ue $end
+#     set -lx LESS '-R -s'
+
+#     set -lx GROFF_NO_SGR yes # fedora
+
+#     set -lx MANPATH (string join : $MANPATH)
+#     if test -z "$MANPATH"
+#         type -q manpath
+#         and set MANPATH (command manpath)
+#     end
+
+#     # Check data dir for Fish 2.x compatibility
+#     set -l fish_data_dir
+#     if set -q __fish_data_dir
+#         set fish_data_dir $__fish_data_dir
+#     else
+#         set fish_data_dir $__fish_datadir
+#     end
+
+#     set -l fish_manpath (dirname $fish_data_dir)/fish/man
+#     if test -d "$fish_manpath" -a -n "$MANPATH"
+#         set MANPATH "$fish_manpath":$MANPATH
+#         command man $argv
+#         return
+#     end
+#     command man $argv
+# end
+
+
+# change colors for man pages, needs fisher plugin
+set -g man_blink -o blue
+set -g man_bold -o red
+set -g man_standout -b 181818 d8d8d8
+set -g man_underline -o blue
+# set -g man_standout -b black 93a1a1
+# set -g man_underline -u #93a1a1
+
+abbr dic "dict -d wn"
+abbr trg "dict -d fd-deu-eng"
+abbr tre "dict -d fd-eng-deu"
+
+# reflector update mirrorlist germany, latest 10 synchronized mirrors, https only, sort by download speed.
+function arch-update-mirrorlist
+    sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+    sudo reflector --country germany --protocol https --sort rate --latest 10 --save /etc/pacman.d/mirrorlist
+end
+
+# z command open
+set -U ZO_METHOD "nvim"
+
+# fasd
+function vv
+    fasd -f -e nvim
+end
+
+function cc
+    fasd_cd -d $argv
+    pwd
+    tree -L 1
 end

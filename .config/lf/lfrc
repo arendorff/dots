@@ -47,6 +47,8 @@ map l reload
 map Oz &zathura $f
 map Os &sxiv $f
 map Oe &evince $f
+map Oo &okular $f
+map Om &mpv $f
 
 
 # delete cut duplicate
@@ -90,6 +92,7 @@ map g. cd ~/sync/dots
 map gd cd ~/downloads
 map gD cd ~/docs
 map gN cd /mnt/moritz
+map gn cd ~/sync/docs/notes
 map gs cd /home/mo/sync
 map gM cd /media/mo/
 map gm cd ~/sync/docs/master/
@@ -352,8 +355,18 @@ cmd bulk-rename ${{
 }}
 
 # fzf jump
-cmd fzf_jump ${{
+cmd fzf_jump_ignore ${{
    res="$(fd --hidden --type f --ignore-file ~/.config/fd/fdignore-test -a . . | fzf --reverse --header='Jump to location')"
+   if [ -f "$res" ]; then
+     cmd="select"
+   elif [ -d "$res" ]; then
+     cmd="cd"
+   fi
+lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd fzf_jump ${{
+   res="$(fd --type f -a . . | fzf --reverse --header='Jump to file')"
    if [ -f "$res" ]; then
      cmd="select"
    elif [ -d "$res" ]; then

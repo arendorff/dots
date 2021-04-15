@@ -2,7 +2,7 @@
 
 nordvpn status | grep "Connected" >/dev/null; and set vpn connected; or set vpn disconnected
 
-set name (nmcli dev | grep "^wlp3s0" | awk '{print$4}')
+set name (nmcli dev | grep "^wlp3.*" | awk '{print$4}')
 
 set date (date +"%a %H:%M %d.%m.%Y")
 

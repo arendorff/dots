@@ -14,14 +14,25 @@ workspace_limit	= 5
 # warp_pointer		= 1
 
 # Window Decoration
-border_width            = 2
-color_focus             = rgb:c5/c8/c6
-color_focus_maximized   = rgb:1d/1f/21
-color_unfocus           = rgb:35/35/35
+border_width              = 2
+# color_focus             = rgb:c5/c8/c6
+# color_focus_maximized   = rgb:1d/1f/21
+# color_unfocus           = rgb:35/35/35
+# # color_unfocus         = rgb:1d/1f/21
+# color_unfocus_maximized = rgb:88/88/00
+region_padding            = 0
+tile_gap                  = 0
+# color_focus             = rgb:ab/46/42
+# color_focus_maximized   = rgb:ab/46/42
+# color_unfocus           = rgb:d8/d8/d8
 # color_unfocus           = rgb:1d/1f/21
-color_unfocus_maximized = rgb:88/88/00
-region_padding          = 0
-tile_gap                = 0
+# color_unfocus_maximized = rgb:ab/46/42
+color_focus               = rgb:d8/d8/d8
+# color_focus_maximized     = rgb:ab/46/42
+# color_unfocus           = rgb:ff/ff/ff
+color_unfocus           = rgb:38/38/38
+# color_unfocus             = rgb:1d/1f/21
+# color_unfocus_maximized   = rgb:ab/46/42
 
 # Region containment
 # Distance window must be dragged/resized beyond the region edge before it is
@@ -98,7 +109,7 @@ bind[browser1]                  = MOD+v
 program[browser2]               = brave
 bind[browser2]                  = MOD+Shift+v
 
-program[nautilus]                = nautilus
+program[nautilus]                = pcmanfm
 bind[nautilus]                   = MOD+Shift+c
 bind[nautilus]                   = MOD+c
 
@@ -113,7 +124,8 @@ program[menu]                  = dmenu_run -fn "Terminus-12" -i
 bind[menu]                     = MOD+a
 
 program[dmenuscript]           = /home/mo/scripts/dmenuscript.fish
-bind[dmenuscript]              = MOD+Shift+space
+bind[dmenuscript]              = MOD+m
+# bind[dmenuscript]              = MOD+Shift+space
 
 # system control
 
@@ -201,7 +213,7 @@ quirk[.*]    = IGNORESPAWNWS
 #bind[bar_toggle]	= MOD+b
 #bind[bar_toggle_ws]	= MOD+Shift+b
 #bind[button2]		= MOD+v
-#bind[cycle_layout]	= MOD+space
+bind[cycle_layout]	= MOD+Shift+e
 #bind[flip_layout]	= MOD+Shift+backslash
 #bind[float_toggle]	= MOD+t
 #bind[focus_main]	= MOD+m
@@ -328,7 +340,7 @@ bind[bar_toggle]	= MOD+b
 # bind[cycle_layout]	= MOD+Shift+Return
 #bind[flip_layout]	= MOD+Shift+backslash
 bind[float_toggle]	= MOD+Shift+a
-bind[focus_main]	= MOD+m
+bind[focus_main]	= MOD+space
 program[mail]       = thunderbird
 bind[mail]	= MOD+l
 bind[focus_next]	= MOD+n
@@ -347,8 +359,6 @@ bind[focus_prev]	= MOD+r
 # bind[master_shrink]	= MOD+Shift+S
 bind[maximize_toggle]	= MOD+e
 bind[menu]		= MOD+a
-program[dmenuscript] = /home/mo/scripts/dmenuscript.fish
-bind[dmenuscript] = MOD+Shift+space
 #bind[move_down]		= MOD+Shift+bracketright
 #bind[move_left]		= MOD+bracketleft
 #bind[move_right]	= MOD+bracketright
@@ -406,7 +416,7 @@ bind[mvws_22]		= MOD+Shift+F12
 #bind[stack_dec]		= MOD+Shift+period
 #bind[stack_inc]		= MOD+Shift+comma
 #bind[stack_reset]	= MOD+Shift+space
-bind[swap_main]		= MOD+space
+bind[swap_main]		= MOD+Shift+space
 bind[swap_next]		= MOD+Shift+n
 bind[swap_prev]		= MOD+Shift+r
 bind[term]		= MOD+Return

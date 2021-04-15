@@ -27,12 +27,13 @@ pgrep -x redshift || redshift &
 # pgrep -x nextcloud || nextcloud &
 # pgrep -x cloud-drive-ui || synology-drive &
 pgrep -x unclutter || unclutter -idle 2 &
+pgrep -x /usr/lib/kdeconnectd || /usr/lib/kdeconnectd &
 pgrep -x xfce4-power-manager || xfce4-power-manager &
 # pgrep cloud-drive || synology-cloud-station-drive &
 # hsetroot -solid "#4c6054"
 # hsetroot -solid "#353535"
 #hsetroot -solid "#000000"
-xsetroot -solid "#181818"
+hsetroot -solid "#181818"
 # hsetroot -solid "#181818"
 #autorandr -c
 
@@ -43,7 +44,7 @@ setxbkmap -layout de -variant neo
 
 xsetroot -cursor_name left_ptr &
 xset r rate 200 50
-# xmodmap ~/.xmodmap-modified
+xmodmap ~/.xmodmap-modified
 
 
 

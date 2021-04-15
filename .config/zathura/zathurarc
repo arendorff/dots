@@ -26,8 +26,8 @@ map s navigate previous
 map Right navigate next
 map Left navigate previous
 
-set default-fg "#dadada"
-set statusbar-fg "#dadada"
+set default-fg "#d8d8d8"
+set statusbar-fg "#d8d8d8"
 set recolor-darkcolor "#000000"
 set recolor-lightcolor "#fdf6e3"
 
@@ -35,9 +35,9 @@ set recolor-lightcolor "#fdf6e3"
 set statusbar-home-tilde true
 set font "Terminus 10"
 
-set default-fg "#dadada"
-set default-bg "#252525"
-set statusbar-fg "#dadada"
-set statusbar-bg "#252525"
+set default-fg "#d8d8d8"
+set default-bg "#181818"
+set statusbar-fg "#d8d8d8"
+set statusbar-bg "#181818"
 # set recolor-darkcolor "#dadada"
 # set recolor-lightcolor "#252525"

@@ -5,12 +5,18 @@
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'ptzz/lf.vim' | Plug 'rbgrouleff/bclose.vim'
+" Plug 'ptzz/lf.vim' | Plug 'rbgrouleff/bclose.vim'
+
+Plug 'ptzz/lf.vim'
+Plug 'voldikss/vim-floaterm'
+
 " Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 " Plug 'jceb/vim-orgmode'
+Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-speeddating'
 " Plug 'sedm0784/vim-you-autocorrect'
 Plug 'dag/vim-fish'
+Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-repeat'
 Plug 'prettier/vim-prettier'
 Plug 'godlygeek/tabular'
@@ -190,9 +196,12 @@ autocmd FileType pandoc :lchdir %:p:h
  " let g:pandoc#syntax#conceal#blacklist=['atx']
 " disable fancy conceal effects
 "let g:pandoc#syntax#conceal#use = 0
+
 " disable pandoc foldcolumn (numbers on the side)
 let g:pandoc#folding#fdc = 0
-let g:pandoc#keyboard#use_default_mappings = 0
+
+" disable default mappings
+" let g:pandoc#keyboard#use_default_mappings = 0
 let g:pandoc#keyboard#display_motions = 0
 
 " }}}
@@ -324,6 +333,9 @@ noremap <leader>pp "+p
 "vnoremap <leader>xy :!xclip -f -sel clip<CR>
 "noremap <leader>xp :-1r !xclip -o -sel clip<CR>
 
+noremap <leader>C :ColorizerToggle<CR>
+noremap <leader>% :source ~/.config/nvim/init.vim<CR>
+
 "window
 " create new split, and switch to it.
 noremap <leader>wv <C-w>v
@@ -355,7 +367,11 @@ noremap <leader>tp :tabprevious<CR>
 " compile markdown and latex and Rscript
 " noremap <leader>cp :silent !pandoc % -o output.pdf<CR>
 " noremap <leader>cz :silent !zathura output.pdf &<CR>
-noremap <leader>cp :silent Pandoc! pdf<CR>
+
+" noremap <leader>cp :silent Pandoc! pdf<CR>
+noremap <leader>cp :!pandoc % --citeproc -o output.pdf --bibliography master.bib; zathura output.pdf &; disown<CR>
+
+
 " noremap <leader>cz :silent !zathura output.pdf &<CR>
 "nnoremap <leader>cll :!latexmk -pdf %<CR>
 "nnoremap <leader>clz :!zathura *.pdf<CR>
@@ -645,3 +661,11 @@ abbreviate Aian Authoritarian
 abbreviate aiy authority
 abbreviate aiies authorities
 abbreviate crv child-rearing values
+
+
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
+
+
+nmap k <Plug>(easymotion-s2)
+nmap K <Plug>(easymotion-t2)
