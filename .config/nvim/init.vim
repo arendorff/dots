@@ -31,7 +31,7 @@ Plug 'liuchengxu/vim-which-key'
 " Plug 'sunaku/vim-shortcut'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'lifepillar/vim-mucomplete'
-" Plug 'lervag/vimtex'
+Plug 'lervag/vimtex'
 Plug 'chriskempson/base16-vim'
 Plug 'tomasiser/vim-code-dark'
 Plug 'jalvesaq/nvim-r'
@@ -252,10 +252,10 @@ noremap l t
 " join lines
 noremap N J
 
-inoremap vf <Esc>
-inoremap fv <Esc>
-inoremap FV <Esc>
-inoremap VF <Esc>
+" inoremap vf <Esc>
+" inoremap fv <Esc>
+" inoremap FV <Esc>
+" inoremap VF <Esc>
 
 "search next/previous
 noremap J N

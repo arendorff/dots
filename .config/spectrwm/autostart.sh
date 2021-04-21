@@ -17,7 +17,8 @@
 pgrep -x lxqt-policykit-agent || lxqt-policykit-agent &
 #pgrep -x emacs || emacs --daemon &
 #pgrep -x picom || picom &
-pgrep -x dunst || dunst &
+pgrep -x nm-applet || nm-applet &
+# pgrep -x dunst || dunst &
 pgrep -x mpd || mpd &
 #pkill polybar; $HOME/.config/polybar/launch.sh
 #pgrep -x polybar || $HOME/.config/polybar/launch.sh

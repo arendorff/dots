@@ -173,7 +173,8 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
+    -- awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -200,7 +201,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s, visible = false  })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -215,7 +216,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             -- mykeyboardlayout,
-            -- wibox.widget.systray(),
+            wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
         },
@@ -259,6 +260,8 @@ awful.key({ modkey,          }, "space",  function() client.focus = awful.client
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "t",  awful.tag.viewnext,
               {description = "view next", group = "tag"}),
+    awful.key({ modkey,           }, "u",  awful.tag.viewnext,
+              {description = "view next alt", group = "tag"}),
     awful.key({ modkey,           }, "Tab", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 
@@ -269,7 +272,7 @@ awful.key({ modkey,          }, "space",  function() client.focus = awful.client
         {description = "focus next by index", group = "client"}
     ),
 
-    awful.key({ modkey,           }, "u",
+    awful.key({ modkey, "Shift"   }, "u",
         function ()
             awful.client.focus.byidx( 1)
         end,
@@ -410,9 +413,11 @@ awful.key({ modkey,          }, "space",  function() client.focus = awful.client
               -- {description = "show the menubar", group = "launcher"})
 
     awful.key({ }, "XF86AudioLowerVolume", function () os.execute("amixer set Master 5%-") end,
-              {description = "+10%", group = "hotkeys"}),
+              {description = "raise volume", group = "hotkeys"}),
     awful.key({ }, "XF86AudioRaiseVolume", function () os.execute("amixer set Master 5%+") end,
-              {description = "-10%", group = "hotkeys"}),
+              {description = "lower volume", group = "hotkeys"}),
+    awful.key({ }, "XF86AudioMute", function () os.execute("pactl set-sink-mute @DEFAULT_SINK@ toggle") end,
+              {description = "mute volume", group = "hotkeys"}),
 
 
     awful.key({ }, "XF86MonBrightnessUp", function () os.execute("brightnessctl set +5%") end,

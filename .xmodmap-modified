@@ -15,10 +15,12 @@ keycode 94 = ISO_Level5_Shift
 ! neo layout capslock key modifier
 keycode 66 = ISO_Level3_Shift
 ! rl super key to alt
-keycode 133 = Alt_L Meta_L Alt_L Alt_L Alt_L 
+keycode 133 = Alt_L Meta_L Alt_L Alt_L Alt_L
 ! rl alt key to super
 keycode 64 = Super_L Super_R Super_L Super_L Super_L
 
+! turn AltGr into Escape
+keycode 108 = Escape NoSymbol Escape NoSymbol Escape
 
 ! because of my weird keymap layout, xmodmap can't handle it and complains about Shift being bound to both lock and shift (modifier). Not binding lock fixes the issue.
 add shift = Shift_L Shift_R
@@ -28,4 +30,3 @@ add mod1 = Alt_L Meta_L
 add mod3 = ISO_Level5_Shift
 add mod4 = Super_L Super_R Super_L
 add mod5 = ISO_Level3_Shift
-

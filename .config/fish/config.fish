@@ -496,12 +496,11 @@ end
 
 
 # change colors for man pages, needs fisher plugin
-set -g man_blink -o blue
-set -g man_bold -o red
-set -g man_standout -b 181818 d8d8d8
-set -g man_underline -o blue
-# set -g man_standout -b black 93a1a1
-# set -g man_underline -u #93a1a1
+set -g man_blink -o red
+set -g man_bold -o blue
+# search
+set -g man_standout -b yellow black
+set -g man_underline -u red
 
 abbr dic "dict -d wn"
 abbr trg "dict -d fd-deu-eng"
@@ -516,13 +515,20 @@ end
 # z command open
 set -U ZO_METHOD "nvim"
 
-# fasd
-function vv
-    fasd -f -e nvim
-end
+# # fasd
+# function vv
+#     fasd -f -e nvim
+# end
+
+alias vv "fasd -f -e nvim"
 
 function cc
     fasd_cd -d $argv
     pwd
     tree -L 1
+end
+
+# rsync to NAS
+function nascp
+    rsync -vahPru $argv
 end

@@ -152,7 +152,7 @@ map ad push %mkdir<space>
 map af push %touch<space>
 
 # paste with rsync for progress
-cmd paste-progress &{{
+cmd rsync-paste &{{
     load=$(lf -remote 'load')
     mode=$(echo "$load" | sed -n '1p')
     list=$(echo "$load" | sed '1d')
