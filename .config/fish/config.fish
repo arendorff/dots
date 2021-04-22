@@ -121,7 +121,7 @@ abbr reload 'xrdb ~/.Xresources'
 
 # programs
 abbr g 'git'
-abbr gp 'git push -u origin master'
+abbr gp 'git push -u origin main'
 abbr gs 'git status'
 abbr gpp 'git pull'
 abbr ga 'git add'
