@@ -1,0 +1,165 @@
+# distance windows snap to the edge from
+snapdist 0
+
+fontname "Terminus:size:10"
+
+gap 30 30 30 30
+
+borderwidth 2
+
+color activeborder "#d8d8d8"
+color inactiveborder "#00000"
+
+# assign windows to currently selected group
+sticky yes
+
+bind-key 4-a "dmenu_run -fn 'Terminus-12'"
+bind-key 4-c pcmanfm
+bind-key 4-v firefox
+bind-key 4-Return alacritty
+
+bind-key 4S-q quit
+bind-key 4-q restart
+bind-key 4-x window-close
+bind-key 4-Tab window-cycle
+bind-key 4S-Tab window-rcycle
+bind-key 4-u group-cycle
+bind-key 4S-u group-rcycle
+bind-key 4-h window-hide
+bind-key 4-e window-maximize
+bind-key 4S-e window-fullscreen
+
+bind-key 4-g menu-window
+bind-key 4-f menu-cmd
+bind-key 4-k menu-exec
+
+bind-key 4C-1 group-toggle-1
+bind-key 4C-2 group-toggle-2
+bind-key 4C-3 group-toggle-3
+bind-key 4C-4 group-toggle-4
+bind-key 4C-5 group-toggle-5
+bind-key 4C-6 group-toggle-6
+
+bind-key 4S-1 window-movetogroup-1
+bind-key 4S-2 window-movetogroup-2
+bind-key 4S-3 window-movetogroup-3
+bind-key 4S-4 window-movetogroup-4
+bind-key 4S-5 window-movetogroup-5
+bind-key 4S-6 window-movetogroup-6
+
+bind-key 4-1 group-only-1
+bind-key 4-2 group-only-2
+bind-key 4-3 group-only-3
+bind-key 4-4 group-only-4
+bind-key 4-5 group-only-5
+bind-key 4-6 group-only-6
+
+bind-key 4CS-s window-move-left-big
+bind-key 4CS-n window-move-down-big
+bind-key 4CS-r window-move-up-big
+bind-key 4CS-t window-move-right-big
+
+bind-key 4-s group-cycle
+bind-key 4-n window-cycle
+bind-key 4-r window-rcycle
+bind-key 4-t group-rcycle
+
+bind-key M-s window-move-left-big
+bind-key M-n window-move-down-big
+bind-key M-r window-move-up-big
+bind-key M-t window-move-right-big
+
+bind-key 4C-s window-resize-left-big
+bind-key 4C-n window-resize-down-big
+bind-key 4C-r window-resize-up-big
+bind-key 4C-t window-resize-right-big
+
+bind-key 4S-s window-snap-left
+bind-key 4S-n window-snap-down
+bind-key 4S-r window-snap-up
+bind-key 4S-t window-snap-right
+
+#bind-key 4-Left pointer-move-left
+#bind-key 4-Right pointer-move-right
+
+bind-key 4-m window-vtile
+bind-key 4-comma window-htile
+bind-key 4S-m window-vmaximize
+bind-key 4S-comma window-hmaximize
+
+
+bind-mouse 4-1 window-move
+bind-mouse 4-2 window-lower
+bind-mouse 4-3 window-resize
+
+# root menu
+command alacritty alacritty
+command firefox firefox
+command pcmanfm pcmanfm
+command slock slock
+
+#            cwm actions are initiated either via key or mouse bindings.  The following nota‐
+#     tions are used throughout this page:
+#
+#           C       Control key.
+#           M       Meta key.
+#           S       Shift key.
+#           4       Mod4 (windows) key.
+#           M1      Left mouse button.
+#           M2      Middle mouse button.
+#           M3      Right mouse button.
+#
+#     The default key bindings are:
+#
+#           CM-Return       Spawn a new terminal.
+#           CM-Delete       Lock the screen.
+#           M-Return        Hide current window.
+#           M-Down          Lower current window.
+#           M-Up            Raise current window.
+#           M-slash         Search for windows.
+#           C-slash         Search for applications.
+#           CM-n            Label current window.
+#           M-Tab           Cycle through currently visible windows.
+#           MS-Tab          Reverse cycle through currently visible windows.
+#           CM-x            Close current window.
+#           CM-[n]          Toggle visibility of group n, where n is 1-9.
+#           CM-a            Toggle visibility of all groups.
+#           CM-g            Toggle group membership of current window.
+#           M-Right         Cycle through active groups.
+#           M-Left          Reverse cycle through active groups.
+#           CMS-f           Toggle freezing geometry of current window.
+#           CM-s            Toggle stickiness of current window.
+#           CM-f            Toggle full-screen mode of current window.
+#           CM-m            Toggle maximization of current window.
+#           CM-equal        Toggle vertical maximization of current window.
+#           CMS-equal       Toggle horizontal maximization of current window.
+#           M-[hjkl]        Move window by a small amount.
+#           MS-[hjkl]       Move window by a large amount; see cwmrc(5).
+#           CM-[hjkl]       Resize window by a small amount.
+#           CMS-[hjkl]      Resize window by a large amount; see cwmrc(5).
+#           M-question      Spawn “exec program” dialog.
+#           M-period        Spawn “ssh to” dialog.  This parses $HOME/.ssh/known_hosts
+#                           to provide host auto-completion.  ssh(1) will be executed
+#                           via the configured terminal emulator.
+#           CM-w            Spawn “exec WindowManager” menu, allowing a switch to an‐
+#                           other window manager.
+#           CMS-r           Restart.
+#           CMS-q           Quit.
+#
+#     The default mouse bindings are:
+#
+#           M-M1            Move current window.
+#           CM-M1           Toggle group membership of current window.
+#           M-M2            Resize current window
+#           M-M3            Lower current window.
+#           CMS-M3          Hide current window.
+#
+#     The following key bindings may be used to navigate search and exec dialogs:
+#
+#           [Return]              Select item.
+#           [Down], C-s or M-j    Next item.
+#           [Up], C-r or M-k      Previous item.
+#           [Backspace] or C-h    Backspace.
+#           C-u                   Clear input.
+#           C-a                   List all available items.
+#           [Esc]                 Cancel.
