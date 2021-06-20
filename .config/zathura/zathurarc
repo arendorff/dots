@@ -1,30 +1,30 @@
 set selection-clipboard clipboard
 
-map n scroll down
-map r scroll up
-#map s scroll left
-#map t scroll right
-map T rotate
-map S rotate
-map N zoom in
-map R zoom out
-# map N scroll full-down
-# map R scroll full-up
-map j search forward
-map J search backward
-map x adjust_window best-fit
-map v adjust_window width
-map l toggle_page_mode
-map = adjust_window width
-#map l follow
-#map L display_link
-#map f toggle_fullscreen
-# map N navigate next
-# map R navigate previous
-map t navigate next
-map s navigate previous
-map Right navigate next
-map Left navigate previous
+#ymap n scroll down
+#ymap r scroll up
+#y#map s scroll left
+#y#map t scroll right
+#ymap T rotate
+#ymap S rotate
+#ymap N zoom in
+#ymap R zoom out
+#y# map N scroll full-down
+#y# map R scroll full-up
+#ymap j search forward
+#ymap J search backward
+#ymap x adjust_window best-fit
+#ymap v adjust_window width
+#ymap l toggle_page_mode
+#ymap = adjust_window width
+#y#map l follow
+#y#map L display_link
+#y#map f toggle_fullscreen
+#y# map N navigate next
+#y# map R navigate previous
+map l navigate next
+map h navigate previous
+#ymap Right navigate next
+#ymap Left navigate previous
 
 set default-fg "#d8d8d8"
 set statusbar-fg "#d8d8d8"

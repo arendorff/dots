@@ -23,16 +23,16 @@ set scrolloff 10
 # quit
 map q quit
 
-# press to jump to next match in find mode
-map ; find-next
-map , find-prev
+# # press to jump to next match in find mode
+# map ; find-next
+# map , find-prev
 
-# movement
-map n down
-map r up
-map s updir
-map t open
-map <enter> open
+# # movement
+# map n down
+# map r up
+# map s updir
+# map t open
+# map <enter> open
 
 map gg top
 map G bottom
@@ -40,12 +40,13 @@ map G bottom
 # copy & paste
 map y copy
 
-# reload directory
-map l reload
+# # reload directory
+# map l reload
 
 # open with
 map Oz &zathura $f
 map Os &sxiv $f
+map Oi &imv $f
 map Oe &evince $f
 map Oo &okular $f
 map Om &mpv $f
@@ -55,7 +56,8 @@ map Om &mpv $f
 map d
 map dd cut
 map dD duplicate
-map p paste-backup
+# map p paste-backup
+map p paste
 map P paste-async
 map u clear
 cmd trash %trash-put $fx
@@ -64,34 +66,40 @@ map Dd delete $fx
 # map P :Link # symlinks and hard links
 map P :symlink # symlinks and hard links
 
-# search
-map / search
-map ? search-back
-map j search-next
-map J search-prev
-map f find
-map F find-back
-map ; find-next
-map , find-prev
+# # search
+# map / search
+# map ? search-back
+# map j search-next
+# map J search-prev
+# map f find
+# map F find-back
+# map ; find-next
+# map , find-prev
 
 # fzf search and jump
-map <c-f> :fzf_jump
+map <c-f> :fzf_jump_file
+map <c-j> :fzf_jump_dir
 
 # interacting with  files and directories
 # map R rename
 map e $$EDITOR $f # open in EDITOR
 map i $$PAGER $f # page with PAGER
 map S $$SHELL # open SHELL in this directory
-map R rename
+map R :bulk-rename
 map <c-r> :bulk-rename
+map L reload
 
 # jumping
 map gh cd ~/
+map gH cd ~/sync/docs/health/
 map gc cd ~/.config/
 map g. cd ~/sync/dots
 map gd cd ~/downloads
-map gD cd ~/docs
+map gD cd ~/sync/docs
 map gN cd /mnt/moritz
+map gi cd ~/sync/images
+map gw cd ~/sync/images/walls
+map gb cd ~/sync/docs/books
 map gn cd ~/sync/docs/notes
 map gs cd /home/mo/sync
 map gM cd /media/mo/
@@ -114,7 +122,7 @@ map .f cd ~/.config/fish
 
 # file info and show hidden
 map zh set hidden!
-map h set hidden!
+# map h set hidden!
 map zr set reverse!
 map zn set info
 map zs set info size
@@ -313,11 +321,12 @@ cmd zip ${{
 cmd open ${{
     set -f
     case $f in
-        *.pdf) setsid -f $PDFVIEWER > /dev/null 2>&1 $f;;
+        *.pdf) setsid -f evince > /dev/null 2>&1 $f;;
         *.mobi|*.epub) setsid -f foliate > /dev/null 2>&1 $f;;
         *.md|*.org|*.txt|*.conf|*.yaml|*.toml|*.json|*.hex|*.c|*.R|*.r|*.rmd|*.html|*.bib) nvim $f;;
         # the dot opens the whole directory not just one image
-        *.jpeg|*.png|*.jpg|*.JPG|*.JPEG) setsid -f sxiv > /dev/null 2>&1  .;;
+        *.jpeg|*.png|*.jpg|*.JPG|*.JPEG) setsid -f sxiv > /dev/null 2>&1 $f;;
+        # *.jpeg|*.png|*.jpg|*.JPG|*.JPEG) setsid -f imv > /dev/null 2>&1  .;;
         # *.jpeg|*.png|*.jpg|*.JPG|*.JPEG) setsid -f $IMGVIEWER > /dev/null 2>&1  .;;
         #*.jpeg|*.png|*.jpg) $IMGVIEWER $f;;
         # *.MP4|*.mkv|*.webm|*.mp4|*.avi|*.mp3|*.flac|*.ogg|*.aac) setsid -f xdg-open > /dev/null 2>&1 $f &;;
@@ -365,7 +374,17 @@ cmd fzf_jump_ignore ${{
 lf -remote "send $id $cmd \"$res\""
 }}
 
-cmd fzf_jump ${{
+cmd fzf_jump_dir ${{
+   res="$(fd --type d -a . . | fzf --reverse --header='Jump to file')"
+   if [ -f "$res" ]; then
+     cmd="select"
+   elif [ -d "$res" ]; then
+     cmd="cd"
+   fi
+lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd fzf_jump_file ${{
    res="$(fd --type f -a . . | fzf --reverse --header='Jump to file')"
    if [ -f "$res" ]; then
      cmd="select"

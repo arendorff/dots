@@ -20,8 +20,8 @@ color_focus_maximized   = rgb:1d/1f/21
 color_unfocus           = rgb:35/35/35
 # color_unfocus           = rgb:1d/1f/21
 color_unfocus_maximized = rgb:88/88/00
-region_padding          = 0
-tile_gap                = 0
+region_padding          = 25
+tile_gap                = 25
 
 # Region containment
 # Distance window must be dragged/resized beyond the region edge before it is
@@ -40,7 +40,8 @@ bar_enabled		= 0
 # bar_color_selected[1]	= rgb:00/80/80
 # bar_font_color[1]	= rgb:a0/a0/a0
 # bar_font_color_selected	= black
-bar_font		= Terminus:size=10
+# bar_font		= Terminus:size=10
+bar_font		= Roboto Mono:size=10
 # bar_action		= baraction.sh
 # bar_justify		= left
 # bar_format		= +N:+I +S <+D>+4<%a %b %d %R %Z %Y+8<+A+4<+V
@@ -104,7 +105,7 @@ autorun = ws[1]:/home/mo/.config/spectrwm/autostart.sh
 # name			= ws[10]:Music
 
 # Mod key, (Windows key is Mod4) (Apple key on OSX is Mod2)
-modkey = Mod1
+modkey = Mod4
 # modkey = Mod4
 
 # This allows you to include pre-defined key bindings for your keyboard layout.
@@ -115,9 +116,9 @@ keyboard_mapping = /dev/null
 
 # Validated default programs:
 # program[lock]		= xlock
-program[term]		= kitty --single-instance
+program[term2]		= kitty --single-instance
 # program[term]		= alacritty
-program[term2]		=  alacritty
+program[term1]		= alacritty
 program[menu]       = dmenu_run -i -l 25 -fn "Roboto Mono-10"
 # program[menu]		= dmenu_run $dmenu_bottom -fn $bar_font -nb $bar_color -nf $bar_font_color -sb $bar_color_selected -sf $bar_font_color_selected
 # program[search]	= dmenu $dmenu_bottom -i -fn $bar_font -nb $bar_color -nf $bar_font_color -sb $bar_color_selected -sf $bar_font_color_selected
@@ -158,8 +159,10 @@ bind[dmenuscript]         = MOD+m
 # program[wifinotification] = /home/mo/scripts/wifi-notification.fish
 # bind[wifinotification]    = MOD+Shift+g
 
-program[mail]             = thunderbird
-bind[mail]                = MOD+l
+program[mail1]             = astroid
+bind[mail1]                = MOD+l
+program[mail2]             = thunderbird
+bind[mail2]                = MOD+Shift+l
 
 # volume control
 
@@ -434,8 +437,8 @@ bind[mvws_22]		= MOD+Shift+F12
 bind[swap_main]		= MOD+Shift+space
 bind[swap_next]		= MOD+Shift+n
 bind[swap_prev]		= MOD+Shift+r
-bind[term]		= MOD+Return
-bind[term2]		= MOD+Shift+Return
+bind[term1]		= MOD+Return
+# bind[term2]		= MOD+Shift+Return
 #bind[uniconify]		= MOD+Shift+w
 #bind[version]		= MOD+Shift+v
 #bind[width_grow]	= MOD+equal
@@ -509,3 +512,9 @@ bind[music] = MOD + i
 
 program[systemmenu] = /home/mo/scripts/systemmenu.fish
 bind[systemmenu] = MOD+Shift+odiaeresis
+
+program[youtubempv] = /home/mo/scripts/youtube.sh
+bind[youtubempv] = MOD+udiaeresis
+
+program[togglelayout] = /home/mo/scripts/togglelayout.fish
+bind[togglelayout] = MOD+Shift+k

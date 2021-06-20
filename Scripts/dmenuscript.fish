@@ -32,8 +32,8 @@ if test -f $string
     # nvim "$string"
     switch $string
         case '*.pdf'
-            zathura $string &
-            # evince $string &
+            # zathura $string &
+            evince $string &
         case '*.md' '*.org' '*.txt' '*.conf' '*.yaml' '*.yml' '*.toml' '*.json' '*.hex' '*.c' '*.R' '*.r' '*.rmd' '*.html' '*.bib' '*.fish' '*.sh'
             alacritty -e $EDITOR $string
             # alacritty -e $EDITOR $string

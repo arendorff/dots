@@ -7,18 +7,19 @@
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod4
+set $mod Mod1
+# set $mod Mod4
 # Home row direction keys, like vim
-set $left s
-set $down n
-set $up r
-set $right t
+set $left h
+set $down j
+set $up k
+set $right l
 # Your preferred terminal emulator
-set $term termite
-set $menu bemenu-run --fn "Roboto Mono 12" --nb "#282828" --nf "d8d8d8"
+set $term kitty
+set $menu bemenu-run --fn "Roboto Mono 12" --nb "#181818" --nf "d8d8d8"
 
-default_border pixel 2 
-default_floating_border pixel 2 
+default_border pixel 2
+default_floating_border pixel 2
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
 
@@ -27,8 +28,9 @@ default_floating_border pixel 2
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
-exec --no-startup-id swaybg -c "#282828" -m solid_color
-#output * bg -c "#282828" fill 
+exec --no-startup-id swaybg -c "#505050" -m solid_color
+exec --no-startup-id autotiling
+#output * bg -c "#282828" fill
 
 #exec --no-startup-id swaybg -c "#282828"
 #
@@ -52,19 +54,20 @@ exec --no-startup-id swaybg -c "#282828" -m solid_color
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+# Input configuration
+
+ # Example configuration:
+
+   input "1739:0:Synaptics_TM3075-002" {
+       dwt enabled
+       tap enabled
+       # natural_scroll enabled
+       # middle_emulation enabled
+   }
+
+
+ # You can get the names of your inputs by running: swaymsg -t get_inputs
+ # Read `man 5 sway-input` for more information about this section.
 
 
 ### Key bindings
@@ -75,7 +78,7 @@ exec --no-startup-id swaybg -c "#282828" -m solid_color
     bindsym $mod+Return exec --no-startup-id $term
 
     # Kill focused window
-    bindsym $mod+x kill
+    bindsym $mod+q kill
 
     # Start your launcher
     bindsym $mod+space exec --no-startup-id $menu
@@ -88,7 +91,7 @@ exec --no-startup-id swaybg -c "#282828" -m solid_color
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+b reload
+    bindsym $mod+Shift+q reload
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+backspace exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
@@ -100,6 +103,7 @@ exec --no-startup-id swaybg -c "#282828" -m solid_color
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
+
     # Or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
@@ -111,6 +115,7 @@ exec --no-startup-id swaybg -c "#282828" -m solid_color
     bindsym $mod+ctrl+$down move down
     bindsym $mod+ctrl+$up move up
     bindsym $mod+ctrl+$right move right
+
     # Ditto, with arrow keys
     bindsym $mod+ctrl+Left move left
     bindsym $mod+ctrl+Down move down
@@ -144,9 +149,13 @@ exec --no-startup-id swaybg -c "#282828" -m solid_color
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 
-# move to next/previous workspace [in this output] and tab back and forth 
-bindsym $mod+u workspace next 
-bindsym $mod+shift+u workspace prev 
+# move to next/previous workspace [in this output] and tab back and forth
+bindsym $mod+a workspace next
+bindsym $mod+shift+a workspace prev
+
+# bindsym $mod+shift+t workspace next
+# bindsym $mod+shift+s workspace prev
+
 #bindsym $mod+u workspace next_on_output
 #bindsym $mod+shift+u workspace prev_on_output
 bindsym $mod+tab workspace back_and_forth
@@ -156,8 +165,8 @@ bindsym $mod+tab workspace back_and_forth
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+z splith
-    bindsym $mod+p splitv
+    bindsym $mod+c splith
+    bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
 #    bindsym $mod+s layout stacking
@@ -165,16 +174,16 @@ bindsym $mod+tab workspace back_and_forth
 #    bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
-    bindsym $mod+e fullscreen
+    bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+a floating toggle
+    bindsym $mod+Shift+d floating toggle
 
     # Swap focus between the tiling area and the floating area
-    bindsym $mod+a focus mode_toggle
+    bindsym $mod+d focus mode_toggle
 
     # Move focus to the parent container
-    bindsym $mod+i focus parent
+    # bindsym $mod+space focus parent
 #
 # Scratchpad:
 #
@@ -182,22 +191,24 @@ bindsym $mod+tab workspace back_and_forth
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+h move scratchpad
+    # bindsym $mod+Shift+h move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+h scratchpad show
+    # bindsym $mod+h scratchpad show
 
 input * xkb_layout "de"
- input * xkb_variant "neo"
+ input * xkb_variant "neo_qwertz"
  #input "MANUFACTURER1 Keyboard" xkb_model "pc101"
 
-# use swaymsg -t get_inputs for a list of devices 
-input "1118:1957:Microsoft_Microsoft®_2.4GHz_Transceiver_v9.0_Mouse" {
-    accel_profile flat
-    pointer_accel 0
+# use swaymsg -t get_inputs for a list of devices
 
+input "2:10:TPPS/2_IBM_TrackPoint" {
+    accel_profile flat
+    pointer_accel 1
 }
+
+output eDP-1 scale 1.3
 
 #Input device: Microsoft Microsoft® 2.4GHz Transceiver v9.0 Mouse
 #  Type: Mouse
@@ -218,39 +229,40 @@ input * {
 }
 
 # programs
-bindsym $mod+v exec --no-startup-id firefox
-bindsym $mod+c exec --no-startup-id termite -e ranger
-bindsym $mod+m exec --no-startup-id thunderbird
-bindsym $mod+l exec --no-startup-id emacs
+bindsym $mod+w exec --no-startup-id sh -c MOZ_ENABLE_WAYLAND=1 firefox
+bindsym $mod+r exec --no-startup-id nautilus
+bindsym $mod+e exec --no-startup-id thunderbird
 
 
+# doesn't work
+# bindsym $mod+b bar hidden_state toggle
 #
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
-#bar {
+# bar {
 #    position top
-#
-#    # When the status_command prints a new line to stdout, swaybar updates.
-#    # The default just shows the current date and time.
-#    #status_command while date +'%Y-%m-%d %l:%M %p'; do sleep 15; done
-#    status_command while /home/mo/.config/sway/swaybarconfig; do sleep 5; done 
-#    font Roboto Mono 10
-##    mode hide
-##    hidden_state hide
-##    modifier $mod
-#
-#    colors {
-#        statusline #d8d8d8
-#        background #282828
-#        inactive_workspace #505050 #505050 #d8d8d8  
-#        focused_workspace #ac4142 #ac4142 #d8d8d8  
-#    }
-#}
 
-# programs 
-exec xrdb .Xresources 
-exec redshift -l 50.1:8.6 -t 4000:3000
+#     # When the status_command prints a new line to stdout, swaybar updates.
+#     # The default just shows the current date and time.
+#     status_command while date +'%Y-%m-%d %l:%M %p'; do sleep 15; done
+#     # status_command while /home/mo/.config/sway/swaybarconfig; do sleep 5; done
+#     font Roboto Mono 10
+#    mode invisible
+#    hidden_state hide
+#    modifier $mod
+
+#     colors {
+#         statusline #d8d8d8
+#         background #181818
+#         inactive_workspace #505050 #505050 #d8d8d8
+#         focused_workspace #ac4142 #ac4142 #d8d8d8
+#     }
+# }
+
+# programs
+# exec xrdb .Xresources
+exec gammastep
 # run waybar alternative bar to swaybar
 #exec waybar
 
@@ -262,12 +274,32 @@ set $highlight #505050
 set $background #505050
 
 # class                 border 		 backgr. 	text 	indicator	child_border
-client.focused          $foreground $highlight $foreground $active $foreground  
-client.focused_inactive $background $background $foreground $foreground $highlight  
-client.unfocused        $background $background $foreground $foreground $highlight  
-client.urgent           $background $background $foreground $foreground $highlight 
+client.focused          $foreground $highlight $foreground $active $foreground
+client.focused_inactive $background $background $foreground $foreground $highlight
+client.unfocused        $background $background $foreground $foreground $highlight
+client.urgent           $background $background $foreground $foreground $highlight
 client.placeholder      $background $background $foreground $foreground $highlight
 
 client.background       $active
 
+# disable xwayland
 
+xwayland disable
+
+
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym F5 exec brightnessctl set 5%-
+bindsym F6 exec brightnessctl set +5%
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86Search exec bemenu-run
+
+
+# clipboard manager
+exec wl-paste -t text --watch clipman store

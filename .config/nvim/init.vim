@@ -10,32 +10,39 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'ptzz/lf.vim'
 Plug 'voldikss/vim-floaterm'
 
-" Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+Plug 'cespare/vim-toml'
 " Plug 'jceb/vim-orgmode'
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-speeddating'
 " Plug 'sedm0784/vim-you-autocorrect'
 Plug 'dag/vim-fish'
 Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-repeat'
-Plug 'prettier/vim-prettier'
+" Plug 'prettier/vim-prettier'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'tpope/vim-commentary'
-Plug 'dylanaraps/wal'
+" Plug 'dylanaraps/wal'
 Plug 'tpope/vim-surround'
 " Plug 'freitass/todo.txt-vim'
 Plug 'liuchengxu/vim-which-key'
 " Plug 'sunaku/vim-shortcut'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'lifepillar/vim-mucomplete'
-Plug 'lervag/vimtex'
+" Plug 'lervag/vimtex'
 Plug 'chriskempson/base16-vim'
-Plug 'tomasiser/vim-code-dark'
+" Plug 'tomasiser/vim-code-dark'
 Plug 'jalvesaq/nvim-r'
-Plug 'vim-pandoc/vim-pandoc' | Plug 'vim-pandoc/vim-pandoc-syntax'
+" Plug 'vim-pandoc/vim-pandoc', { 'for': 'pandoc' }
+" Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'pandoc' }
+
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
+
+" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
 
 call plug#end()
 " }}}
@@ -120,6 +127,10 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 
 " mucomplete {{{
 
+" delay in milliseconds
+let g:mucomplete#completion_delay = 250
+" number of characters to occur before completion kicks in
+let g:mucomplete#minimum_prefix_length = 3
 " also show menu with just one item
 set completeopt+=menuone
 " don't automatically insert text from the menu
@@ -131,8 +142,6 @@ set shortmess+=c   " Shut off completion messages
 set belloff+=ctrlg " If Vim beeps during completion
 let g:mucomplete#no_mappings = 1
 let g:mucomplete#enable_auto_at_startup = 1
-" delay in milliseconds
-" let g:mucomplete#completion_delay = 500
 
 " manually set complete options, maybe it helps
 set complete=.,w,b,u,U,i,d,t
@@ -186,6 +195,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 " vim-pandoc {{{
 
+let g:pandoc#modules#disabled = ["command", "templates", "menu", "yaml", "spell" ]
 " vim-pandoc
 "let g:pandoc#filetypes#pandoc_markdown = 0
 " disable automatic spellcheck
@@ -224,57 +234,72 @@ let g:vimtex_fold_enabled = 1
 " keybindings {{{
 
 " bindings for easy split nav
-noremap <C-s> <C-w>h
-noremap <C-n> <C-w>j
-noremap <C-r> <C-w>k
-noremap <C-t> <C-w>l
+noremap <C-h> <C-w>h
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-l> <C-w>l
 
 "toggle folds
 nnoremap ä za
 nnoremap Ä zA
 
-" NEO2 REMAPPINGS
-noremap s h
-noremap n gj
-noremap r gk
-noremap t l
-" kill
-noremap k s
-" jump
-noremap j n
-" hide (replace either one character or enter replace mode)
-noremap h r
-noremap H R
-" that frees up R to be used for redo
-noremap R :redo<CR>
-" lookup
-noremap l t
-" join lines
-noremap N J
+" move about
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+"" NEO2 REMAPPINGS
+"noremap s h
+" noremap j gj
+" noremap k gk
+"noremap t l
+"" kill
+"noremap k s
+"" jump
+"noremap j n
+"" hide (replace either one character or enter replace mode)
+"noremap h r
+"noremap H R
+"" that frees up R to be used for redo
+"noremap R :redo<CR>
+"" lookup
+"noremap l t
+"" join lines
+"noremap N J
 
-" inoremap vf <Esc>
-" inoremap fv <Esc>
-" inoremap FV <Esc>
-" inoremap VF <Esc>
+inoremap vf <Esc>
+inoremap fv <Esc>
+inoremap FV <Esc>
+inoremap VF <Esc>
 
-"search next/previous
-noremap J N
-noremap j n
+inoremap fj <Esc>
+inoremap jf <Esc>
+inoremap JF <Esc>
+inoremap FJ <Esc>
+
+tnoremap fj <C-\><C-N>
+tnoremap jf <C-\><C-N>
+tnoremap JF <C-\><C-N>
+tnoremap FJ <C-\><C-N>
+
+""search next/previous
+"noremap J N
+"noremap j n
 
 "S and T (shift+left/right) to move to end or beginning of line.
-nnoremap S ^
-vnoremap S ^
-nnoremap T $
-vnoremap T $
+nnoremap H ^
+vnoremap H ^
+nnoremap L $
+vnoremap L $
 
-nnoremap ( )
-nnoremap ) (
+" nnoremap ( )
+" nnoremap ) (
 
 " change Y to y$
 nnoremap Y y$
 
-" press esc to exit terminal mode
-"tnoremap <Esc> <C-\><C-n>
+ " press esc to exit terminal mode
+tnoremap <Esc> <C-\><C-n>
 
 tnoremap <A-s> <C-\><C-N><C-w>h
 tnoremap <A-n> <C-\><C-N><C-w>j
@@ -360,6 +385,7 @@ noremap <leader>tt :tabnew<CR>
 noremap <leader>tn :tabnext<CR>
 noremap <leader>tb :tabprevious<CR>
 noremap <leader>tc :tabclose<CR>
+noremap <leader>td :tabclose<CR>
 noremap <leader>tp :tabprevious<CR>
 "terminal
 " nnoremap <leader>T :terminal<CR>
@@ -369,7 +395,10 @@ noremap <leader>tp :tabprevious<CR>
 " noremap <leader>cz :silent !zathura output.pdf &<CR>
 
 " noremap <leader>cp :silent Pandoc! pdf<CR>
-noremap <leader>cp :!pandoc % --citeproc -o output.pdf --bibliography master.bib; zathura output.pdf &; disown<CR>
+" noremap <leader>cp :!pandoc % --citeproc -o output.pdf --bibliography master.bib<CR>
+noremap <leader>cp :!make pdf<CR>
+noremap <leader>ch :!make html<CR>
+noremap <leader>co :!zathura build/*.pdf &; disown<CR>
 
 
 " noremap <leader>cz :silent !zathura output.pdf &<CR>
@@ -382,7 +411,7 @@ noremap <leader>cr :silent !Rscript %
 noremap <leader>bb :blast<CR>
 noremap <leader>bn :bnext<CR>
 noremap <leader>bp :bprevious<CR>
-noremap <leader>bq :bdelet<CR>
+noremap <leader>bd :bdelet<CR>
 noremap <leader>bx :bdelet<CR>
 noremap <leader>bf :Buffers<CR>
 nnoremap <Tab> :bnext<CR>
@@ -407,6 +436,8 @@ noremap <leader>.. :source ~/.config/nvim/init.vim<CR>
 " noremap <leader>Q :q!<CR>
 noremap <leader>X :q!<CR>
 noremap <leader>x :wqall<CR>
+noremap <leader>q :q!<CR>
+noremap <leader>q :wqall<CR>
 
 "file
 " noremap <leader>fs :write<CR>
@@ -481,6 +512,9 @@ colorscheme base16-default-dark
 	autocmd BufWritePre * %s/\s\+$//e
 	autocmd BufWritepre * %s/\n\+\%$//e
 
+" au BufEnter journal.md setlocal filetype=markdown
+autocmd BufNewFile,BufRead journal.txt set ft=markdown
+
 "vimrc folding
 au BufEnter init.vim setlocal foldmethod=marker
 " auto source vimrc
@@ -494,6 +528,7 @@ au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm al
 " let R_in_buffer = 0
 "let R_term_cmd = 'alacritty --config-file /home/mo/.config/alacritty/alacritty.x250.yml'
 " let R_external_term = 1
+let R_external_term = 'alacritty'
 " let R_external_term = 'xterm'
 
 " let R_objbr_place = 'console,above'
@@ -512,7 +547,8 @@ au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm al
 " pandoc/markdown {{{
 
 
-autocmd BufRead,BufNewFile *.pmd set filetype=pandoc
+" autocmd BufRead,BufNewFile *.md set filetype=markdown
+" autocmd BufRead,BufNewFile *.pmd set filetype=pandoc
 " autocmd BufRead,BufNewFile *.md,*.markdown set filetype=markdown
 " autocmd BufRead,BufNewFile *.md,*.rmd,*.rmarkdown,*.markdown set filetype=pandoc
 
@@ -526,9 +562,11 @@ autocmd BufRead,BufNewFile *.R set conceallevel=0
 " don't allow vim-pandoc to handle markdown filetype.
 " let g:pandoc#filetypes#pandoc_markdown = 0
 
-" define the handled filetypes for plugin.
-"      let g:pandoc#filetypes#handled = ["pandoc"]
-"      let g:pandoc#filetypes#pandoc_markdown = 0
+" this doesn't work. Pandoc still gets loaded and slows things down, because filetype "pandoc' includes mardown files.
+" define the handled filetypes for plugin. Only pandoc
+     " let g:pandoc#filetypes#handled = ["pandoc"]
+     " this only means the pandoc syntax file is not loaded when using markdown.
+     " let g:pandoc#filetypes#pandoc_markdown = 0
 
 " }}}
 
@@ -661,11 +699,22 @@ abbreviate Aian Authoritarian
 abbreviate aiy authority
 abbreviate aiies authorities
 abbreviate crv child-rearing values
+abbreviate ap authoritarian personality
+" abbreviate rrp radical-right populism
+
 
 
 map f <Plug>Sneak_s
 map F <Plug>Sneak_S
 
 
-nmap k <Plug>(easymotion-s2)
-nmap K <Plug>(easymotion-t2)
+" nmap k <Plug>(easymotion-s2)
+" nmap K <Plug>(easymotion-t2)
+
+
+" map f <Plug>Sneak_s
+" map F <Plug>Sneak_S
+
+
+" nmap k <Plug>(easymotion-s2)
+" nmap K <Plug>(easymotion-t2)

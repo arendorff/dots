@@ -7,6 +7,7 @@ end
 # set -x MANPAGER '/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
 
 # PATH
+set PATH /home/mo/.local/share/gem/ruby/3.0.0/bin $PATH
 set PATH /home/mo/.local/bin $PATH
 set PATH /snap/bin/ $PATH
 set PATH /usr/local/sbin $PATH
@@ -26,14 +27,21 @@ set PATH /home/mo/Games/* $PATH
 set XDG_DATA_DIRS ~/.local/share/flatpak/exports/share/applications /var/lib/flatpak/exports/share/applications $XDG_DATA_DIRS
 
 # qt5ct
-set -Ux QT_QPA_PLATFORMTHEME qt5ct
+set -x QT_QPA_PLATFORMTHEME qt5ct
 
-# Start X at login
-if status is-login
-   if test -z "$DISPLAY" -a $XDG_VTNR = 1
-        exec startx -- -keeptty
-    end
-end
+# # Start X at login
+# if status is-login
+#    if test -z "$DISPLAY" -a $XDG_VTNR = 1
+#         exec startx -- -keeptty
+#     end
+# end
+
+# # Start river at login
+# if status is-login
+#    if test -z "$DISPLAY" -a $XDG_VTNR = 1
+#         exec river
+#     end
+# end
 
 # functions for hibernate, etc
 function hibernate
@@ -63,6 +71,13 @@ end
 #sudo mount -t cifs //NAS/stuff /home/mo/NAS/stuff -o credentials=/etc/samba/credentials/NAS,workgroup=NAS,iocharset=utf8,uid=mo,gid=mo
 #end
 
+function henschelmount
+sudo mount -t cifs //ubuntu/henschel /mnt/henschel -o credentials=/etc/samba/credentials,workgroup=workgroup,uid=mo,gid=mo,iocharset=utf8
+end
+
+function henschelumount
+sudo umount /mnt/henschel
+end
 
 function nasmount
 sudo mount -t cifs //ubuntu/moritz /mnt/moritz -o credentials=/etc/samba/credentials,workgroup=workgroup,uid=mo,gid=mo,iocharset=utf8
@@ -105,21 +120,24 @@ function fish_mode_prompt
 end
 
 
-# cutom keybindings for vi mode
-function fish_user_key_bindings
-    bind -m default T end-of-line
-    bind -m default S beginning-of-line
-    bind -m default s backward-char
-    bind -m default t forward-char
-    #bind -m default r up-or-search
-    #bind -m default n down-or-search
-end
-#fish_default_key_bindings
+## cutom keybindings for vi mode
+#function fish_user_key_bindings
+#    bind -m default T end-of-line
+#    bind -m default S beginning-of-line
+#    bind -m default s backward-char
+#    bind -m default t forward-char
+#    #bind -m default r up-or-search
+#    #bind -m default n down-or-search
+#end
+##fish_default_key_bindings
 
 # reload
 abbr reload 'xrdb ~/.Xresources'
 
 # programs
+abbr tp 'trash-put'
+abbr te 'trash-empty'
+abbr tl 'trash-list'
 abbr g 'git'
 abbr gp 'git push -u origin main'
 abbr gs 'git status'
@@ -138,6 +156,7 @@ abbr vpnd 'nordvpn disconnect'
 abbr ytdl 'youtube-dl'
 abbr r ranger
 abbr l lfcd
+abbr e joshuto
 abbr sc 'systemctl'
 abbr scs 'sudo systemctl status'
 abbr sce 'sudo systemctl enable'
@@ -199,7 +218,8 @@ abbr manrc "nvim ~/.config/vimpager/init.vim"
 abbr pagerrc "nvim ~/.config/vimpager/init.vim"
 abbr zshrc "nvim ~/.zshrc"
 abbr drc 'nvim ~/.config/dunst/dunstrc'
-abbr drc 'nvim ~/.config/dunst/dunstrc'
+# abbr dwrc 'nvim ~/src/dwl/config.h'
+abbr dwrc 'nvim ~/src/dwl/config.h; cd ~/src/dwl/; make; sudo make install'
 
 # todo files
 abbr tep 'nvim ~/sync/docs/todo/personal.md'
@@ -213,7 +233,7 @@ abbr tml 'glow ~/sync/docs/todo/master.md'
 
 # journal
 abbr jj journal.fish
-abbr jo 'nvim +normal\ G ~/sync/docs/todo/journal.md'
+abbr jo 'nvim +normal\ G ~/sync/docs/todo/journal.txt'
 
 # todo ls
 function tls
@@ -229,6 +249,7 @@ abbr ll 'ls -lh'
 abbr la 'ls -Alh'
 abbr lm 'ls -t -1'
 abbr v 'nvim'
+abbr vq 'nvim -u ~/.config/nvim/init-qwertz.vim'
 # abbr vim 'nvim'
 # abbr vi 'nvim'
 abbr pseg 'ps -e | grep -i '
@@ -291,12 +312,17 @@ set -x VISUAL /usr/bin/nvim
 #set -Ux VISUAL '/usr/bin/emacs -nw'
 set -x PAGER /usr/bin/less
 set -x IMGVIEWER /usr/bin/sxiv
-# set -x PDFVIEWER /usr/bin/evince
-set -x PDFVIEWER /usr/bin/zathura
+set -x PDFVIEWER /usr/bin/evince
+# set -x PDFVIEWER /usr/bin/zathura
 # set -x TERM /usr/bin/alacritty
 set -x BROWSER /usr/bin/firefox
 # set -x WM /usr/bin/bspwm
 set -x WM /usr/bin/spectrwm
+set -x TERMINAL /usr/bin/alacritty
+set -x XKB_DEFAULT_LAYOUT "de"
+set -x XKB_DEFAULT_VARIANT "neo_qwertz"
+
+
 
 # fix keyboard shit with fish and bspwm
 set -Ux SXHKD_SHELL "/usr/bin/bash"
@@ -358,6 +384,11 @@ function fv
 fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Open in Neovim' | xargs -ro nvim
 end
 
+function f.
+# nvim (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Open in Neovim')
+fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . . | fzf --header='Open in Neovim' | xargs -ro nvim
+end
+
 function fc
 fd --hidden --type f -L -a . ~/.config | fzf --header='Open config files' | xargs -ro nvim
 end
@@ -366,8 +397,12 @@ function fS
 nvim (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~/scripts | fzf --header='Open scripts')
 end
 
-function ff
-. ~/Scripts/fzfscript.fish
+function ef
+    fasd -l -f | fzf | xargs -ro nvim
+end
+
+function ed
+    cd (fasd -l -d | fzf)
 end
 
 function report
@@ -528,7 +563,16 @@ function cc
     tree -L 1
 end
 
+# function cd
+#     cd $argv
+#     tree -L 1
+# end
+
 # rsync to NAS
 function nascp
     rsync -vahPru $argv
+end
+
+function deploy
+    hugo && rsync --delete -azPv -e 'ssh -p 69' . mo@hcloud.host:/home/mo/
 end

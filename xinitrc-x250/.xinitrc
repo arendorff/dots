@@ -10,27 +10,22 @@
 # pywal
 #wal -R
 
-pgrep -x sxhkd || sxhkd -m -1 -c $HOME/.config/sxhkd/sxhkdrc.corsair &
-#pgrep -x dropbox || dropbox &
 pgrep -x udiskie || udiskie &
-#pgrep -x emacs || emacs --daemon &
-#pgrep -x picom || picom &
+pgrep -x picom || picom &
 pgrep -x dunst || dunst &
 pgrep -x mpd || mpd &
-#pkill polybar; $HOME/.config/polybar/launch.sh
-#pgrep -x polybar || $HOME/.config/polybar/launch.sh
-#pgrep -x polybar || polybar polybar &
 pgrep -x redshift || redshift &
-# pgrep -x cloud-drive-ui || synology-drive &
 pgrep -x unclutter || unclutter --timeout 2 &
 pgrep -x xfce4-power-manager || xfce4-power-manager &
 pgrep cloud-drive || synology-cloud-station-drive &
 # hsetroot -solid "#4c6054"
 # hsetroot -solid "#353535"
-hsetroot -solid "#000000"
+# hsetroot -solid "#505050"
 #autorandr -c
 
-exec spectrwm
+# exec spectrwm
+# exec cwm
+#exec qtile
 
 xsetroot -cursor_name left_ptr &
 # setxbkmap -layout de -variant neo
@@ -40,8 +35,8 @@ xmodmap ~/.xmodmap-modified
 
 
 # thinkpad specific configuration
-if [ $(hostname) = x250 ]
-then
+# if [ $(hostname) = x250 ]
+# then
 # trackpoint acceleration speed
 xinput set-prop "TPPS/2 IBM TrackPoint" "libinput Accel Speed" 0.3
 
@@ -58,4 +53,4 @@ xinput set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
 xinput set-prop "Synaptics TM3075-002" "libinput Tapping Drag Lock Enabled" 1
 xinput set-prop "Synaptics TM3075-002" "libinput Tapping Enabled" 1
 
-fi
+# fi

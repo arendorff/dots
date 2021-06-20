@@ -1,22 +1,16 @@
 #!/usr/bin/bash
 
-#load xresources
-#[[ $(hostname) = x250 ]] && [[ -f ~/.Xresources.x250 ]] && xrdb -merge -I$HOME ~/.Xresources.x250
-#[[ $(hostname) = corsair ]] && [[ -f ~/.Xresources.corsair ]] && xrdb -merge -I$HOME ~/.Xresources.corsair
 
 [[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
 # [[ -f ~/.Xresources.x250 ]] && xrdb -merge -I$HOME ~/.Xresources
 
-# pywal
-#wal -R
 
 # pgrep -x sxhkd || sxhkd -m -1 -c $HOME/.config/sxhkd/sxhkdrc.corsair &
 #pgrep -x dropbox || dropbox &
 # pgrep -x udiskie || udiskie &
-# pgrep -x lxsession || lxsession &
 pgrep -x lxqt-policykit-agent || lxqt-policykit-agent &
 #pgrep -x emacs || emacs --daemon &
-#pgrep -x picom || picom &
+pgrep -x picom || picom &
 pgrep -x nm-applet || nm-applet &
 # pgrep -x dunst || dunst &
 pgrep -x mpd || mpd &
@@ -34,13 +28,15 @@ pgrep -x xfce4-power-manager || xfce4-power-manager &
 # hsetroot -solid "#4c6054"
 # hsetroot -solid "#353535"
 #hsetroot -solid "#000000"
-hsetroot -solid "#181818"
+# hsetroot -solid "#181818"
+nitrogen --restore
+# hsetroot -solid "#505050"
 # hsetroot -solid "#181818"
 #autorandr -c
 
 # feh --bg-fill ~/images/walls/wallhaven-137ozw.png
 
-setxbkmap -layout de -variant neo
+# setxbkmap -layout de -variant neo
 # exec spectrwm
 
 xsetroot -cursor_name left_ptr &
