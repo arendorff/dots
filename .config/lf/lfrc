@@ -77,8 +77,8 @@ map P :symlink # symlinks and hard links
 # map , find-prev
 
 # fzf search and jump
-map <c-f> :fzf_jump_file
-map <c-j> :fzf_jump_dir
+map <c-f> :fzf_jump_ignore_file
+map <c-j> :fzf_jump_ignore_dir
 
 # interacting with  files and directories
 # map R rename
@@ -365,7 +365,27 @@ cmd bulk-rename ${{
 
 # fzf jump
 cmd fzf_jump_ignore ${{
-   res="$(fd --hidden --type f --ignore-file ~/.config/fd/fdignore-test -a . . | fzf --reverse --header='Jump to location')"
+   res="$(fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . . | fzf --reverse --header='Jump to location')"
+   if [ -f "$res" ]; then
+     cmd="select"
+   elif [ -d "$res" ]; then
+     cmd="cd"
+   fi
+lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd fzf_jump_ignore_dir ${{
+   res="$(fd --hidden --type d --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --reverse --header='Jump to location')"
+   if [ -f "$res" ]; then
+     cmd="select"
+   elif [ -d "$res" ]; then
+     cmd="cd"
+   fi
+lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd fzf_jump_ignore_file ${{
+   res="$(fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --reverse --header='Jump to location')"
    if [ -f "$res" ]; then
      cmd="select"
    elif [ -d "$res" ]; then
@@ -375,7 +395,7 @@ lf -remote "send $id $cmd \"$res\""
 }}
 
 cmd fzf_jump_dir ${{
-   res="$(fd --type d -a . . | fzf --reverse --header='Jump to file')"
+   res="$(fd --type d -a . . | fzf --reverse --header='Jump to directory')"
    if [ -f "$res" ]; then
      cmd="select"
    elif [ -d "$res" ]; then

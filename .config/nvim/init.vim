@@ -214,6 +214,32 @@ let g:pandoc#folding#fdc = 0
 " let g:pandoc#keyboard#use_default_mappings = 0
 let g:pandoc#keyboard#display_motions = 0
 
+
+" autocmd BufRead,BufNewFile *.md set filetype=markdown
+" autocmd BufRead,BufNewFile *.pmd set filetype=pandoc
+" autocmd BufRead,BufNewFile *.md,*.markdown set filetype=markdown
+" autocmd BufRead,BufNewFile *.md,*.rmd,*.rmarkdown,*.markdown set filetype=pandoc
+
+
+" close TOC after navigating is reversed
+let g:pandoc#toc#close_after_navigating = 1
+
+autocmd BufRead,BufNewFile *.rmd set conceallevel=0
+autocmd BufRead,BufNewFile *.md set conceallevel=0
+autocmd BufRead,BufNewFile *.pmd set conceallevel=0
+autocmd BufRead,BufNewFile *.md set foldlevel=5
+autocmd BufRead,BufNewFile *.pmd set foldlevel=5
+autocmd BufRead,BufNewFile *.R set conceallevel=0
+
+" don't allow vim-pandoc to handle markdown filetype.
+" let g:pandoc#filetypes#pandoc_markdown = 0
+
+" this doesn't work. Pandoc still gets loaded and slows things down, because filetype "pandoc' includes mardown files.
+" define the handled filetypes for plugin. Only pandoc
+     " let g:pandoc#filetypes#handled = ["pandoc"]
+     " this only means the pandoc syntax file is not loaded when using markdown.
+     " let g:pandoc#filetypes#pandoc_markdown = 0
+
 " }}}
 
 " lf.vim {{{
@@ -387,6 +413,9 @@ noremap <leader>tb :tabprevious<CR>
 noremap <leader>tc :tabclose<CR>
 noremap <leader>td :tabclose<CR>
 noremap <leader>tp :tabprevious<CR>
+
+" table of contents in pandoc
+noremap <leader>toc :TOC<CR>
 "terminal
 " nnoremap <leader>T :terminal<CR>
 "compile
@@ -541,32 +570,6 @@ let R_external_term = 'alacritty'
 " let R_hl_term = 0
 " let R_args = []  " if you had set any
 " let R_bracketed_paste = 1
-
-" }}}
-
-" pandoc/markdown {{{
-
-
-" autocmd BufRead,BufNewFile *.md set filetype=markdown
-" autocmd BufRead,BufNewFile *.pmd set filetype=pandoc
-" autocmd BufRead,BufNewFile *.md,*.markdown set filetype=markdown
-" autocmd BufRead,BufNewFile *.md,*.rmd,*.rmarkdown,*.markdown set filetype=pandoc
-
-autocmd BufRead,BufNewFile *.rmd set conceallevel=0
-autocmd BufRead,BufNewFile *.md set conceallevel=0
-autocmd BufRead,BufNewFile *.pmd set conceallevel=0
-autocmd BufRead,BufNewFile *.md set foldlevel=5
-autocmd BufRead,BufNewFile *.pmd set foldlevel=5
-autocmd BufRead,BufNewFile *.R set conceallevel=0
-
-" don't allow vim-pandoc to handle markdown filetype.
-" let g:pandoc#filetypes#pandoc_markdown = 0
-
-" this doesn't work. Pandoc still gets loaded and slows things down, because filetype "pandoc' includes mardown files.
-" define the handled filetypes for plugin. Only pandoc
-     " let g:pandoc#filetypes#handled = ["pandoc"]
-     " this only means the pandoc syntax file is not loaded when using markdown.
-     " let g:pandoc#filetypes#pandoc_markdown = 0
 
 " }}}
 

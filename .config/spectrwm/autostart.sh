@@ -18,6 +18,7 @@ pgrep -x mpd || mpd &
 #pgrep -x polybar || $HOME/.config/polybar/launch.sh
 #pgrep -x polybar || polybar polybar &
 pgrep -x redshift || redshift &
+pgrep -x keepassxc || keepassxc &
 # pgrep -x nitrogen || nitrogen --restore &
 # pgrep -x nextcloud || nextcloud &
 # pgrep -x cloud-drive-ui || synology-drive &

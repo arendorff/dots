@@ -22,7 +22,8 @@
 # end
 
 
-set string (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | dmenu -fn "Terminus-12" -nf "#c5c8c6" -nb "#1d1f21" -sb "#81a2be" -sf "#1d1f21" -i -l 25)
+# set string (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | dmenu -fn "Terminus-12" -nf "#c5c8c6" -nb "#1d1f21" -sb "#81a2be" -sf "#1d1f21" -i -l 25)
+set string (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | dmenu -nf "#c5c8c6" -nb "#1d1f21" -sb "#81a2be" -sf "#1d1f21" -i -l 25)
 
         # dmenu_run -i -fn "Terminus-12" -nf "#c5c8c6" -nb "#1d1f21" -sb "#81a2be" -sf "#1d1f21"
 
@@ -45,9 +46,9 @@ if test -f $string
         #      mpv --sub-auto=fuzzy $string
         case '*'
             # xdg-open $string &
-            alacritty -e $EDITOR $string
+            # alacritty -e $EDITOR $string
             # echo "error"
-            # notify-send "error"
+            notify-send "error"
             # nvim $string
     end
 # else if test -d $string
