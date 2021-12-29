@@ -3,35 +3,56 @@ snapdist 0
 
 fontname "Terminus:size:10"
 
+unbind-key all
+
+# pixels to move when moving
+moveamount 3
+
+# gap at the edge of the screen to be respected when maximizing windows
 gap 30 30 30 30
+# gap 20 20 20 20
+# gap 15 15 15 15
 
-borderwidth 2
+borderwidth 1
 
-color activeborder "#d8d8d8"
-color inactiveborder "#00000"
+# color activeborder "#d8d8d8"
+color activeborder "#ffffff"
+# color inactiveborder "#181818"
+color inactiveborder "#252525"
 
-# assign windows to currently selected group
+# color menubg "#d8d8d8"
+# color selfont "#d8d8d8"
+# color menufg "#181818"
+# color font "#181818"
+
+ # assign windows to currently selected group
 sticky yes
 
-bind-key 4-a "dmenu_run -fn 'Terminus-12'"
-bind-key 4-c pcmanfm
-bind-key 4-v firefox
+bind-key 4-d "dmenu_run -fn 'Terminus-12'"
+bind-key 4-r pcmanfm
+bind-key 4-w firefox
+bind-key 4-e thunderbird
 bind-key 4-Return alacritty
+bind-key 4-t telegram-desktop
 
-bind-key 4S-q quit
-bind-key 4-q restart
-bind-key 4-x window-close
+# bind-key 4S-x quit
+bind-key 4S-x /home/mo/scripts/systemmenu.fish
+bind-key 4-x restart
+bind-key 4-q window-close
 bind-key 4-Tab window-cycle
 bind-key 4S-Tab window-rcycle
-bind-key 4-u group-cycle
-bind-key 4S-u group-rcycle
-bind-key 4-h window-hide
-bind-key 4-e window-maximize
-bind-key 4S-e window-fullscreen
+bind-key M-Tab group-cycle
+bind-key 4-a group-cycle
+bind-key 4S-a group-rcycle
+bind-key 4-u window-hide
+bind-key 4-f window-maximize
 
-bind-key 4-g menu-window
-bind-key 4-f menu-cmd
-bind-key 4-k menu-exec
+bind-key 4-z menu-window
+bind-key 4-m /home/mo/scripts/xdo-center.sh
+bind-key 4-i /home/mo/scripts/systeminfo_corsair.fish
+bind-key 4S-m /home/mo/scripts/xdo-uncenter.sh
+bind-key 4-n /home/mo/scripts/xdo-tile.sh
+bind-key 4-o /home/mo/scripts/dmenuscript.fish
 
 bind-key 4C-1 group-toggle-1
 bind-key 4C-2 group-toggle-2
@@ -54,48 +75,51 @@ bind-key 4-4 group-only-4
 bind-key 4-5 group-only-5
 bind-key 4-6 group-only-6
 
-bind-key 4CS-s window-move-left-big
-bind-key 4CS-n window-move-down-big
-bind-key 4CS-r window-move-up-big
-bind-key 4CS-t window-move-right-big
+bind-key 4C-h window-move-left-big
+bind-key 4C-j window-move-down-big
+bind-key 4C-k window-move-up-big
+bind-key 4C-l window-move-right-big
 
-bind-key 4-s group-cycle
-bind-key 4-n window-cycle
-bind-key 4-r window-rcycle
-bind-key 4-t group-rcycle
+bind-key 4-l group-cycle
+bind-key 4-j window-cycle
+bind-key 4-k window-rcycle
+bind-key 4-h group-rcycle
 
-bind-key M-s window-move-left-big
-bind-key M-n window-move-down-big
-bind-key M-r window-move-up-big
-bind-key M-t window-move-right-big
+bind-key M-h window-move-left-big
+bind-key M-j window-move-down-big
+bind-key M-k window-move-up-big
+bind-key M-l window-move-right-big
 
-bind-key 4C-s window-resize-left-big
-bind-key 4C-n window-resize-down-big
-bind-key 4C-r window-resize-up-big
-bind-key 4C-t window-resize-right-big
+bind-key 4CS-h window-resize-left-big
+bind-key 4CS-j window-resize-down-big
+bind-key 4CS-k window-resize-up-big
+bind-key 4CS-l window-resize-right-big
 
-bind-key 4S-s window-snap-left
-bind-key 4S-n window-snap-down
-bind-key 4S-r window-snap-up
-bind-key 4S-t window-snap-right
+bind-key 4S-h window-snap-left
+bind-key 4S-j window-snap-down
+bind-key 4S-k window-snap-up
+bind-key 4S-l window-snap-right
 
-#bind-key 4-Left pointer-move-left
-#bind-key 4-Right pointer-move-right
+bind-key 4-Left pointer-move-left
+bind-key 4-Right pointer-move-right
 
-bind-key 4-m window-vtile
-bind-key 4-comma window-htile
-bind-key 4S-m window-vmaximize
-bind-key 4S-comma window-hmaximize
+# bind-key 4-m window-vtile
+# bind-key 4-comma window-htile
+bind-key 4-comma window-vmaximize
+bind-key 4-period window-hmaximize
 
 
 bind-mouse 4-1 window-move
 bind-mouse 4-2 window-lower
 bind-mouse 4-3 window-resize
+bind-mouse 4-4 group-cycle
+bind-mouse 4-5 group-rcycle
 
 # root menu
 command alacritty alacritty
 command firefox firefox
 command pcmanfm pcmanfm
+command telegram telegram-desktop
 command slock slock
 
 #            cwm actions are initiated either via key or mouse bindings.  The following nota‐

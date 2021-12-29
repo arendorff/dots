@@ -8,15 +8,15 @@ set var (echo -e "shutdown\nreboot\nescape\nexit\nsuspend\nhibernate" | dmenu -p
 # execute command based on the value of variable
 switch $var
     case shutdown
-        sudo systemctl poweroff
+        systemctl poweroff
     case reboot
-        sudo systemctl reboot
+        systemctl reboot
     case hibernate
-        sudo systemctl hibernate
+        systemctl hibernate
     case suspend
-        sudo systemctl suspend
+        systemctl suspend
     case exit
-        killall spectrwm; or killall bspwm; or killall openbox
+        killall spectrwm; or killall bspwm; or killall openbox; or killall awesome
     case escape
         notify-send "Exiting script..."
     case '*'

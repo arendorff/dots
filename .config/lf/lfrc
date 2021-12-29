@@ -50,6 +50,9 @@ map Oi &imv $f
 map Oe &evince $f
 map Oo &okular $f
 map Om &mpv $f
+# map OM &mpvsub $f
+# map OM %mpvsub.fish $f
+
 
 
 # delete cut duplicate
@@ -175,6 +178,11 @@ cmd rsync-paste &{{
     fi
     lf -remote 'send load'
     lf -remote 'send clear'
+}}
+
+cmd mpvsub &{{
+    sub=$(fzf)
+    mpv $1 --sub-file=$sub
 }}
 
 # paste with backup of existing files
@@ -331,7 +339,8 @@ cmd open ${{
         #*.jpeg|*.png|*.jpg) $IMGVIEWER $f;;
         # *.MP4|*.mkv|*.webm|*.mp4|*.avi|*.mp3|*.flac|*.ogg|*.aac) setsid -f xdg-open > /dev/null 2>&1 $f &;;
         # *.mkv|*.webm|*.mp4|*.avi|*.mp3|*.flac|*.ogg|*.aac) setsid -f mpv --sub-auto=fuzzy $f &;;
-        *.mkv|*.webm|*.MP4|*.mp4|*.avi|*.mp3|*.flac|*.ogg|*.aac) mpv --sub-auto=fuzzy $f;;
+        *.mkv|*.webm|*.MP4|*.mp4|*.avi|*.mp3|*.flac|*.ogg|*.aac) mpv --hwdec=auto --sub-auto=fuzzy $f;;
+        *.sc|*.csv|*.tsv|*.xlsx) sc-im $f;;
 #*) /home/mo/Scripts/emacsclientwrapper.sh $f # open in EDITOR
         *) nvim $f ;; # open in EDITOR
         #*) $EDITOR $f;;

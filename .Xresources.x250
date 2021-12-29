@@ -25,14 +25,14 @@ XTerm.vt100.translations: #override \n\
 XTerm.vt100.faceName: Roboto Mono:size=10:antialias=true
 xterm*faceName: Inconsolata
 xterm*faceName: Roboto Mono
-xterm*faceSize: 12
+xterm*faceSize: 10
 xterm*renderFont: true
 
-XTerm.faceName: Roboto Mono:size=10:antialias=true
-XTerm.vt100.font: Terminus:size=20
-xterm*faceName: Terminus
-xterm*faceName: Terminus
-xterm*faceSize: 11
+/* XTerm.faceName: Roboto Mono:size=10:antialias=true */
+/* XTerm.vt100.font: Terminus:size=20 */
+/* xterm*faceName: Terminus */
+/* xterm*faceName: Terminus */
+/* xterm*faceSize: 11 */
 
 !Base16 Default Dark
 !Scheme: Chris Kempson (http://chriskempson.com)

@@ -7,6 +7,8 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 " Plug 'ptzz/lf.vim' | Plug 'rbgrouleff/bclose.vim'
 
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+
 Plug 'ptzz/lf.vim'
 Plug 'voldikss/vim-floaterm'
 
@@ -38,8 +40,8 @@ Plug 'jalvesaq/nvim-r'
 " Plug 'vim-pandoc/vim-pandoc', { 'for': 'pandoc' }
 " Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': 'pandoc' }
 
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
+" Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc-syntax'
 
 " Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
@@ -48,6 +50,25 @@ call plug#end()
 " }}}
 
 " basic settings {{{
+
+" Allow gf to open non-existent files
+map gf :edit <cfile><cr>
+
+" Reselect visual selection after indenting
+vnoremap < <gv
+vnoremap > >gv
+
+" Maintain the cursor position when yanking a visual selection
+" http://ddrscott.github.io/blog/2016/yank-without-jank/
+vnoremap y myy`y
+vnoremap Y myY`y
+
+" Paste replace visual selection without copying it
+vnoremap <leader>p "_dP
+
+" Make Y behave like the other capitals
+nnoremap Y y$
+
 " Splits open at the bottom and right, which is non-retarded, unlike vim defaults.
 set splitbelow
 set splitright
@@ -104,6 +125,8 @@ set clipboard=unnamedplus               " all yanks are also in clipboard regist
 set autochdir                           " Your working directory will always be the same as your working directory
 " use this instead for automatic changing of directory if something breaks with autochdir
 " autocmd BufEnter * silent! lcd %:p:h
+
+set guifont=JetBrains\ Mono:h15
 
 " }}}
 
@@ -427,13 +450,16 @@ noremap <leader>toc :TOC<CR>
 " noremap <leader>cp :!pandoc % --citeproc -o output.pdf --bibliography master.bib<CR>
 noremap <leader>cp :!make pdf<CR>
 noremap <leader>ch :!make html<CR>
-noremap <leader>co :!zathura build/*.pdf &; disown<CR>
+noremap <leader>co :!evince *.pdf &; disown<CR>
+" noremap <leader>co :!zathura build/*.pdf &; disown<CR>
 
 
 " noremap <leader>cz :silent !zathura output.pdf &<CR>
 "nnoremap <leader>cll :!latexmk -pdf %<CR>
 "nnoremap <leader>clz :!zathura *.pdf<CR>
-noremap <leader>cl :silent !latexmk -pdf %; zathura *.pdf<CR>
+noremap <leader>cl :!latexmk -pdf %<CR>
+" noremap <leader>cl :silent !latexmk -pdf %<CR>
+" noremap <leader>cl :silent !latexmk -pdf %; zathura *.pdf<CR>
 noremap <leader>cr :silent !Rscript %
 
 "buffer
@@ -530,7 +556,8 @@ set statusline+=%L   " Total lines
 
  " colorscheme codedark
 colorscheme base16-default-dark
-" colorscheme base16-tomorrow-night
+" " " colorscheme base16-tomorrow-night
+" colorscheme onehalflight
 " colorscheme wal
 
 " }}}
@@ -557,7 +584,8 @@ au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm al
 " let R_in_buffer = 0
 "let R_term_cmd = 'alacritty --config-file /home/mo/.config/alacritty/alacritty.x250.yml'
 " let R_external_term = 1
-let R_external_term = 'alacritty'
+" let R_external_term = 'xfce4-terminal'
+let g:R_external_term = 'xfce4-terminal'
 " let R_external_term = 'xterm'
 
 " let R_objbr_place = 'console,above'
@@ -703,12 +731,11 @@ abbreviate aiy authority
 abbreviate aiies authorities
 abbreviate crv child-rearing values
 abbreviate ap authoritarian personality
-" abbreviate rrp radical-right populism
 
 
 
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
+map s <Plug>Sneak_s
+map s <Plug>Sneak_S
 
 
 " nmap k <Plug>(easymotion-s2)

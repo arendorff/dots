@@ -18,12 +18,12 @@ pgrep -x mpd || mpd &
 #pgrep -x polybar || $HOME/.config/polybar/launch.sh
 #pgrep -x polybar || polybar polybar &
 pgrep -x redshift || redshift &
-pgrep -x keepassxc || keepassxc &
+# pgrep -x keepassxc || keepassxc &
 # pgrep -x nitrogen || nitrogen --restore &
 # pgrep -x nextcloud || nextcloud &
 # pgrep -x cloud-drive-ui || synology-drive &
 pgrep -x unclutter || unclutter -idle 2 &
-pgrep -x /usr/lib/kdeconnectd || /usr/lib/kdeconnectd &
+# pgrep -x /usr/lib/kdeconnectd || /usr/lib/kdeconnectd &
 pgrep -x xfce4-power-manager || xfce4-power-manager &
 # pgrep cloud-drive || synology-cloud-station-drive &
 # hsetroot -solid "#4c6054"

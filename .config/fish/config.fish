@@ -2,6 +2,10 @@ function cooler
 xinput set-prop "Cooler Master Technology Inc. MM710 Gaming Mouse" "libinput Accel Profile Enabled" 0, 1
 end
 
+# hardware acceleration
+set -x MOZ_X11_EGL 1
+set -x LIBVA_DRIVER_NAME iHD
+set -x LIBVA_DRIVERS_PATH /usr/lib/dri/
 # set -x MANPAGER "nvim -c 'set ft=man' -"
 # set -x MANPAGER 'nvim +Man!'
 # set -x MANPAGER '/bin/bash -c "vim -MRn -c \"set buftype=nofile showtabline=0 ft=man ts=8 nomod nolist norelativenumber nonu noma\" -c \"normal L\" -c \"nmap q :qa<CR>\"</dev/tty <(col -b)"'
@@ -29,12 +33,15 @@ set XDG_DATA_DIRS ~/.local/share/flatpak/exports/share/applications /var/lib/fla
 # qt5ct
 set -x QT_QPA_PLATFORMTHEME qt5ct
 
-# # Start X at login
-# if status is-login
-#    if test -z "$DISPLAY" -a $XDG_VTNR = 1
-#         exec startx -- -keeptty
-#     end
-# end
+# set terminal
+set TERM "xterm-256color"
+
+# Start X at login
+if status is-login
+   if test -z "$DISPLAY" -a $XDG_VTNR = 1
+        exec startx -- -keeptty
+    end
+end
 
 # # Start river at login
 # if status is-login
@@ -80,7 +87,7 @@ sudo umount /mnt/henschel
 end
 
 function nasmount
-sudo mount -t cifs //ubuntu/moritz /mnt/moritz -o credentials=/etc/samba/credentials,workgroup=workgroup,uid=mo,gid=mo,iocharset=utf8
+sudo mount -t cifs //192.168.2.111/moritz /mnt/moritz -o credentials=/etc/samba/credentials,workgroup=workgroup,uid=mo,gid=mo,iocharset=utf8
 end
 function nasumount
 sudo umount /mnt/moritz
@@ -135,6 +142,9 @@ end
 abbr reload 'xrdb ~/.Xresources'
 
 # programs
+abbr du 'dust'
+abbr scim 'sc-im'
+abbr sc 'sc-im'
 abbr tp 'trash-put'
 abbr te 'trash-empty'
 abbr tl 'trash-list'
@@ -145,7 +155,7 @@ abbr gpp 'git pull'
 abbr ga 'git add'
 abbr gc 'git commit -m "'
 abbr R 'R --quiet'
-abbr df 'df -h'
+abbr df 'duf'
 abbr vpn 'nordvpn'
 abbr vpns 'nordvpn status'
 abbr vpnS 'nordvpn settings'
@@ -156,8 +166,8 @@ abbr vpnd 'nordvpn disconnect'
 abbr ytdl 'youtube-dl'
 abbr r ranger
 abbr l lfcd
+abbr j joshuto
 abbr e joshuto
-abbr sc 'systemctl'
 abbr scs 'sudo systemctl status'
 abbr sce 'sudo systemctl enable'
 abbr scd 'sudo systemctl disable'
@@ -176,7 +186,7 @@ abbr jb 'cd ~/Dropbox; ls -GFHh'
 abbr jg 'cd ~/Games; ls -GFHh'
 abbr jd 'cd ~/Downloads; ls -GFHh'
 abbr jD 'cd ~/Documents; ls -GFHh'
-abbr jm 'cd ~/SynologyDrive/Documents/master; ls -GFHh'
+abbr jm 'cd ~/sync/docs/master; ls -GFHh1'
 abbr jc 'cd ~/.config; ls -GFHh'
 abbr jC 'cd ~/Cloud; ls -GFHh'
 abbr j. 'cd ~/dotfiles; ls -GFHh'
@@ -226,6 +236,7 @@ abbr tep 'nvim ~/sync/docs/todo/personal.md'
 abbr ter 'nvim ~/sync/docs/todo/ricing.md'
 abbr tem 'nvim ~/sync/docs/todo/master.md'
 abbr teh 'nvim +normal\ G ~/sync/docs/todo/health.md'
+abbr teb 'nvim +normal\ G ~/sync/docs/todo/buy.md'
 abbr thl 'glow ~/sync/docs/todo/health.md'
 abbr tpl 'glow ~/sync/docs/todo/personal.md'
 abbr trl 'glow ~/sync/docs/todo/ricing.md'
@@ -265,7 +276,7 @@ abbr sprs "sudo pacman -Rs" # remove package and unneeded dependencies
 abbr sprns "sudo pacman -Rns" # remove package and unneeded dependencies
 abbr prns "pacman -Rns" # remove package and unneeded dependencies
 abbr prs "sudo pacman -Rs" # remove package and unneeded dependencies
-abbr spsyu "sudo pacman -Syu" # update repository database und packages
+abbr spsyu "paru -Syu" # update repository database und packages
 abbr psyu "sudo pacman -Syu" # update repository database und packages
 abbr psi "pacman -Si" # info on package in repos.
 abbr pqi "pacman -Qi" # info on local package
@@ -359,7 +370,7 @@ pacman -Qq | fzf -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -Rns
 end
 
 function fo
-xdg-open (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Open file') &; disown; exit
+~/scripts/fileopen.fish (fd --hidden --type f --ignore-file ~/.config/fd/fdignore -a . ~ | fzf --header='Open file')
 end
 
 function fj
@@ -571,8 +582,4 @@ end
 # rsync to NAS
 function nascp
     rsync -vahPru $argv
-end
-
-function deploy
-    hugo && rsync --delete -azPv -e 'ssh -p 69' . mo@hcloud.host:/home/mo/
 end

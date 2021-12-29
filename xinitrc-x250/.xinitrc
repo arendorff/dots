@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/sh
 
 #load xresources
 #[[ $(hostname) = x250 ]] && [[ -f ~/.Xresources.x250 ]] && xrdb -merge -I$HOME ~/.Xresources.x250
@@ -24,11 +24,12 @@ pgrep cloud-drive || synology-cloud-station-drive &
 #autorandr -c
 
 # exec spectrwm
+# exec awesome
 # exec cwm
-#exec qtile
+#y exec qtile start
 
 xsetroot -cursor_name left_ptr &
-# setxbkmap -layout de -variant neo
+setxbkmap -layout de -variant neo_qwertz
 xset r rate 200 50
 xmodmap ~/.xmodmap-modified
 

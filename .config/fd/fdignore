@@ -1,10 +1,13 @@
 .dropbox*
 .CloudStation
 .factorio
+google-chrome
+.emacs.d
 games
 .gem
 .npm
 .local
+Zotero
 /home/mo/sync/old/
 R
 R.saved

@@ -52,6 +52,7 @@ beautiful.init("/home/mo/.config/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 browser = "firefox"
+browser2 = "brave"
 terminal = "alacritty"
 terminal2 = "kitty --single-instance"
 editor = "nvim"
@@ -389,16 +390,27 @@ awful.key({ modkey,          }, "space",  function() client.focus = awful.client
     -- awful.key({ modkey, "Shift"   }, "e", function () awful.layout.inc(-1)                end,
     --           {description = "select previous", group = "layout"}),
 
-    awful.key({ modkey, "Control"   }, "g", function ()
-        for s in screen do
-    for _, t in ipairs(s.tags) do
-        -- t.layout = awful.layout.suit.tile
-        -- t.layout = awful.layout.inc(-1)
-        t.gap = 10
-    end
-end
+    -- awful.key({ modkey, "Control"   }, "g", function ()
+    --     for s in screen do
+    -- for _, t in ipairs(s.tags) do
+    --     -- t.layout = awful.layout.suit.tile
+    --     -- t.layout = awful.layout.inc(-1)
+    --     t.gap = 10
+    -- end
+-- end
+    --     end,
+    --           {description = "toggle gaps", group = "layout"}),
+
+    awful.key({ modkey}, "g", function ()
+         awful.tag.incgap (5)
         end,
-              {description = "toggle gaps", group = "layout"}),
+              {description = "increase gaps", group = "layout"}),
+
+    awful.key({ modkey, "Shift"   }, "g", function ()
+         awful.tag.incgap (-5)
+        end,
+              {description = "decrease gaps", group = "layout"}),
+
 
     awful.key({ modkey, "Control"   }, "t", function ()
         for s in screen do
@@ -446,6 +458,11 @@ end
     end,
               {description = "launch firefox", group = "programs"}),
 
+    awful.key({ modkey, "Shift" },            "w",     function ()
+        awful.spawn("brave")
+    end,
+              {description = "launch chromium", group = "programs"}),
+
     awful.key({ modkey, "Shift" },            "e",     function ()
         awful.spawn("thunderbird")
     end,
@@ -477,6 +494,11 @@ end
         awful.spawn.with_shell("/home/mo/sync/dots/x250/Scripts/dmenuscript.fish")
     end,
               {description = "dmenu script for opening files", group = "programs"}),
+
+    awful.key({ modkey, "Shift" },            "v",     function ()
+        awful.spawn.with_shell("/home/mo/sync/dots/x250/Scripts/vpntoggle.fish")
+    end,
+              {description = "toggle vpn", group = "programs"}),
 
     awful.key({ modkey },            "y",     function ()
         -- awful.util.spawn("home/mo/scripts/dmenuscript.fish")
@@ -536,10 +558,10 @@ end
               {description = "mute volume", group = "hotkeys"}),
 
 
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("brightnessctl set +5%") end,
-              {description = "+10%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("brightnessctl set 5%-") end,
-              {description = "-10%", group = "hotkeys"}),
+    -- awful.key({ }, "XF86MonBrightnessUp", function () os.execute("brightnessctl set +5%") end,
+              -- {description = "+10%", group = "hotkeys"}),
+    -- awful.key({ }, "XF86MonBrightnessDown", function () os.execute("brightnessctl set 5%-") end,
+              -- {description = "-10%", group = "hotkeys"}),
 
     awful.key({ }, "XF86Display", function () os.execute("brightnessctl set 1%") end,
               {description = "+10%", group = "hotkeys"})
@@ -780,7 +802,7 @@ awful.rules.rules = {
           "Gpick",
           "Kruler",
           "MessageWin",  -- kalarm.
-          "Sxiv",
+          -- "Sxiv",
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
@@ -881,7 +903,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- autostart
 
-awful.spawn.with_shell("/home/mo/sync/dots/x250/.config/spectrwm/autostart.sh")
+awful.spawn.with_shell("/home/mo/sync/dots/corsair/.config/spectrwm/autostart.sh")
 -- awful.spawn.with_shell("")
 
 
